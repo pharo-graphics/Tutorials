@@ -1,13 +1,13 @@
 {
 	"commentStamp" : "",
-	"super" : "BlElementEventListener",
+	"super" : "BlElement",
 	"category" : "Bloc-MemoryGame-Elements",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"memoryGame"
+		"card"
 	],
-	"name" : "MgCardEventListener",
+	"name" : "MgRawCardElement",
 	"type" : "normal"
 }

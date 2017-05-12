@@ -1,10 +1,10 @@
 {
 	"instance" : {
-		"initialize" : "AliakseiSyrel 5/10/2017 18:26",
-		"defaultBorder" : "AliakseiSyrel 5/10/2017 18:30",
-		"defaultGeometry" : "AliakseiSyrel 5/10/2017 18:29",
-		"defaultBackground" : "AliakseiSyrel 5/10/2017 18:31",
-		"defaultLayout" : "AliakseiSyrel 5/10/2017 19:05"
+		"initialize" : "AndreiChis 5/12/2017 18:22",
+		"defaultBorder" : "AliakseiSyrel 5/12/2017 17:04:27",
+		"defaultGeometry" : "AliakseiSyrel 5/12/2017 17:04:27",
+		"defaultBackground" : "AliakseiSyrel 5/12/2017 17:04:27",
+		"memoryGame:" : "AndreiChis 5/12/2017 18:24"
 	},
 	"class" : { }
 }

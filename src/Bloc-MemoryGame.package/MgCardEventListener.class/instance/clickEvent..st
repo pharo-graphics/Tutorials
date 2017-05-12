@@ -1,5 +1,18 @@
 mouse handlers
 clickEvent: anEvent
+
+	self memoryGame chooseCard: anEvent currentTarget card
+
+	"| animation |
+	animation := BlScaleAnimation new
+		target: anEvent currentTarget;
+		easing: BlEasing bounceOut;
+		scaleTo: 1.1@1.1;
+		duration: 500.
+
+
+	animation start."
+
 	"| animation |
 	animation := BlRotateAnimation new duration: 1000.
 	
