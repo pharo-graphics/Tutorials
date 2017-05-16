@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/16/2017 11:04",
+	"super" : "Object",
+	"category" : "Bloc-MemoryGame-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"availableCards",
+		"chosenCards"
+	],
+	"name" : "MgGameModel",
+	"type" : "normal"
+}

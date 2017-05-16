@@ -1,28 +1,23 @@
 mouse handlers
 clickEvent: anEvent
-
-	self memoryGame chooseCard: anEvent currentTarget card
-
-	"| animation |
-	animation := BlScaleAnimation new
-		target: anEvent currentTarget;
-		easing: BlEasing bounceOut;
-		scaleTo: 1.1@1.1;
-		duration: 500.
-
-
-	animation start."
-
-	"| animation |
-	animation := BlRotateAnimation new duration: 1000.
+	| animation cardElement |
 	
-	animation addEventHandlerOn: BlAnimationTickEvent do: [ self halt ].
+	cardElement := anEvent currentTarget.
+	
+	animation := cardElement card flipped
+		ifTrue: [
+			self memoryGame chooseCard: cardElement card.
+			BlScaleAnimation new
+				target: anEvent currentTarget;
+				easing: BlEasing bounceOut;
+				scaleTo: 0.001@0.001;
+				duration: 500 ]
+		ifFalse: [
+			BlScaleAnimation new
+				target: anEvent currentTarget;
+				easing: BlEasing bounceOut;
+				scaleTo: 0.2@0.2;
+				duration: 350;
+				onFinishedDo: [ self memoryGame chooseCard: cardElement card ] ].
 
-	animation2 := BlRotateAnimation new duration: 1000.
-	
-	animation2 addEventHandlerOn: BlAnimationTickEvent do: [ self halt ].
-	animation2 onTickDo: [ ].
-	
-	anEvent currentTarget addEventHandlerOn: BlAnimationTickEvent do: [ self halt ].
-	
-	anEvent currentTarget addAnimation: (BlRotateAnimation new duration: 1000)"
+	animation start

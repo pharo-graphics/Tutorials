@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "AliakseiSyrel 5/16/2017 11:05",
 	"super" : "Object",
 	"category" : "Bloc-MemoryGame-Model",
 	"classinstvars" : [ ],
@@ -8,8 +8,11 @@
 	"instvars" : [
 		"background",
 		"image",
-		"game"
+		"game",
+		"symbol",
+		"flipped",
+		"announcer"
 	],
-	"name" : "MgCard",
+	"name" : "MgCardModel",
 	"type" : "normal"
 }

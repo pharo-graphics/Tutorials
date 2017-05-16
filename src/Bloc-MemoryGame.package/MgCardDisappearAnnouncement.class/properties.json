@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "Object",
-	"category" : "Bloc-MemoryGame-Examples",
+	"super" : "Announcement",
+	"category" : "Bloc-MemoryGame-Events",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "MgExamples",
+	"name" : "MgCardDisappearAnnouncement",
 	"type" : "normal"
 }

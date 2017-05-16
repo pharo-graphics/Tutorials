@@ -1,0 +1,3 @@
+announcements
+onFlipped
+	self invalidate
