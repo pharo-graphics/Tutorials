@@ -5,7 +5,7 @@ onDisappear
 	enlargeAnimation := BlScaleAnimation new
 		target: self;
 		easing: BlEasing bounceOut;
-		scaleTo: 0.3@0.3;
+		scaleTo: 0.2@0.2;
 		duration: 500.
 
 	disappearAnimation := BlOpacityAnimation new
