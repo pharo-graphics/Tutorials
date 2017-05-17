@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "MgGridElement",
+	"name" : "MgGameElement",
 	"type" : "normal"
 }

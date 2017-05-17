@@ -1,3 +1,5 @@
-announcements
+announcement - handling
 onFlipped
-	self invalidate
+	self card flipped
+		ifTrue: [ self onFlippedFace ]
+		ifFalse: [ self onFlippedBack ]

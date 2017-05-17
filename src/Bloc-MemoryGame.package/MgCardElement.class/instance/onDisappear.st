@@ -1,4 +1,4 @@
-announcements
+announcement - handling
 onDisappear
 	| disappearAnimation enlargeAnimation scalingAnimation parallelAnimation sequentialAnimation |
 

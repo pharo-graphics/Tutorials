@@ -4,5 +4,5 @@ addCard: aMgCardModel
 	self
 		assert: [ availableCards size <= self cardsCount ]
 		description: [ 'Amount of cards must not exceed grid size limit' ].
-		
+
 	availableCards add: aMgCardModel

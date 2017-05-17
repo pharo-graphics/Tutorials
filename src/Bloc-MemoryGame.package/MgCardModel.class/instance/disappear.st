@@ -1,4 +1,4 @@
-accessing
+actions
 disappear
-
-	self announcer announce: MgCardDisappearAnnouncement new
+	"Ask card to disapper"
+	self notifyDisappear
