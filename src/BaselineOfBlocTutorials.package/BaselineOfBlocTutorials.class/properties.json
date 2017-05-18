@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/18/2017 10:15",
+	"super" : "BaselineOf",
+	"category" : "BaselineOfBlocTutorials",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BaselineOfBlocTutorials",
+	"type" : "normal"
+}
