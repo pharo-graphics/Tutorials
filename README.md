@@ -21,3 +21,8 @@ Metacello new
 
 Package:
   **Bloc-MemoryGame-Demo**
+  
+VMs:
+- [Windows Stable](http://files.pharo.org/vm/pharo-spur32/win/stable-20170503.zip)
+- [Mac](http://files.pharo.org/vm/pharo-spur32/mac/stable-20170503.zip)
+- Linux: download the right one from [here](http://files.pharo.org/vm/pharo-spur32/linux/)
