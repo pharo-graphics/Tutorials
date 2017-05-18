@@ -13,14 +13,10 @@ initialize
 	face visibility: BlVisibility hidden.
 	
 	back := BlElement new
-		layout: BlFrameLayout new;
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
 		addChild: (BlLineElement new
-			constraintsDo: [ :c |
-				c horizontal matchParent.
-				c vertical matchParent ];
 			border: (BlBorder paint: Color paleBlue width: 1);
 			fromAnchor: (BlGeometryStaticAnchor position: 0 @ 0);
 			toAnchor: (BlGeometryStaticAnchor position: 80 @ 80);
