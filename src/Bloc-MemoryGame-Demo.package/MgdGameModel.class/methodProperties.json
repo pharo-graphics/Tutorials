@@ -1,0 +1,18 @@
+{
+	"instance" : {
+		"cardsCount" : "AliakseiSyrel 5/18/2017 09:57",
+		"availableCards" : "AliakseiSyrel 5/18/2017 09:57",
+		"initialize" : "AliakseiSyrel 5/18/2017 09:57",
+		"chooseCard:" : "AliakseiSyrel 5/18/2017 09:57",
+		"initializeForSymbols:" : "AliakseiSyrel 5/18/2017 09:57",
+		"chosenCards" : "AliakseiSyrel 5/18/2017 09:57",
+		"matchesCount" : "AliakseiSyrel 5/18/2017 09:57",
+		"addCard:" : "AliakseiSyrel 5/18/2017 09:57",
+		"gridSize" : "AliakseiSyrel 5/18/2017 09:57"
+	},
+	"class" : {
+		"chinese" : "AliakseiSyrel 5/18/2017 09:57",
+		"emoji" : "AliakseiSyrel 5/18/2017 09:57",
+		"numbers" : "AliakseiSyrel 5/18/2017 09:57"
+	}
+}

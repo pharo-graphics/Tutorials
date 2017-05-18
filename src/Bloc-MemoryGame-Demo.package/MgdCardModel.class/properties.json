@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "AliakseiSyrel 5/18/2017 10:08",
+	"super" : "Object",
+	"category" : "Bloc-MemoryGame-Demo-Model",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"symbol",
+		"flipped",
+		"announcer"
+	],
+	"name" : "MgdCardModel",
+	"type" : "normal"
+}
