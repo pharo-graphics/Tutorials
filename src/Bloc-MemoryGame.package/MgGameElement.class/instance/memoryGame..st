@@ -1,10 +1,9 @@
-mouse handlers
+accessing
 memoryGame: aMemoryGame
-	
+
 	self layout columnCount: aMemoryGame gridSize.
 	
 	aMemoryGame availableCards do: [ :aCard |
-		self addChild: (MgSimpleCardElement new
+		self addChild: (self newCardElement
 			card: aCard;
-			addEventHandler: (MgCardEventListener new
-				memoryGame: aMemoryGame)) ].
+			addEventHandler: (self newCardEventListener memoryGame: aMemoryGame)) ].

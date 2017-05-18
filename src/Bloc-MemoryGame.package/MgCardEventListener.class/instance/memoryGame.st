@@ -1,3 +1,3 @@
-mouse handlers
+accessing
 memoryGame
 	^ memoryGame
