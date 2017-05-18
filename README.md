@@ -9,7 +9,7 @@ In [Pharo 6.0](http://files.pharo.org/image/60/60493.zip) with [Sources V60](htt
 Metacello new
     baseline: 'Bloc';
     repository: 'github://pharo-graphics/Bloc/src';
-    load: #core
+    load: #core.
 ```    
 
 ```smalltalk
