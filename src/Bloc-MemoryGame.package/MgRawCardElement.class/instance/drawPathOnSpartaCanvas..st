@@ -1,11 +1,11 @@
 drawing
 drawPathOnSpartaCanvas: aCanvas
 	| radius |
-	
-	radius := 12.
+
+	radius := self cornerRadius.
 	
 	aCanvas fill
-		paint: Color lightGray;
+		paint: self backgroundColor;
 		path: (aCanvas shape 
 			roundedRectangle: self boundsInLocal 
 			radii: (BlCornerRadii radius: radius));

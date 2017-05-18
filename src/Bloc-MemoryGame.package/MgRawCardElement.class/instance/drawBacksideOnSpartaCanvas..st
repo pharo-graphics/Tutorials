@@ -2,7 +2,7 @@ drawing
 drawBacksideOnSpartaCanvas: aCanvas
 	| radius radiusOffset |
 	
-	radius := 12.
+	radius := self cornerRadius.
 	radiusOffset := radius/Float pi.
 	
 	aCanvas stroke

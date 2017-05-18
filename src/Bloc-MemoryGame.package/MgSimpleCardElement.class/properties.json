@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "MgCardElement",
+	"category" : "Bloc-MemoryGame-Elements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"face",
+		"back"
+	],
+	"name" : "MgSimpleCardElement",
+	"type" : "normal"
+}
