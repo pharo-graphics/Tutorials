@@ -1,6 +1,6 @@
 drawing
 drawFlippedSideOnSpartaCanvas: aCanvas
-	| font textPainter metrics |
+	| font textPainter metrics baseline origin |
 	
 	font := aCanvas font
 		size: 50;
@@ -13,6 +13,9 @@ drawFlippedSideOnSpartaCanvas: aCanvas
 	
 	metrics := textPainter measure.
 	
+	origin := (self extent - metrics textMetrics bounds extent) / 2.0.
+	baseline := origin - metrics textMetrics bounds origin.
+	
 	textPainter
-		baseline: (self extent - metrics textMetrics bounds extent) / 2.0 - metrics textMetrics bounds origin;
+		baseline: baseline;
 		draw
