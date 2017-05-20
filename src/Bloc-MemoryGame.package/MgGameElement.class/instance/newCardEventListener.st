@@ -1,3 +1,3 @@
-instance creation
+building
 newCardEventListener
 	^ MgCardEventListener new

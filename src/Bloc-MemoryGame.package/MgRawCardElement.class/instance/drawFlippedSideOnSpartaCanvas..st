@@ -3,7 +3,7 @@ drawFlippedSideOnSpartaCanvas: aCanvas
 	| font textPainter metrics baseline origin |
 	
 	font := aCanvas font
-		size: 50;
+		size: self symbolFontSize;
 		build.
 
 	textPainter := aCanvas text

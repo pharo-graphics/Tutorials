@@ -9,6 +9,6 @@
 		"face",
 		"back"
 	],
-	"name" : "MgSimpleCardElement",
+	"name" : "MgComposedCardElement",
 	"type" : "normal"
 }

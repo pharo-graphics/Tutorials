@@ -1,3 +1,3 @@
-instance creation
+building
 newCardElement
-	^ MgSimpleCardElement new
+	^ self class cardType new

@@ -2,4 +2,4 @@ initialization
 initialize
 	super initialize.
 	
-	self size: 80@80
+	self size: self cardSize

@@ -12,4 +12,5 @@ initializeForSymbols: aCollectionOfCharacters
 
 	availableCards := (aCollectionOfCharacters asArray
 			collect: [ :aSymbol | 
-				(1 to: self matchesCount) collect: [ :i | MgCardModel new symbol: aSymbol ] ] ) flattened shuffled asOrderedCollection
+				(1 to: self matchesCount) collect: [ :i | 
+					MgCardModel new symbol: aSymbol ] ] ) flattened shuffled asOrderedCollection

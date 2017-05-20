@@ -18,6 +18,6 @@ drawPathOnSpartaCanvas: aCanvas
 				buildPathOnSpartaCanvas: aCanvas within: self boundsInLocal);
 		draw."	
 			
-	self card flipped
+	self card isFlipped
 		ifTrue: [ self drawFlippedSideOnSpartaCanvas: aCanvas ]
 		ifFalse: [ self drawBacksideOnSpartaCanvas: aCanvas ]

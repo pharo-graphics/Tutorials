@@ -2,7 +2,9 @@
 	"commentStamp" : "",
 	"super" : "BlElement",
 	"category" : "Bloc-MemoryGame-Elements",
-	"classinstvars" : [ ],
+	"classinstvars" : [
+		"cardType"
+	],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
