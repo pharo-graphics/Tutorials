@@ -1,6 +1,6 @@
 initialization
 initializeForSymbols: aCollectionOfCharacters
-	"Initialize game model with the  cards that a represented by character symbols taken from a given
+	"Initialize game model with the cards that are represented by character symbols taken from a given
 	collection of symbols.
 	Note, amount of characters must correspond to amount of possible card combinations
 	which is in fact = (total card count / how many card to match).

@@ -1,5 +1,5 @@
 drawing
-drawPathOnSpartaCanvas: aCanvas
+drawOnSpartaCanvas: aCanvas
 	| radius |
 
 	radius := self cornerRadius.
