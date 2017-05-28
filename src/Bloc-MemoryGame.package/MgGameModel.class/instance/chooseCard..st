@@ -4,7 +4,7 @@ chooseCard: aCard
 		ifTrue: [ ^ self ].
 	self chosenCards add: aCard.
 	aCard flip.
-	self stepCompleted ifTrue: [
+	self shouldCompleteStep ifTrue: [
 		^ self completeStep ].
-	self stepOverflow ifTrue: [
+	self shouldResetStep ifTrue: [
 		self resetStep ]

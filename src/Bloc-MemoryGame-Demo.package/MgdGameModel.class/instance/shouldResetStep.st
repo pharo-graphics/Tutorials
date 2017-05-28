@@ -1,3 +1,3 @@
 testing
-stepOverflow 
+shouldResetStep 
 	^ self chosenCards size > self matchesCount
