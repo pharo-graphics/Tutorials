@@ -3,7 +3,7 @@ initialize
 	super initialize.
 	
 	self geometry: (BlRectangle cornerRadius: self cornerRadius).
-	self background: self backgroundColor.
+	self background: self backgroundPaint.
 	self layout: BlFrameLayout new.
 	
 	face := BlTextElement new.

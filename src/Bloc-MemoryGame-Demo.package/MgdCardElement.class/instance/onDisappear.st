@@ -12,7 +12,7 @@ onDisappear
 		target: self;
 		opacity: 0;
 		duration: 400.
-	
+
 	scalingAnimation := BlScaleAnimation new
 		target: self;
 		easing: BlEasing linear;

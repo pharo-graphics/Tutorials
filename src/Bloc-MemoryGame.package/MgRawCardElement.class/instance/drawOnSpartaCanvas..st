@@ -1,23 +1,19 @@
 drawing
 drawOnSpartaCanvas: aCanvas
-	| radius |
-
-	radius := self cornerRadius.
+	| roundedRectangle |
 	
-	aCanvas fill
-		paint: self backgroundColor;
-		path: (aCanvas shape 
+	roundedRectangle := aCanvas shape 
 			roundedRectangle: self boundsInLocal 
-			radii: (BlCornerRadii radius: radius));
-		draw.
+			radii: (BlCornerRadii radius: self cornerRadius).
 	
-	"aCanvas fill
-		paint: Color lightGray;
-		path: ((BlRectangle new
-			cornerRadius: 12)
-				buildPathOnSpartaCanvas: aCanvas within: self boundsInLocal);
-		draw."	
-			
-	self card isFlipped
-		ifTrue: [ self drawFlippedSideOnSpartaCanvas: aCanvas ]
-		ifFalse: [ self drawBacksideOnSpartaCanvas: aCanvas ]
+	aCanvas clip
+		by: roundedRectangle
+		during: [
+			aCanvas fill
+				paint: self backgroundPaint;
+				path: self boundsInLocal;
+				draw.
+				
+			self card isFlipped
+				ifTrue: [ self drawFlippedSideOnSpartaCanvas: aCanvas ]
+				ifFalse: [ self drawBacksideOnSpartaCanvas: aCanvas ] ]
