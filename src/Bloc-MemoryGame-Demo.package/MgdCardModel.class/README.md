@@ -1,5 +1,5 @@
-I am a card model that can be flipped or not.
-When card is flipped player should see a symbol that is used to compare two cards.
+I am a card model that can be flipped in order to show its back or face.
+When card is flipped on the face a player should see a symbol that is used to compare two cards.
 
 !! Examples:
 
