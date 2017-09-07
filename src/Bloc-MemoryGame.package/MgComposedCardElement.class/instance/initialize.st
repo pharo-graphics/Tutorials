@@ -11,20 +11,20 @@ initialize
 		c frame horizontal alignCenter.
 		c frame vertical alignCenter ].
 	face visibility: BlVisibility hidden.
-	
+
 	back := BlElement new
 		constraintsDo: [ :c |
 			c horizontal matchParent.
 			c vertical matchParent ];
 		addChild: (BlLineElement new
 			border: (BlBorder paint: Color paleBlue width: 1);
-			fromAnchor: (BlGeometryStaticAnchor position: 0 @ 0);
-			toAnchor: (BlGeometryStaticAnchor position: 80 @ 80);
+			fromAnchor: (BlAbsolutePositionAnchor position: 0 @ 0);
+			toAnchor: (BlAbsolutePositionAnchor position: 80 @ 80);
 			yourself);
 		addChild: (BlLineElement new
 			border: (BlBorder paint: Color paleBlue width: 1);
-			fromAnchor: (BlGeometryStaticAnchor position: 80 @ 0);
-			toAnchor: (BlGeometryStaticAnchor position: 0 @ 80);
+			fromAnchor: (BlAbsolutePositionAnchor position: 80 @ 0);
+			toAnchor: (BlAbsolutePositionAnchor position: 0 @ 80);
 			yourself).
 		
 	self addChild: face.

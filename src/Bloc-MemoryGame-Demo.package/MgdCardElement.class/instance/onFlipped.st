@@ -1,5 +1,5 @@
 announcement - handling
 onFlipped
-	self card flipped
+	self card isFlipped
 		ifTrue: [ self onFlippedFace ]
 		ifFalse: [ self onFlippedBack ]

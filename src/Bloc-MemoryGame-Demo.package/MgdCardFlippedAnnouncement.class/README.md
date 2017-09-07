@@ -1,0 +1,1 @@
+Is sent by ==MgdCardModel== after the card is flipped
