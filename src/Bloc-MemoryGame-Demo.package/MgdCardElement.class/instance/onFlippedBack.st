@@ -1,8 +1,11 @@
 announcement - handling
 onFlippedBack
-	BlScaleAnimation new
-		target: self;
+	| animation |
+
+	animation := BlTransformAnimation scale: 1@1.
+	animation
+		absolute;
 		easing: BlEasing bounceOut;
-		scaleTo: 0.001@0.001;
-		duration: 350;
-		start
+		duration: 0.35 seconds.
+	
+	animation startOn: self

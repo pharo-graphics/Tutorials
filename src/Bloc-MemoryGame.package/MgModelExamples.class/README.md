@@ -1,0 +1,1 @@
+I contain examples of how to instantiate and initialize a game model with cards and query card count or grid size

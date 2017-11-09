@@ -1,4 +1,4 @@
-examples
+instance creation
 basicCard
 	<gtExample>
 	

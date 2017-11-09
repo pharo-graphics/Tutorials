@@ -1,8 +1,11 @@
 announcement - handling
 onFlippedFace
-	BlScaleAnimation new
-		target: self;
+	| animation |
+
+	animation := BlTransformAnimation scale: 0.85 @ 0.85.	
+	animation
+		absolute;
 		easing: BlQuinticInterpolator default;
-		scaleTo: (0.15@0.15) negated;
-		duration: 300;
-		start
+		duration: 0.3 seconds.
+	
+	animation startOn: self

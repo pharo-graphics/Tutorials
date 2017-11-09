@@ -1,16 +1,13 @@
-instance creation
+examples
 open
-	<example>
-	| space game gameElement |
-	space := BlSpace new.
-	space extent: 420@420.
-
+	"I create and start a game with Number cards"
+	<script: 'self open'>
+	| game gameElement |
+	
 	game := MgGameModel new.
-	"game initializeForSymbols: '为从公家里地个时'."
-	game initializeForSymbols: '💰🏡🎅🍪🍕🚀😸🙈'.
+	game initializeForSymbols: '12345678'.
 
 	gameElement := MgGameElement new.
 	gameElement memoryGame: game.
-
-	space root addChild: gameElement.
-	space show
+	
+	self openInWindow: gameElement
