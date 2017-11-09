@@ -21,7 +21,9 @@ Metacello new
 
 Package:
   **Bloc-MemoryGame-Demo**
-  
+
+## Direct links to Pharo 6.1
+
 - [Windows](http://files.pharo.org/platform/Pharo6.1-win.zip)
 - [Mac](http://files.pharo.org/platform/Pharo6.1-mac.zip)
 - [Linux](https://pharo.org/gnu-linux-installation)
