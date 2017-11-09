@@ -1,5 +1,5 @@
 drawing
-drawFlippedSideOnSpartaCanvas: aCanvas
+drawFlippedSideOn: aCanvas
 	| font textPainter metrics baseline origin |
 	
 	font := aCanvas font
