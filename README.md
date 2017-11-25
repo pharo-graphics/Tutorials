@@ -1,6 +1,10 @@
 # Tutorials
 I contain bloc/brick tutorials and demo related materials that go far beyond simple bloc/brick examples
 
+# Memory Game booklet
+Consider going through a detailed steb by step implementation described in a booklet:<br>
+[Bloc - Memory Game.pdf](http://files.pharo.org/books-pdfs/booklet-Bloc/2017-11-09-memorygame.pdf)
+
 # Installation
 
 In [Pharo 6.1](https://pharo.org/download):
