@@ -1,1 +1,0 @@
-Is sent by ==MgdCardModel== after the card is removed from the ==MgdGameModel==

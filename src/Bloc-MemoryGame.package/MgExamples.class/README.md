@@ -1,1 +1,0 @@
-I contain runnable games initalized with different card types
