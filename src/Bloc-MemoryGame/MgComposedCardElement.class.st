@@ -5,7 +5,7 @@ Class {
 		'face',
 		'back'
 	],
-	#category : 'Bloc-MemoryGame-Elements'
+	#category : #'Bloc-MemoryGame-Elements'
 }
 
 { #category : #accessing }
@@ -13,10 +13,10 @@ MgComposedCardElement >> card: aMgCard [
 	| text |
 	super card: aMgCard.
 	
-	text := BrRopedText string: aMgCard symbol asString.
-	text attributes: {
-		BrFontSizeAttribute size: self symbolFontSize.
-		BrTextForegroundAttribute paint: Color white }.
+	text := aMgCard symbol asString asRopedText.
+	text 
+		fontSize: self symbolFontSize;
+		foreground: Color white.
 	
 	face text: text
 ]
