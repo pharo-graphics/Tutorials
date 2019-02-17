@@ -71,32 +71,25 @@ MgCardElement >> onDisappear [
 	enlarge
 		absolute;
 		easing: BlEasing bounceOut;
-		duration: 0.5 seconds;
-		target: self.
+		duration: 0.5 seconds.
 
 	"vanish animation manipulates opacity to make element transparent"
 	vanish := BlOpacityAnimation new
 		opacity: 0;
-		duration: 0.35 seconds;
-		target: self.
+		duration: 0.35 seconds.
 
 	"minimization animation changes card's scale to a tiny value"
 	minimize := BlTransformAnimation scale: 0.01 @ 0.01.		
 	minimize
 		absolute;
 		easing: BlEasing linear;
-		duration: 0.35 seconds;
-		target: self.
+		duration: 0.35 seconds.
 
 	"disappearing animation makes card transparent and minimizes until it becomes invisible"
 	disappear := BlParallelAnimation with: { vanish . minimize }.
 	
 	"final animation consists of two sequential animations: enlarge and disappear"
-	(BlSequentialAnimation with: { enlarge. disappear })
-		"in order to preserve grid layout we don't actually remove cards from the window,
-		we make them transparent (vanish animation) and forbid them from handling mouse events"
-		onFinishedDo: [ self wantsMouse: false ];
-		start
+	self addAnimation: (BlSequentialAnimation with: { enlarge. disappear })
 ]
 
 { #category : #'announcement - handling' }
@@ -116,7 +109,7 @@ MgCardElement >> onFlippedBack [
 		easing: BlEasing bounceOut;
 		duration: 0.35 seconds.
 	
-	animation startOn: self
+	self addAnimation: animation
 ]
 
 { #category : #'announcement - handling' }
@@ -129,7 +122,7 @@ MgCardElement >> onFlippedFace [
 		easing: BlQuinticInterpolator default;
 		duration: 0.3 seconds.
 	
-	animation startOn: self
+	self addAnimation: animation.
 ]
 
 { #category : #'visual properties' }
