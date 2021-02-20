@@ -70,11 +70,30 @@ MGCardElement >> card: aCardModel [
 	card announcer when: MGCardDisappearAnnouncement send: #onDisappear to: self
 ]
 
-{ #category : #'visual properties' }
+{ #category : #drawing }
 MGCardElement >> cornerRadius [
-	"Return a number representing a corner radius of the card element"
+  ^ 12
+]
 
-	^ 12
+{ #category : #drawing }
+MGCardElement >> drawBacksideOn: aCanvas [
+	aCanvas stroke
+		paint: Color paleBlue;
+		path: (aCanvas shape line: 0@0 to: self extent);
+		draw.
+]
+
+{ #category : #drawing }
+MGCardElement >> drawCommonOn: aCanvas [
+	aCanvas fill
+		paint: self backgroundPaint;
+		path: self boundsInLocal;
+		draw
+]
+
+{ #category : #drawing }
+MGCardElement >> drawFlippedSideOn: aCanvas [
+        "nothing for now"
 ]
 
 { #category : #drawing }
@@ -87,12 +106,42 @@ MGCardElement >> drawOnSpartaCanvas1: aCanvas [
 ]
 
 { #category : #drawing }
-MGCardElement >> drawOnSpartaCanvas: aCanvas [
+MGCardElement >> drawOnSpartaCanvas2: aCanvas [
   aCanvas fill
     paint: self backgroundPaint;
     path: (aCanvas shape ellipse: self boundsInLocal);
     draw
 
+]
+
+{ #category : #drawing }
+MGCardElement >> drawOnSpartaCanvas3: aCanvas [
+	| roundedRectangle |
+	roundedRectangle := aCanvas shape
+  		roundedRectangle: self boundsInLocal
+		radii: (BlCornerRadii radius: self cornerRadius) asArray.
+	aCanvas clip
+		by: roundedRectangle
+		during: [
+			aCanvas fill
+				paint: self backgroundPaint;
+				path: self boundsInLocal;
+				draw ]
+]
+
+{ #category : #drawing }
+MGCardElement >> drawOnSpartaCanvas: aCanvas [
+	| roundedRectangle |
+	roundedRectangle := aCanvas shape
+  		roundedRectangle: self boundsInLocal
+		radii: (BlCornerRadii radius: self cornerRadius) asArray.
+	aCanvas clip
+		by: roundedRectangle
+		during: [
+			self drawCommonOn: aCanvas.
+			self card isFlipped
+				ifTrue: [ self drawFlippedSideOn: aCanvas ]
+				ifFalse: [ self drawBacksideOn: aCanvas ]  ]
 ]
 
 { #category : #initialization }
