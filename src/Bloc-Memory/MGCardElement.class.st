@@ -13,6 +13,14 @@ MGCardElement new inspect
 [[[ 
 MGCardElement inASpace		
 ]]]
+
+
+[[[
+| cardElement |
+cardElement := MGCardElement new.
+cardElement card flip.
+cardElement			
+]]]
 "
 Class {
 	#name : #MGCardElement,
@@ -81,6 +89,10 @@ MGCardElement >> drawBacksideOn: aCanvas [
 		paint: Color paleBlue;
 		path: (aCanvas shape line: 0@0 to: self extent);
 		draw.
+	aCanvas stroke
+		paint: Color paleBlue;
+		path: (aCanvas shape line: self width @ 0 to: 0@self height);
+		draw
 ]
 
 { #category : #drawing }
