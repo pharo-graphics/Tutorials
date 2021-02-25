@@ -11,42 +11,66 @@ Class {
 	#name : #MGGameElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'memoryGame'
+		'game'
 	],
 	#category : #'Bloc-Memory-Elements'
 }
 
 { #category : #example }
-MGGameElement class >> example [ 
-	"self example"
+MGGameElement class >> exampleInASpace [
 	<example>
 	
-	| game board |
+	| space game gameElement |
 	game := MGGame withNumbers.
-   board := MGGameElement new.
-   board memoryGame: game.
-	^ board
+	gameElement := self new.
+	gameElement memoryGame: game.
+	 
+	space := BlSpace new.
+	space extent: 420@420.
+	space addChild: gameElement. 
+	space show. 
+
 ]
 
 { #category : #initialization }
 MGGameElement >> initialize [
+
 	super initialize.
-	self layout: BlGridLayout horizontal.
+
+	self background: (BlBackground paint: Color gray darker).
+	self layout: (BlGridLayout horizontal cellSpacing: 20).
+
+	self constraintsDo: [ :aLayoutConstraints | 
+		aLayoutConstraints horizontal fitContent.
+		aLayoutConstraints vertical fitContent ]
 ]
 
 { #category : #accessing }
 MGGameElement >> memoryGame [
-	^ memoryGame
+	^ game
 ]
 
 { #category : #accessing }
-MGGameElement >> memoryGame: anObject [
-	memoryGame := anObject.
-	memoryGame availableCards
-		do: [ :aCard | self addChild: (self newCardElement card: aCard) ]
+MGGameElement >> memoryGame: aGame [
+
+	| aCardEventListener |
+	game := aGame.
+	aCardEventListener := self newCardEventListener memoryGame: aGame.
+	self layout columnCount: game gridSize.
+	game availableCards do: [ :aCard | 
+		| cardElement |
+		cardElement := self newCardElement card: aCard.
+		cardElement addEventHandler: aCardEventListener.
+		self addChild: cardElement ]
 ]
 
 { #category : #accessing }
 MGGameElement >> newCardElement [
 	^ MGCardElement new
+]
+
+{ #category : #'instance creation' }
+MGGameElement >> newCardEventListener [
+
+	^ MGCardEventListener new
 ]

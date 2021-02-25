@@ -105,7 +105,21 @@ MGCardElement >> drawCommonOn: aCanvas [
 
 { #category : #drawing }
 MGCardElement >> drawFlippedSideOn: aCanvas [
-        "nothing for now"
+
+	| font origin textPainter metrics |
+	font := aCanvas font
+		        named: 'Source Sans Pro';
+		        size: 50;
+		        build.
+	textPainter := aCanvas text
+		               font: font;
+		               paint: Color white;
+		               string: self card symbol asString.
+	metrics := textPainter measure.
+	origin := self extent - metrics textMetrics bounds extent / 2.0.
+	textPainter
+		baseline: origin;
+		draw
 ]
 
 { #category : #drawing }
