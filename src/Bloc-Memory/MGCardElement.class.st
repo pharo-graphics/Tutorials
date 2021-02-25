@@ -111,12 +111,15 @@ MGCardElement >> drawFlippedSideOn: aCanvas [
 		        named: 'Source Sans Pro';
 		        size: 50;
 		        build.
+
 	textPainter := aCanvas text
 		               font: font;
 		               paint: Color white;
 		               string: self card symbol asString.
+
 	metrics := textPainter measure.
-	origin := self extent - metrics textMetrics bounds extent / 2.0.
+	origin := (self extent - metrics textMetrics bounds extent) / 2.0.
+	origin := origin - metrics textMetrics bounds origin.
 	textPainter
 		baseline: origin;
 		draw
