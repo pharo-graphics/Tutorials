@@ -14,7 +14,9 @@ In [Pharo 9.0](https://pharo.org/download):
 Metacello new
     baseline: 'Memory';
     repository: 'github://pharo-graphics/Tutorials/src';
+    onConflictUseLoaded;
     load
 ```
 
 It will load the package `Bloc-Memory` located in this repository, and Bloc as a dependency.
+The `onConflictUseLoaded` avoid a conflict in thte case you already have Bloc loaded in the image.
