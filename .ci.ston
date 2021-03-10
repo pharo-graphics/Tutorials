@@ -1,0 +1,14 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'Memory',
+      #directory : 'src',
+      #platforms : [ #pharo ]
+    }
+  ],
+  #testing: {
+    #include : {
+     #packages : [ 'Bloc-Memory.*' ]
+    }
+  }
+}
