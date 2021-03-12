@@ -1,3 +1,7 @@
+"
+I'm an event listener for mouse clicks on cards of a memory game.
+
+"
 Class {
 	#name : #MGCardEventListener,
 	#superclass : #BlEventListener,
