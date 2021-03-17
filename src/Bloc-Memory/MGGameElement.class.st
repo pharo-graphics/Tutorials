@@ -1,11 +1,30 @@
 "
-| board space |
-board := MGGameElement example.
+I'm a game visual board.
+
+## To open a game 
+
+```
+| aGameElement space |
+aGameElement := MGGameElement new memoryGame: MGGame withNumbers; yourself.
 space := BlSpace new.
-space extent: 420@420.
-space addChild: board.
+space addChild: aGameElement. 
+space pulse.
+space extent: aGameElement extent.
 space show. 
-{  board . space } inspect 
+```
+
+
+## To open a game in a separate native window
+```
+| aGameElement space |
+aGameElement := MGGameElement new memoryGame: MGGame withNumbers; yourself.
+space := BlSpace new.
+space host: BlOSWindowSDL2Host new.  
+space addChild: aGameElement. 
+space pulse.
+space extent: aGameElement extent.
+space show. 
+```
 "
 Class {
 	#name : #MGGameElement,
@@ -17,19 +36,58 @@ Class {
 }
 
 { #category : #example }
-MGGameElement class >> exampleInASpace [
-	<example>
+MGGameElement class >> example [
+	<sampleInstance>
 	
-	| space game gameElement |
-	game := MGGame withNumbers.
-	gameElement := self new.
-	gameElement memoryGame: game.
-	 
-	space := BlSpace new.
-	space extent: 420@420.
-	space addChild: gameElement. 
-	space show. 
+	^ self new memoryGame: MGGame withNumbers; yourself
 
+]
+
+{ #category : #example }
+MGGameElement class >> exampleInASpace [
+	<sampleInstance>
+	
+	self openOnModel: MGGame withNumbers inSpace: (BlSpace new extent: 420@420; yourself)
+
+]
+
+{ #category : #example }
+MGGameElement class >> exampleInASpaceInAnOSWindow [
+	<sampleInstance>
+	
+	self nativelyOpenOnModel: MGGame withNumbers inSpace: BlSpace new.
+]
+
+{ #category : #opening }
+MGGameElement class >> nativelyOpenOnModel: aModel inSpace: aSpace [
+
+	aSpace host: BlOSWindowSDL2Host new.
+	^ self openOnModel: aModel inSpace: aSpace.
+]
+
+{ #category : #'instance creation' }
+MGGameElement class >> onModel: aModel [
+
+	^ self new memoryGame: aModel; yourself
+]
+
+{ #category : #'instance creation' }
+MGGameElement class >> onModel: aModel inSpace: aSpace [
+
+	| game |
+	game := self onModel: aModel.
+	aSpace addChild: game. 
+	^ game
+]
+
+{ #category : #opening }
+MGGameElement class >> openOnModel: aModel inSpace: aSpace [
+
+	| game |
+	game := self onModel: aModel inSpace: aSpace.
+	aSpace pulse.
+	aSpace show.
+	^ game
 ]
 
 { #category : #initialization }
