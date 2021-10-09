@@ -1,5 +1,8 @@
 # Memory Game Tutorial
 
+[![License](https://img.shields.io/github/license/pharo-graphics/Tutorials.svg)](./LICENSE)
+[![Test](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml/badge.svg)](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml)
+
 I contain a Memory Game based in [Bloc](https://github.com/pharo-graphics/Bloc). 
 
 The present code is the result of following the Bloc tutorial in [this booklet](https://files.pharo.org/books-pdfs/booklet-Bloc/2017-11-09-memorygame.pdf), with some little name adaptations.
@@ -9,7 +12,7 @@ The source code for such booklet can be found [here](https://github.com/SquareBr
 ![Window](OSWindow.png)
 
 
-# Installation
+## Installation
 
 In [Pharo 9.0](https://pharo.org/download):
 
@@ -24,7 +27,8 @@ Metacello new
 It will load the package `Bloc-Memory` located in this repository, and Bloc as a dependency.
 The `onConflictUseLoaded` avoid a conflict in thte case you already have Bloc loaded in the image.
 
-# Play
+
+## Play
 
 Evaluate this code:
 
@@ -47,3 +51,8 @@ space show.
 ```
 
 By default, a Morphic window will popup. It is also possible to open a OS "external" window. To do it, open "System Settings > Appearance > Bloc" and select "OSWindow - SDL2" in "Preferable Host".
+
+
+## License
+
+This code is licensed under the [MIT license](./LICENSE).
