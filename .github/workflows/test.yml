@@ -1,19 +1,14 @@
-name: Complete Test
+name: Test
 
-on:
-  push:
-  pull_request:
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+on: [ push, pull_request, workflow_dispatch ]
 
 jobs:
   test:
     strategy:
-      # Default value means that a failure in one OS cancels all 
-      fail-fast: false
+      fail-fast: false # Default value means that a failure in one OS cancels all 
       matrix:
-        smalltalk: [ Pharo64-8.0, Pharo64-9.0 ]
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        smalltalk: [ Pharo64-9.0, Pharo64-10 ]
+        os: [ windows-latest ] # macos-latest, ubuntu-latest
         ston: [ .ci.ston ]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.smalltalk }} on ${{ matrix.os }}
@@ -22,9 +17,10 @@ jobs:
       - name: Setup smalltalkCI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
-          smalltalk-version: ${{ matrix.smalltalk }}
-      - name: Load Image and Run Tests
+          smalltalk-image: ${{ matrix.smalltalk }}
+      - name: Load in new image and run SUnit tests
         run: smalltalkci -s ${{ matrix.smalltalk }} ${{ matrix.ston }}
+        shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         timeout-minutes: 10
