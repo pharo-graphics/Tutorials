@@ -1,9 +1,27 @@
-# Memory Game Tutorial
+# Tutorials for Bloc and Brick
 
 [![License](https://img.shields.io/github/license/pharo-graphics/Tutorials.svg)](./LICENSE)
 [![Test](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml/badge.svg)](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml)
 
-I contain a Memory Game based in [Bloc](https://github.com/pharo-graphics/Bloc). 
+This repository contains examples of [Bloc](https://github.com/pharo-graphics/Bloc) and [Brick](https://github.com/pharo-graphics/Brick).
+
+
+## Installation
+
+In [Pharo](https://pharo.org/download) 9 or 10, evaluate:
+
+```smalltalk
+Metacello new
+    baseline: 'Memory';
+    repository: 'github://pharo-graphics/Tutorials/src';
+    load
+```
+
+
+## Memory Game Tutorial
+
+This is a Memory Card game.
+Please, find the code at the `Bloc-Memory` package.
 
 The present code is the result of following the Bloc tutorial in [this booklet](https://files.pharo.org/books-pdfs/booklet-Bloc/2017-11-09-memorygame.pdf), with some little name adaptations.
 The source code for such booklet can be found [here](https://github.com/SquareBracketAssociates/Booklet-BuildingMemoryGameWithBloc).
@@ -12,25 +30,7 @@ The source code for such booklet can be found [here](https://github.com/SquareBr
 ![Window](OSWindow.png)
 
 
-## Installation
-
-In [Pharo 9.0](https://pharo.org/download):
-
-```smalltalk
-Metacello new
-    baseline: 'Memory';
-    repository: 'github://pharo-graphics/Tutorials/src';
-    onConflictUseLoaded;
-    load
-```
-
-It will load the package `Bloc-Memory` located in this repository, and Bloc as a dependency.
-The `onConflictUseLoaded` avoid a conflict in thte case you already have Bloc loaded in the image.
-
-
-## Play
-
-Evaluate this code:
+To start it, evaluate this code:
 
 ```smalltalk
 "Create the game model and the Bloc element."
@@ -51,6 +51,30 @@ space show.
 ```
 
 By default, a Morphic window will popup. It is also possible to open a OS "external" window. To do it, open "System Settings > Appearance > Bloc" and select "OSWindow - SDL2" in "Preferable Host".
+
+
+## Reordering
+
+This example shows how to use drag-and-drop, and it's written using Bloc and Brick.
+
+![Reordering Capture](https://cdn.discordapp.com/attachments/375240886319316994/917496462777135174/unknown.png)
+
+To execute it, evaluate the following code:
+
+```smalltalk
+pane := DTPaneCreatingReorderingHandler new 
+        fittingColumns   
+        constraintsDo: [ :c | 
+            c horizontal matchParent.
+            c vertical matchParent ];
+        yourself.
+space := BlSpace new extent: 800@600.
+
+space root addChild: pane.
+space show.
+```
+
+Thanks @StephanEggermont for the contribution.
 
 
 ## License
