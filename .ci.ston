@@ -1,14 +1,14 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'Memory',
+      #baseline : 'BlocBrickTutorials',
       #directory : 'src',
       #platforms : [ #pharo ]
     }
   ],
   #testing: {
     #include : {
-     #packages : [ 'Bloc-Memory.*' ]
+     #packages : [ 'Bloc-Memory.*', 'Brick-Examples-Reordering.*' ]
     }
   }
 }
