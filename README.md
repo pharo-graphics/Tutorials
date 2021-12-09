@@ -12,7 +12,7 @@ In [Pharo](https://pharo.org/download) 9 or 10, evaluate:
 
 ```smalltalk
 Metacello new
-    baseline: 'Memory';
+    baseline: 'BlocBrickTutorials';
     repository: 'github://pharo-graphics/Tutorials/src';
     load
 ```
