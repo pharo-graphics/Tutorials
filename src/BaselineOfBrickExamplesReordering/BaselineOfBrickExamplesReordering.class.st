@@ -11,7 +11,7 @@ BaselineOfBrickExamplesReordering >> baseline: spec [
 	spec for: #common do: [ 
 		spec
 			baseline: 'NewBrick'
-			with: [ spec repository: 'github://pharo-graphics/Brick/src' ].
+			with: [ spec repository: 'github://pharo-graphics/Brick:dev-1.0/src' ].
 		spec
 			package: #'Brick-Examples-Reordering' with: [
 				spec requires: #( #NewBrick ) ];

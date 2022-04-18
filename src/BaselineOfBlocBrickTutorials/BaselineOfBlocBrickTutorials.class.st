@@ -11,9 +11,9 @@ BaselineOfBlocBrickTutorials >> baseline: spec [
 	spec for: #common do: [ 
 		spec
 			baseline: 'Memory'
-			with: [ spec repository: 'github://pharo-graphics/Tutorials/src' ].
+			with: [ spec repository: 'github://pharo-graphics/Tutorials:dev-1.0/src' ].
 		spec
 			baseline: 'BrickExamplesReordering'
-			with: [ spec repository: 'github://pharo-graphics/Tutorials/src' ] ]
+			with: [ spec repository: 'github://pharo-graphics/Tutorials:dev-1.0/src' ] ]
 
 ]
