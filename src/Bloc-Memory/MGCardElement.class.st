@@ -217,39 +217,6 @@ MGCardElement >> drawFlippedSideOn: aCanvas [
 		draw
 ]
 
-{ #category : #drawing }
-MGCardElement >> drawOnSpartaCanvas1: aCanvas [
-	
-	aCanvas fill
-		paint: self backgroundPaint;
-		path: self boundsInLocal;
-		draw
-]
-
-{ #category : #drawing }
-MGCardElement >> drawOnSpartaCanvas2: aCanvas [
-  aCanvas fill
-    paint: self backgroundPaint;
-    path: (aCanvas shape ellipse: self boundsInLocal);
-    draw
-
-]
-
-{ #category : #drawing }
-MGCardElement >> drawOnSpartaCanvas3: aCanvas [
-	| roundedRectangle |
-	roundedRectangle := aCanvas shape
-  		roundedRectangle: self boundsInLocal
-		radii: (BlCornerRadii radius: self cornerRadius) asArray.
-	aCanvas clip
-		by: roundedRectangle
-		during: [
-			aCanvas fill
-				paint: self backgroundPaint;
-				path: self boundsInLocal;
-				draw ]
-]
-
 { #category : #'drawing - Sparta' }
 MGCardElement >> drawOnSpartaCanvas: aCanvas [
 	| roundedRectangle |
