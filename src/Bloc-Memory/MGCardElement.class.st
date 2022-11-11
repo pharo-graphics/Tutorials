@@ -68,12 +68,12 @@ MGCardElement >> aeDrawBackSideOn: aeCanvas [
 	aeCanvas drawOpenPathWith: [ :cairoContext |
 		"top-left to bottom-right line"
 		cairoContext
-			primMoveToX: 0 y: 0;
+			moveToX: 0 y: 0;
 			lineTo: self extent.
 		"bottom-left to top-right line"
 		cairoContext
-			primRelativeMoveToX: self width negated y: 0;
-			primRelativeLineToX: self width y: self height negated ].
+			relativeMoveToX: self width negated y: 0;
+			relativeLineToX: self width y: self height negated ].
 
 	"Draw it"
 	aeCanvas drawFigure.
@@ -84,7 +84,7 @@ MGCardElement >> aeDrawBackSideOn: aeCanvas [
 MGCardElement >> aeDrawFlippedSideOn: aeCanvas [ 
 	"Draw card's flipped side on an Alexandrie canvas"
 
-	| aFTFace cairoScaledFont helloUtf8 cairoGlyphsArray baseline |
+	| aFTFace cairoScaledFont cairoGlyphsArray baseline |
 	aFTFace := AeFontManager globalInstance
 		detectFamilyName: self fontFamilyName
 		slant: AeFontSlant normal
@@ -95,10 +95,7 @@ MGCardElement >> aeDrawFlippedSideOn: aeCanvas [
 		scaledFontForFace: aFTFace
 		size: self fontPointSize.
 
-	helloUtf8 := self card symbol asString utf8Encoded.
-	cairoGlyphsArray := cairoScaledFont
-		glyphArrayFor: helloUtf8
-		length: helloUtf8 size.
+	cairoGlyphsArray := cairoScaledFont glyphArrayForString: self card symbol asString.
 
 	aeCanvas
 		textExtentsFor: cairoGlyphsArray
@@ -128,9 +125,9 @@ MGCardElement >> aeDrawOnlyMeOn: aeCanvas [
 		cairoContext
 			roundedRectangleTo: self size
 			radii: (Array new: 4 withAll: self cornerRadius) ].
-	aeCanvas drawFigure.
-
-	aeCanvas prepareToDrawChildrenWithClipping: true.
+	aeCanvas
+		shouldClipAfterDrawingFigure: true;
+		drawFigure.
 
 	self card isFlipped
 		ifTrue: [ self aeDrawFlippedSideOn: aeCanvas ]
