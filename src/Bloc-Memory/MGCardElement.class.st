@@ -279,10 +279,10 @@ MGCardElement >> onDisappear [
 		duration: 0.35 seconds.
 
 	"disappearing animation makes card transparent and minimizes until it becomes invisible"
-	disappear := BlParallelAnimation with: { vanish . minimize }.
+	disappear := BlParallelAnimation withAll: { vanish . minimize }.
 	
 	"final animation consists of two sequential animations: enlarge and disappear"
-	self addAnimation: (BlSequentialAnimation with: { enlarge. disappear })
+	self addAnimation: (BlSequentialAnimation withAll: { enlarge. disappear })
 ]
 
 { #category : #'announcement - handling' }
