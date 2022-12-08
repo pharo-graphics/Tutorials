@@ -115,7 +115,7 @@ MGCardElement >> aeDrawFlippedSideOn: aeCanvas [
 ]
 
 { #category : #'drawing - Alexandrie' }
-MGCardElement >> aeDrawOnlyMeOn: aeCanvas [
+MGCardElement >> aeDrawGeometryOn: aeCanvas [
 	"Draw this card on an Alexandrie canvas"
 
 	aeCanvas setBackgroundWith: [
@@ -125,9 +125,7 @@ MGCardElement >> aeDrawOnlyMeOn: aeCanvas [
 		cairoContext
 			roundedRectangleTo: self size
 			radii: (Array new: 4 withAll: self cornerRadius) ].
-	aeCanvas
-		shouldClipAfterDrawingFigure: true;
-		drawFigure.
+	aeCanvas drawFigureAndPrepareToClip.
 
 	self card isFlipped
 		ifTrue: [ self aeDrawFlippedSideOn: aeCanvas ]
