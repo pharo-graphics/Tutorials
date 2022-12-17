@@ -55,17 +55,8 @@ MGCardElement class >> inASpace [
 MGCardElement >> aeDrawBackSideOn: aeCanvas [
 	"Draw card's back side on an Alexandrie canvas"
 
-	"No fill"
-	aeCanvas setBackgroundOff.
-
-	"Stroke"
-	aeCanvas setOutskirtsCentered.
-	aeCanvas setBorderBlock: [
-		aeCanvas setSourceColor: self backSideLinesColor.
-		aeCanvas setBorderWidth: 2 ].
-
 	"Shape"
-	aeCanvas drawOpenPathWith: [ :cairoContext |
+	aeCanvas pathFactory: [ :cairoContext |
 		"top-left to bottom-right line"
 		cairoContext
 			moveToX: 0 y: 0;
@@ -74,6 +65,15 @@ MGCardElement >> aeDrawBackSideOn: aeCanvas [
 		cairoContext
 			relativeMoveToX: self width negated y: 0;
 			relativeLineToX: self width y: self height negated ].
+
+	"No fill"
+	aeCanvas setBackgroundOff.
+
+	"Stroke"
+	aeCanvas setOutskirtsCentered.
+	aeCanvas setBorderBlock: [
+		aeCanvas setSourceColor: self backSideLinesColor.
+		aeCanvas setBorderWidth: 2 ].
 
 	"Draw it"
 	aeCanvas drawFigure.
@@ -118,14 +118,15 @@ MGCardElement >> aeDrawFlippedSideOn: aeCanvas [
 MGCardElement >> aeDrawGeometryOn: aeCanvas [
 	"Draw this card on an Alexandrie canvas"
 
-	aeCanvas setBackgroundWith: [
-		aeCanvas setSourceColor: self backgroundPaint ].
-	aeCanvas setBorderOff.
-	aeCanvas drawClosedPathWith: [ :cairoContext |
-		cairoContext
-			roundedRectangleTo: self size
-			radii: (Array new: 4 withAll: self cornerRadius) ].
-	aeCanvas drawFigureAndPrepareToClip.
+	aeCanvas
+		pathFactory: [ :cairoContext |
+			cairoContext
+				roundedRectangleTo: self size
+				radii: (Array new: 4 withAll: self cornerRadius) ];
+		setBackgroundWith: [
+			aeCanvas setSourceColor: self backgroundPaint ];
+		setBorderOff;
+		drawFigureAndPrepareToClip.
 
 	self card isFlipped
 		ifTrue: [ self aeDrawFlippedSideOn: aeCanvas ]
