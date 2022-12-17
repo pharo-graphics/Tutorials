@@ -1,26 +1,26 @@
 "
-I am a visual card modelled by ==MGCard==
+I am a visual card whose model is an `MGCard`.
 
-A model should be attached by sending #card: to the card element.
-Card element reacts on model events such as MgdCardFlippedAnnouncement and MgdCardDisappearAnnouncement after card is flipped or disappeared.
+A model should be attached by sending `card:` to the card element.
+Card element reacts on model events such as `MgdCardFlippedAnnouncement` and `MgdCardDisappearAnnouncement` after card is flipped or disappeared.
 
 By default I do not have a visual representations of the face and back
 
-[[[ 
+``` 
 MGCardElement new inspect		
-]]]
+```
 
-[[[ 
+``` 
 MGCardElement inASpace		
-]]]
+```
 
 
-[[[
+```
 | cardElement |
 cardElement := MGCardElement new.
 cardElement card flip.
 cardElement			
-]]]
+```
 "
 Class {
 	#name : #MGCardElement,
@@ -183,8 +183,8 @@ MGCardElement >> initialize [
 
 { #category : #'announcement - handling' }
 MGCardElement >> onDisappear [
-	| vanish enlarge minimize disappear |
 
+	| vanish enlarge minimize disappear |
 	"when two cards match we want them to enlarge a bit to get player's attention"
 	enlarge := BlTransformAnimation scale: 1.15 @ 1.15.
 	enlarge
@@ -194,21 +194,25 @@ MGCardElement >> onDisappear [
 
 	"vanish animation manipulates opacity to make element transparent"
 	vanish := BlOpacityAnimation new
-		opacity: 0;
-		duration: 0.35 seconds.
+		          opacity: 0;
+		          duration: 0.35 seconds.
 
 	"minimization animation changes card's scale to a tiny value"
-	minimize := BlTransformAnimation scale: 0.01 @ 0.01.		
+	minimize := BlTransformAnimation scale: 0.01 @ 0.01.
 	minimize
 		absolute;
 		easing: BlEasing linear;
 		duration: 0.35 seconds.
 
 	"disappearing animation makes card transparent and minimizes until it becomes invisible"
-	disappear := BlParallelAnimation with: { vanish . minimize }.
-	
+	disappear := BlParallelAnimation withAll: { 
+			             vanish.
+			             minimize }.
+
 	"final animation consists of two sequential animations: enlarge and disappear"
-	self addAnimation: (BlSequentialAnimation with: { enlarge. disappear })
+	self addAnimation: (BlSequentialAnimation withAll: { 
+				 enlarge.
+				 disappear })
 ]
 
 { #category : #'announcement - handling' }

@@ -1,5 +1,9 @@
 "
 I am a memory game model
+
+```
+MGGame withEmoji openInNewSpace
+```
 "
 Class {
 	#name : #MGGame,
@@ -18,6 +22,7 @@ MGGame class >> withChinese [
 
 { #category : #factory }
 MGGame class >> withEmoji [
+
 	^ self new initializeForSymbols: '💰🏡🎅🍪🍕🚀😸🙈'
 ]
 
