@@ -1,19 +1,19 @@
 # Tutorials for Bloc and Brick
 
 [![License](https://img.shields.io/github/license/pharo-graphics/Tutorials.svg)](./LICENSE)
-[![Test](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml/badge.svg)](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml)
+[![Tests](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml/badge.svg)](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml)
 
 This repository contains examples of [Bloc](https://github.com/pharo-graphics/Bloc) and [Brick](https://github.com/pharo-graphics/Brick).
 
 
 ## Installation
 
-In [Pharo](https://pharo.org/download) 9 or 10, evaluate:
+In [Pharo](https://pharo.org/download) 11, evaluate:
 
 ```smalltalk
 Metacello new
     baseline: 'BlocBrickTutorials';
-    repository: 'github://pharo-graphics/Tutorials/src';
+    repository: 'github://pharo-graphics/Tutorials:dev-1.0/src';
     load
 ```
 

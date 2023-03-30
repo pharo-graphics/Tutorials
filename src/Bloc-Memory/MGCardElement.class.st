@@ -51,6 +51,94 @@ MGCardElement class >> inASpace [
 	{ space . card } inspect
 ]
 
+{ #category : #'drawing - Alexandrie' }
+MGCardElement >> aeDrawBackSideOn: aeCanvas [
+	"Draw card's back side on an Alexandrie canvas"
+
+	"Shape"
+	aeCanvas pathFactory: [ :cairoContext |
+		"top-left to bottom-right line"
+		cairoContext
+			moveToX: 0 y: 0;
+			lineTo: self extent.
+		"bottom-left to top-right line"
+		cairoContext
+			relativeMoveToX: self width negated y: 0;
+			relativeLineToX: self width y: self height negated ].
+
+	"No fill"
+	aeCanvas setBackgroundOff.
+
+	"Stroke"
+	aeCanvas setOutskirtsCentered.
+	aeCanvas setBorderBlock: [
+		aeCanvas setSourceColor: self backSideLinesColor.
+		aeCanvas setBorderWidth: 2 ].
+
+	"Draw it"
+	aeCanvas drawFigure.
+
+]
+
+{ #category : #'drawing - Alexandrie' }
+MGCardElement >> aeDrawFlippedSideOn: aeCanvas [ 
+	"Draw card's flipped side on an Alexandrie canvas"
+
+	| aFTFace cairoScaledFont cairoGlyphsArray baseline |
+	aFTFace := AeFontManager globalInstance
+		detectFamilyName: self fontFamilyName
+		slant: AeFontSlant normal
+		weight: AeFontWeight normal
+		stretch: AeFontStretch normal
+		ifNone: [ AeFontManager globalInstance defaultFace ].
+	cairoScaledFont := aeCanvas
+		scaledFontForFace: aFTFace
+		size: self fontPointSize.
+
+	cairoGlyphsArray := cairoScaledFont glyphArrayForString: self card symbol asString.
+
+	aeCanvas
+		textExtentsFor: cairoGlyphsArray
+		scaledFont: cairoScaledFont
+		do: [ :aTextExtents |
+			"Calculate the baseline required to center the 
+			symbol, both horizontally and vertically:"
+			baseline := ((self extent
+				- (aTextExtents width @ aTextExtents height)) / 2.0)
+				- (aTextExtents bearingX @ aTextExtents bearingY) ].
+
+	aeCanvas restoreContextAfter: [ 
+		aeCanvas pathTranslate: baseline.
+		aeCanvas setSourceColor: self fontColor.
+		aeCanvas drawText: cairoGlyphsArray font: cairoScaledFont ].
+
+]
+
+{ #category : #'drawing - Alexandrie' }
+MGCardElement >> aeDrawGeometryOn: aeCanvas [
+	"Draw this card on an Alexandrie canvas"
+
+	aeCanvas
+		pathFactory: [ :cairoContext |
+			cairoContext
+				roundedRectangleTo: self size
+				radius: self cornerRadius ];
+		setBackgroundWith: [
+			aeCanvas setSourceColor: self backgroundPaint ];
+		setBorderOff;
+		drawFigureAndPrepareToClip.
+
+	self card isFlipped
+		ifTrue: [ self aeDrawFlippedSideOn: aeCanvas ]
+		ifFalse: [ self aeDrawBackSideOn: aeCanvas ]
+]
+
+{ #category : #accessing }
+MGCardElement >> backSideLinesColor [
+
+	^ Color paleBlue
+]
+
 { #category : #'visual properties' }
 MGCardElement >> backgroundPaint [
 	"Return a BlPaint that should be used as a background (fill)
@@ -78,24 +166,24 @@ MGCardElement >> card: aCardModel [
 	card announcer when: MGCardDisappearAnnouncement send: #onDisappear to: self
 ]
 
-{ #category : #drawing }
+{ #category : #accessing }
 MGCardElement >> cornerRadius [
   ^ 12
 ]
 
-{ #category : #drawing }
+{ #category : #'drawing - Sparta' }
 MGCardElement >> drawBacksideOn: aCanvas [
 	aCanvas stroke
-		paint: Color paleBlue;
+		paint: self backSideLinesColor;
 		path: (aCanvas shape line: 0@0 to: self extent);
 		draw.
 	aCanvas stroke
-		paint: Color paleBlue;
+		paint: self backSideLinesColor;
 		path: (aCanvas shape line: self width @ 0 to: 0@self height);
 		draw
 ]
 
-{ #category : #drawing }
+{ #category : #'drawing - Sparta' }
 MGCardElement >> drawCommonOn: aCanvas [
 	aCanvas fill
 		paint: self backgroundPaint;
@@ -103,18 +191,18 @@ MGCardElement >> drawCommonOn: aCanvas [
 		draw
 ]
 
-{ #category : #drawing }
+{ #category : #'drawing - Sparta' }
 MGCardElement >> drawFlippedSideOn: aCanvas [
 
 	| font origin textPainter metrics |
 	font := aCanvas font
-		        named: 'Source Sans Pro';
-		        size: 50;
+		        named: self fontFamilyName;
+		        size: self fontPointSize;
 		        build.
 
 	textPainter := aCanvas text
 		               font: font;
-		               paint: Color white;
+		               paint: self fontColor;
 		               string: self card symbol asString.
 
 	metrics := textPainter measure.
@@ -125,40 +213,7 @@ MGCardElement >> drawFlippedSideOn: aCanvas [
 		draw
 ]
 
-{ #category : #drawing }
-MGCardElement >> drawOnSpartaCanvas1: aCanvas [
-	
-	aCanvas fill
-		paint: self backgroundPaint;
-		path: self boundsInLocal;
-		draw
-]
-
-{ #category : #drawing }
-MGCardElement >> drawOnSpartaCanvas2: aCanvas [
-  aCanvas fill
-    paint: self backgroundPaint;
-    path: (aCanvas shape ellipse: self boundsInLocal);
-    draw
-
-]
-
-{ #category : #drawing }
-MGCardElement >> drawOnSpartaCanvas3: aCanvas [
-	| roundedRectangle |
-	roundedRectangle := aCanvas shape
-  		roundedRectangle: self boundsInLocal
-		radii: (BlCornerRadii radius: self cornerRadius) asArray.
-	aCanvas clip
-		by: roundedRectangle
-		during: [
-			aCanvas fill
-				paint: self backgroundPaint;
-				path: self boundsInLocal;
-				draw ]
-]
-
-{ #category : #drawing }
+{ #category : #'drawing - Sparta' }
 MGCardElement >> drawOnSpartaCanvas: aCanvas [
 	| roundedRectangle |
 	roundedRectangle := aCanvas shape
@@ -171,6 +226,24 @@ MGCardElement >> drawOnSpartaCanvas: aCanvas [
 			self card isFlipped
 				ifTrue: [ self drawFlippedSideOn: aCanvas ]
 				ifFalse: [ self drawBacksideOn: aCanvas ]  ]
+]
+
+{ #category : #accessing }
+MGCardElement >> fontColor [
+
+	^ Color white
+]
+
+{ #category : #accessing }
+MGCardElement >> fontFamilyName [
+
+	^ 'Source Sans Pro'
+]
+
+{ #category : #accessing }
+MGCardElement >> fontPointSize [
+
+	^ 50
 ]
 
 { #category : #initialization }
