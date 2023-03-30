@@ -122,7 +122,7 @@ MGCardElement >> aeDrawGeometryOn: aeCanvas [
 		pathFactory: [ :cairoContext |
 			cairoContext
 				roundedRectangleTo: self size
-				radii: (Array new: 4 withAll: self cornerRadius) ];
+				radius: self cornerRadius ];
 		setBackgroundWith: [
 			aeCanvas setSourceColor: self backgroundPaint ];
 		setBorderOff;
