@@ -4,26 +4,13 @@ I'm a game visual board.
 ## To open a game 
 
 ```
-| aGameElement space |
-aGameElement := MGGameElement new memoryGame: MGGame withNumbers; yourself.
-space := BlSpace new.
-space addChild: aGameElement. 
-space pulse.
-space extent: aGameElement extent.
-space show. 
+ddd
 ```
 
 
 ## To open a game in a separate native window
 ```
-| aGameElement space |
-aGameElement := MGGameElement new memoryGame: MGGame withNumbers; yourself.
-space := BlSpace new.
-space host: BlOSWindowSDL2Host new.  
-space addChild: aGameElement. 
-space pulse.
-space extent: aGameElement extent.
-space show. 
+aGameElement := MGGameElement openWithNumber
 ```
 "
 Class {
@@ -90,6 +77,43 @@ MGGameElement class >> openOnModel: aModel inSpace: aSpace [
 	^ game
 ]
 
+{ #category : #example }
+MGGameElement class >> openWithNumber [
+
+	<script>
+	| aGameElement space |
+	aGameElement := MGGameElement new
+		                memoryGame: MGGame withNumbers;
+		                yourself.
+	space := BlSpace new.
+	space host: BlOSWindowSDL2Host new.
+	space root addChild: aGameElement.
+	"space root layout: BlFrameLayout new.
+	space root constraintsDo: [ :c | 
+		c horizontal fitContent.
+		c vertical fitContent ]."
+	space root whenLayoutedDoOnce: [ space extent: 420 @ 420 ].
+	space show
+]
+
+{ #category : #example }
+MGGameElement class >> openWithNumberNoHost [
+
+	<script>
+	| aGameElement space |
+	aGameElement := MGGameElement new
+		                memoryGame: MGGame withNumbers;
+		                yourself.
+	space := BlSpace new.
+	space root addChild: aGameElement.
+	"space root layout: BlFrameLayout new.
+	space root constraintsDo: [ :c | 
+		c horizontal fitContent.
+		c vertical fitContent ]."
+	space root whenLayoutedDoOnce: [ space extent: 420 @ 420 ].
+	space show
+]
+
 { #category : #initialization }
 MGGameElement >> initialize [
 
@@ -99,8 +123,8 @@ MGGameElement >> initialize [
 	self layout: (BlGridLayout horizontal cellSpacing: 20).
 
 	self constraintsDo: [ :aLayoutConstraints | 
-		aLayoutConstraints horizontal fitContent.
-		aLayoutConstraints vertical fitContent ]
+		aLayoutConstraints horizontal matchParent.
+		aLayoutConstraints vertical matchParent ]
 ]
 
 { #category : #accessing }
