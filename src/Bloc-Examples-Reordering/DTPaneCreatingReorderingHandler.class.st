@@ -21,6 +21,66 @@ DTPaneCreatingReorderingHandler >> addPaneWith: draggable at: anEvent [
 	column when: BlPullStartEvent do: [ self makeLast: column ]
 ]
 
+{ #category : #private }
+DTPaneCreatingReorderingHandler >> columnBlock [
+
+	^ [ BlElement new
+			border: (BlBorder paint: Color lightGray lighter);
+			background: Color yellow muchLighter muchLighter lighter;
+			layout: BlFlowLayout new;
+			margin: (BlInsets all: 2);
+			padding: (BlInsets top: 10 left: 2 bottom: 2 right: 2);
+			constraintsDo: [ :c | 
+				c horizontal exact: 86*3.
+				c vertical fitContent ];
+			addEventHandler: BlPullHandler new;
+			yourself ]
+]
+
+{ #category : #'event handling' }
+DTPaneCreatingReorderingHandler >> dragEndEvent: anEvent [
+	"anEvent consumed: true."
+	| draggable |
+	draggable := anEvent currentTarget.
+	overlay removeChild: draggable.
+	(parent containsGlobalPoint: anEvent position) ifTrue: [
+		parent replaceChild: placeholder with: draggable] 
+	ifFalse: [ 
+		parent removeChild: placeholder.
+		self addPaneWith: draggable at: anEvent].
+	overlay detach.
+	panes do: [:each | |nrOfChildren|
+		nrOfChildren := each childrenCount.
+		nrOfChildren = 0 ifTrue: [ container removeChild: each]
+		ifFalse: [ each constraintsDo: [ :c | 
+			c horizontal exact: 86*(nrOfChildren sqrt roundUpTo: 1)]].
+].
+	(panes removeAllSuchThat: [:each | each childrenCount = 0]).
+	anEvent currentTarget dispatchEvent: BlPullEndEvent new
+]
+
+{ #category : #'event handling' }
+DTPaneCreatingReorderingHandler >> dragStartEvent: anEvent [
+	|draggable |
+	anEvent consumed: true.
+	draggable := anEvent currentTarget.
+	parent := panes detect: [ :aPane | (aPane containsGlobalPoint: anEvent position) 
+		and: [ draggable hasParent: aPane]].
+	overlay := BlOverlayElement on: container.
+	container parent addChild: overlay.
+
+	"drag start position in parent"
+	dragStartPosition := draggable globalPointToParent: anEvent position.
+	draggableOffset := dragStartPosition - draggable position.
+	"element position in parent"
+	originalPosition := draggable position.
+	placeholder := self newPlaceholderFor: draggable.
+	parent replaceChild: draggable with: placeholder.
+	overlay addChild: draggable.
+
+	anEvent currentTarget dispatchEvent: BlPullStartEvent new
+]
+
 { #category : #examples }
 DTPaneCreatingReorderingHandler >> fittingColumnsExample [
 	<sampleInstance>
@@ -62,4 +122,31 @@ DTPaneCreatingReorderingHandler >> fittingColumnsExample [
 		title: 'Fitting columns';
 		show;
 		yourself
+]
+
+{ #category : #private }
+DTPaneCreatingReorderingHandler >> makeLast: aPane [
+
+	panes swap: (panes indexOf: aPane) with: panes size.
+	container removeChildren.
+	container addChildren: panes
+]
+
+{ #category : #private }
+DTPaneCreatingReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
+
+	| currentPane |
+	currentPane := panes reversed
+		detect: [ :aPane |
+			aPane containsGlobalPoint: anEvent position ]
+		ifNone: [ parent ].
+	currentPane = parent ifTrue: [ ^ self ].
+
+	parent removeChild: placeholder.
+	parent constraintsDo: [ :c |
+		c horizontal exact: 86 * (parent childrenCount sqrt roundUpTo: 1) ].
+	parent := currentPane.
+	parent addChild: placeholder.
+	parent constraintsDo: [ :c |
+		c horizontal exact: 86 * (parent childrenCount sqrt roundUpTo: 1) ]
 ]
