@@ -1,6 +1,6 @@
 Class {
-	#name : #DTPaneCreatingReorderingHandler,
-	#superclass : #DTMultiPaneReorderingHandler,
+	#name : #BlPaneCreatingReorderingHandler,
+	#superclass : #BlMultiPaneReorderingHandler,
 	#instVars : [
 		'draggableOffset'
 	],
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #adding }
-DTPaneCreatingReorderingHandler >> addPaneWith: draggable at: anEvent [
+BlPaneCreatingReorderingHandler >> addPaneWith: draggable at: anEvent [
 
 	| column |
 	column := self columnBlock value.
@@ -22,7 +22,7 @@ DTPaneCreatingReorderingHandler >> addPaneWith: draggable at: anEvent [
 ]
 
 { #category : #private }
-DTPaneCreatingReorderingHandler >> columnBlock [
+BlPaneCreatingReorderingHandler >> columnBlock [
 
 	^ [ BlElement new
 			border: (BlBorder paint: Color lightGray lighter);
@@ -38,7 +38,7 @@ DTPaneCreatingReorderingHandler >> columnBlock [
 ]
 
 { #category : #'event handling' }
-DTPaneCreatingReorderingHandler >> dragEndEvent: anEvent [
+BlPaneCreatingReorderingHandler >> dragEndEvent: anEvent [
 	"anEvent consumed: true."
 	| draggable |
 	draggable := anEvent currentTarget.
@@ -60,7 +60,7 @@ DTPaneCreatingReorderingHandler >> dragEndEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-DTPaneCreatingReorderingHandler >> dragStartEvent: anEvent [
+BlPaneCreatingReorderingHandler >> dragStartEvent: anEvent [
 	|draggable |
 	anEvent consumed: true.
 	draggable := anEvent currentTarget.
@@ -82,7 +82,7 @@ DTPaneCreatingReorderingHandler >> dragStartEvent: anEvent [
 ]
 
 { #category : #examples }
-DTPaneCreatingReorderingHandler >> fittingColumnsExample [
+BlPaneCreatingReorderingHandler >> fittingColumnsExample [
 	<sampleInstance>
 
 	| pane columnBlock toDo columns handler |
@@ -125,7 +125,7 @@ DTPaneCreatingReorderingHandler >> fittingColumnsExample [
 ]
 
 { #category : #private }
-DTPaneCreatingReorderingHandler >> makeLast: aPane [
+BlPaneCreatingReorderingHandler >> makeLast: aPane [
 
 	panes swap: (panes indexOf: aPane) with: panes size.
 	container removeChildren.
@@ -133,7 +133,7 @@ DTPaneCreatingReorderingHandler >> makeLast: aPane [
 ]
 
 { #category : #private }
-DTPaneCreatingReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
+BlPaneCreatingReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
 
 	| currentPane |
 	currentPane := panes reversed

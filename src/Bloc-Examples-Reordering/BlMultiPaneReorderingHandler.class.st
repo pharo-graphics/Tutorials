@@ -2,8 +2,8 @@
 In planning boards, we want to drag and drop tasks from one pane to another. This event handler supports that. The container is the space where the dragging and dropping is to happen, the panes are the elements that contain tasks
 "
 Class {
-	#name : #DTMultiPaneReorderingHandler,
-	#superclass : #DTReorderingHandler,
+	#name : #BlMultiPaneReorderingHandler,
+	#superclass : #BlReorderingHandler,
 	#instVars : [
 		'container',
 		'panes'
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #examples }
-DTMultiPaneReorderingHandler >> cardsExample [
+BlMultiPaneReorderingHandler >> cardsExample [
 	<sampleInstance>
 
 	| enlargeButton reduceButton bar pane scene |
@@ -64,13 +64,13 @@ DTMultiPaneReorderingHandler >> cardsExample [
 ]
 
 { #category : #accessing }
-DTMultiPaneReorderingHandler >> container: theContainer [
+BlMultiPaneReorderingHandler >> container: theContainer [
 
 	container := theContainer
 ]
 
 { #category : #'event handling' }
-DTMultiPaneReorderingHandler >> dragEvent: anEvent [
+BlMultiPaneReorderingHandler >> dragEvent: anEvent [
 
 	| dragPosition dragDelta aNewPosition |
 	dragPosition := anEvent currentTarget globalPointToParent:
@@ -102,7 +102,7 @@ DTMultiPaneReorderingHandler >> dragEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-DTMultiPaneReorderingHandler >> dragStartEvent: anEvent [
+BlMultiPaneReorderingHandler >> dragStartEvent: anEvent [
 
 	| draggable |
 	anEvent consumed: true.
@@ -124,7 +124,7 @@ DTMultiPaneReorderingHandler >> dragStartEvent: anEvent [
 ]
 
 { #category : #private }
-DTMultiPaneReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
+BlMultiPaneReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 
 	| mouseOverOther index |
 	self movePlaceholderToCorrectParent: anEvent.
@@ -140,7 +140,7 @@ DTMultiPaneReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 ]
 
 { #category : #'event handling' }
-DTMultiPaneReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
+BlMultiPaneReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
 
 	| currentPane |
 	currentPane := panes
@@ -155,7 +155,7 @@ DTMultiPaneReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
 ]
 
 { #category : #private }
-DTMultiPaneReorderingHandler >> newThreeColumnsPane [
+BlMultiPaneReorderingHandler >> newThreeColumnsPane [
 
 	| pane columnBlock toDo doing done columns handler |
 	pane := BlElement new
@@ -206,12 +206,12 @@ DTMultiPaneReorderingHandler >> newThreeColumnsPane [
 ]
 
 { #category : #accessing }
-DTMultiPaneReorderingHandler >> panes: thePanes [
+BlMultiPaneReorderingHandler >> panes: thePanes [
 	panes := thePanes
 ]
 
 { #category : #examples }
-DTMultiPaneReorderingHandler >> threeColumnsExample [
+BlMultiPaneReorderingHandler >> threeColumnsExample [
 	<sampleInstance>
 
 	^ BlSpace new

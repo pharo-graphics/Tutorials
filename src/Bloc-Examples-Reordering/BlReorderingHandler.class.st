@@ -2,7 +2,7 @@
 I support dragging and dropping to reorder
 "
 Class {
-	#name : #DTReorderingHandler,
+	#name : #BlReorderingHandler,
 	#superclass : #BlCustomEventHandler,
 	#instVars : [
 		'originalPosition',
@@ -22,39 +22,39 @@ Class {
 }
 
 { #category : #'class initialization' }
-DTReorderingHandler class >> initialize [	
+BlReorderingHandler class >> initialize [	
 	Any := #any.
 	Vertical := #vertical.
 	Horizontal := #horizontal
 ]
 
 { #category : #accessing }
-DTReorderingHandler >> allowOutOfBounds [
+BlReorderingHandler >> allowOutOfBounds [
 	"Allow the pulled element to be pulled outside of the parent bounds"
 	
 	allowedOutOfBounds := true
 ]
 
 { #category : #accessing }
-DTReorderingHandler >> beFree [
+BlReorderingHandler >> beFree [
 
 	direction := Any
 ]
 
 { #category : #accessing }
-DTReorderingHandler >> beHorizontal [
+BlReorderingHandler >> beHorizontal [
 
 	direction := Horizontal
 ]
 
 { #category : #accessing }
-DTReorderingHandler >> beVertical [
+BlReorderingHandler >> beVertical [
 
 	direction := Vertical
 ]
 
 { #category : #'event handling' }
-DTReorderingHandler >> computePullDelta: aDragDelta [
+BlReorderingHandler >> computePullDelta: aDragDelta [
 	
 	direction = Any
 		ifTrue: [ ^ aDragDelta ].
@@ -69,14 +69,14 @@ DTReorderingHandler >> computePullDelta: aDragDelta [
 ]
 
 { #category : #accessing }
-DTReorderingHandler >> disallowOutOfBounds [
+BlReorderingHandler >> disallowOutOfBounds [
 	"Do not allow the pulled element to be pulled outside of the parent bounds"
 	
 	allowedOutOfBounds := false
 ]
 
 { #category : #'event handling' }
-DTReorderingHandler >> dragEndEvent: anEvent [
+BlReorderingHandler >> dragEndEvent: anEvent [
 
 	| draggable |
 	"anEvent consumed: true."
@@ -89,7 +89,7 @@ DTReorderingHandler >> dragEndEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-DTReorderingHandler >> dragEvent: anEvent [
+BlReorderingHandler >> dragEvent: anEvent [
 
 	| dragPosition dragDelta aNewPosition |
 	dragPosition := anEvent currentTarget globalPointToParent:
@@ -122,7 +122,7 @@ DTReorderingHandler >> dragEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-DTReorderingHandler >> dragStartEvent: anEvent [
+BlReorderingHandler >> dragStartEvent: anEvent [
 
 	| draggable |
 	anEvent consumed: true.
@@ -144,7 +144,7 @@ DTReorderingHandler >> dragStartEvent: anEvent [
 ]
 
 { #category : #'event handling' }
-DTReorderingHandler >> eventsToHandle [
+BlReorderingHandler >> eventsToHandle [
 
 	^ {
 		  BlDragStartEvent.
@@ -153,7 +153,7 @@ DTReorderingHandler >> eventsToHandle [
 ]
 
 { #category : #initialization }
-DTReorderingHandler >> initialize [
+BlReorderingHandler >> initialize [
 
 	super initialize.
 
@@ -162,7 +162,7 @@ DTReorderingHandler >> initialize [
 ]
 
 { #category : #examples }
-DTReorderingHandler >> inplaceSortingExample [
+BlReorderingHandler >> inplaceSortingExample [
 	<sampleInstance>
 
 	| pane |
@@ -192,7 +192,7 @@ DTReorderingHandler >> inplaceSortingExample [
 ]
 
 { #category : #private }
-DTReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
+BlReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 
 	| mouseOverOther index |
 	mouseOverOther := placeholder.
@@ -206,7 +206,7 @@ DTReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 ]
 
 { #category : #private }
-DTReorderingHandler >> newPlaceholderFor: draggable [
+BlReorderingHandler >> newPlaceholderFor: draggable [
 
 	^ BlElement new
 		  size: draggable size;
