@@ -12,7 +12,7 @@ In [Pharo](https://pharo.org/download) 11, evaluate:
 
 ```smalltalk
 Metacello new
-    baseline: 'BlocBrickTutorials';
+    baseline: 'BlocTutorials';
     repository: 'github://pharo-graphics/Tutorials:dev-1.0/src';
     load
 ```
@@ -53,7 +53,7 @@ space show.
 By default, a Morphic window will popup. It is also possible to open a OS "external" window. To do it, open "System Settings > Appearance > Bloc" and select "OSWindow - SDL2" in "Preferable Host".
 
 
-## Reordering
+## Reordering Examples
 
 This example shows how to use drag-and-drop, and it's written using Bloc and Brick.
 

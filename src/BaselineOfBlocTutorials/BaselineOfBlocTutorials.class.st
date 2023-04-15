@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfBlocBrickTutorials,
+	#name : #BaselineOfBlocTutorials,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfBlocBrickTutorials
+	#category : #BaselineOfBlocTutorials
 }
 
 { #category : #baselines }
-BaselineOfBlocBrickTutorials >> baseline: spec [
+BaselineOfBlocTutorials >> baseline: spec [
 	<baseline>
 
 	spec for: #common do: [ 
@@ -13,7 +13,7 @@ BaselineOfBlocBrickTutorials >> baseline: spec [
 			baseline: 'Memory'
 			with: [ spec repository: 'github://pharo-graphics/Tutorials:dev-1.0/src' ].
 		spec
-			baseline: 'BrickExamplesReordering'
+			baseline: 'BlocReorderingExamples'
 			with: [ spec repository: 'github://pharo-graphics/Tutorials:dev-1.0/src' ] ]
 
 ]
