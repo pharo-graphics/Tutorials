@@ -2,7 +2,7 @@
 I am a memory game model
 
 ```
-MGGame withEmoji openInNewSpace
+MGGame withEmoji 
 ```
 "
 Class {
@@ -17,17 +17,19 @@ Class {
 
 { #category : #factory }
 MGGame class >> withChinese [
+	<sampleInstance>
 	^ self new initializeForSymbols: '为从公家里地个时'
 ]
 
 { #category : #factory }
 MGGame class >> withEmoji [
-
-	^ self new initializeForSymbols: '💰🏡🎅🍪🍕🚀😸🙈'
+	<sampleInstance>
+	^ self new initializeForSymbols: '💰🏡🎅🍪🍕🚀😸🙈'; yourself
 ]
 
 { #category : #factory }
 MGGame class >> withNumbers [
+	<sampleInstance>
 	^ self new initializeForSymbols: '12345678'
 ]
 

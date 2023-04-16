@@ -4,7 +4,7 @@ I'm a game visual board.
 ## To open a game 
 
 ```
-ddd
+(MGGameElement onModel: MGGame withNumbers) openInNewSpace
 ```
 
 
@@ -54,7 +54,9 @@ MGGameElement class >> nativelyOpenOnModel: aModel inSpace: aSpace [
 
 { #category : #'instance creation' }
 MGGameElement class >> onModel: aModel [
-
+	"(self onModel: MGGame withEmoji) openInNewSpace"
+	"(self onModel: MGGame withEmoji) openInNewSpace"
+	
 	^ self new memoryGame: aModel; yourself
 ]
 
