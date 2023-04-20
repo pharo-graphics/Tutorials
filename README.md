@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/github/license/pharo-graphics/Tutorials.svg)](./LICENSE)
 [![Tests](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml/badge.svg)](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml)
 
-This repository contains examples of [Bloc](https://github.com/pharo-graphics/Bloc) and [Brick](https://github.com/pharo-graphics/Brick).
+This repository contains examples of [Bloc](https://github.com/pharo-graphics/Bloc).
 
 
 ## Installation
