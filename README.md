@@ -1,4 +1,4 @@
-# Tutorials for Bloc and Brick
+# Tutorials for Bloc
 
 [![License](https://img.shields.io/github/license/pharo-graphics/Tutorials.svg)](./LICENSE)
 [![Tests](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml/badge.svg)](https://github.com/pharo-graphics/Tutorials/actions/workflows/test.yml)
