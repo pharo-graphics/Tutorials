@@ -13,7 +13,7 @@ BaselineOfBlocTutorials >> baseline: spec [
 			baseline: 'Memory'
 			with: [ spec repository: 'github://pharo-graphics/Tutorials:dev-1.0/src' ].
 		spec
-			baseline: 'BlocReorderingExamples'
+			baseline: 'ReorderingExamples'
 			with: [ spec repository: 'github://pharo-graphics/Tutorials:dev-1.0/src' ] ]
 
 ]
