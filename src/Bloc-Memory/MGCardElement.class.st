@@ -26,7 +26,9 @@ Class {
 	#name : #MGCardElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'card'
+		'card',
+		'faceElement',
+		'backElement'
 	],
 	#category : #'Bloc-Memory-Elements'
 }
@@ -51,88 +53,6 @@ MGCardElement class >> inASpace [
 	{ space . card } inspect
 ]
 
-{ #category : #'drawing - Alexandrie' }
-MGCardElement >> aeDrawBackSideOn: aeCanvas [
-	"Draw card's back side on an Alexandrie canvas"
-
-	"Shape"
-	aeCanvas pathFactory: [ :cairoContext |
-		"top-left to bottom-right line"
-		cairoContext
-			moveToX: 0 y: 0;
-			lineTo: self extent.
-		"bottom-left to top-right line"
-		cairoContext
-			relativeMoveToX: self width negated y: 0;
-			relativeLineToX: self width y: self height negated ].
-
-	"No fill"
-	aeCanvas setBackgroundOff.
-
-	"Stroke"
-	aeCanvas setOutskirtsCentered.
-	aeCanvas setBorderBlock: [
-		aeCanvas setSourceColor: self backSideLinesColor.
-		aeCanvas setBorderWidth: 2 ].
-
-	"Draw it"
-	aeCanvas drawFigure.
-
-]
-
-{ #category : #'drawing - Alexandrie' }
-MGCardElement >> aeDrawFlippedSideOn: aeCanvas [ 
-	"Draw card's flipped side on an Alexandrie canvas"
-
-	| aFTFace cairoScaledFont cairoGlyphsArray baseline |
-	aFTFace := AeFontManager globalInstance
-		detectFamilyName: self fontFamilyName
-		slant: AeFontSlant normal
-		weight: AeFontWeight normal
-		stretch: AeFontStretch normal
-		ifNone: [ AeFontManager globalInstance defaultFace ].
-	cairoScaledFont := aeCanvas
-		scaledFontForFace: aFTFace
-		size: self fontPointSize.
-
-	cairoGlyphsArray := cairoScaledFont glyphArrayForString: self card symbol asString.
-
-	aeCanvas
-		textExtentsFor: cairoGlyphsArray
-		scaledFont: cairoScaledFont
-		do: [ :aTextExtents |
-			"Calculate the baseline required to center the 
-			symbol, both horizontally and vertically:"
-			baseline := ((self extent
-				- (aTextExtents width @ aTextExtents height)) / 2.0)
-				- (aTextExtents bearingX @ aTextExtents bearingY) ].
-
-	aeCanvas restoreContextAfter: [ 
-		aeCanvas pathTranslate: baseline.
-		aeCanvas setSourceColor: self fontColor.
-		aeCanvas drawText: cairoGlyphsArray font: cairoScaledFont ].
-
-]
-
-{ #category : #'drawing - Alexandrie' }
-MGCardElement >> aeDrawGeometryOn: aeCanvas [
-	"Draw this card on an Alexandrie canvas"
-
-	aeCanvas
-		pathFactory: [ :cairoContext |
-			cairoContext
-				roundedRectangleTo: self size
-				radius: self cornerRadius ];
-		setBackgroundWith: [
-			aeCanvas setSourceColor: self backgroundPaint ];
-		setBorderOff;
-		drawFigureAndPrepareToClip.
-
-	self card isFlipped
-		ifTrue: [ self aeDrawFlippedSideOn: aeCanvas ]
-		ifFalse: [ self aeDrawBackSideOn: aeCanvas ]
-]
-
 { #category : #accessing }
 MGCardElement >> backSideLinesColor [
 
@@ -145,7 +65,22 @@ MGCardElement >> backgroundPaint [
 	of both back and face sides of the card. Color is polymorphic
 	with BlPaint and therefore can be used too."
 	
-	^ Color pink
+	^ Color pink darker
+]
+
+{ #category : #accessing }
+MGCardElement >> beFlippedBack [
+
+	self removeChildren.
+	self addChild: backElement
+]
+
+{ #category : #accessing }
+MGCardElement >> beFlippedFace [
+
+	self removeChildren.
+	self addChild: faceElement
+
 ]
 
 { #category : #accessing }
@@ -156,76 +91,37 @@ MGCardElement >> card [
 ]
 
 { #category : #accessing }
-MGCardElement >> card: aCardModel [
-	"Attach a card model and subscribe to its announcements.
-	aCardModel must not be nil"
+MGCardElement >> card: aCard [
+	"Attach a card model and subscribe to its announcements."
 	
-	card := aCardModel.
-	
-	card announcer when: MGCardFlippedAnnouncement send: #onFlipped to: self.
-	card announcer when: MGCardDisappearAnnouncement send: #onDisappear to: self
+	card := aCard.
+
+	faceElement text: (card symbol asString asRopedText
+		fontSize: self fontPointSize;
+		foreground: self fontColor;
+		yourself).
+
+	card isFlipped
+		ifTrue: [ self beFlippedFace ]
+		ifFalse: [ self beFlippedBack ].
+
+	card announcer
+		when: MGCardFlippedAnnouncement
+			send: #onFlipped to: self;
+		when: MGCardDisappearAnnouncement
+			send: #onDisappear to: self
+]
+
+{ #category : #'visual properties' }
+MGCardElement >> cardExtent [
+
+	^ 80@80
 ]
 
 { #category : #accessing }
 MGCardElement >> cornerRadius [
-  ^ 12
-]
 
-{ #category : #'drawing - Sparta' }
-MGCardElement >> drawBacksideOn: aCanvas [
-	aCanvas stroke
-		paint: self backSideLinesColor;
-		path: (aCanvas shape line: 0@0 to: self extent);
-		draw.
-	aCanvas stroke
-		paint: self backSideLinesColor;
-		path: (aCanvas shape line: self width @ 0 to: 0@self height);
-		draw
-]
-
-{ #category : #'drawing - Sparta' }
-MGCardElement >> drawCommonOn: aCanvas [
-	aCanvas fill
-		paint: self backgroundPaint;
-		path: self boundsInLocal;
-		draw
-]
-
-{ #category : #'drawing - Sparta' }
-MGCardElement >> drawFlippedSideOn: aCanvas [
-
-	| font origin textPainter metrics |
-	font := aCanvas font
-		        named: self fontFamilyName;
-		        size: self fontPointSize;
-		        build.
-
-	textPainter := aCanvas text
-		               font: font;
-		               paint: self fontColor;
-		               string: self card symbol asString.
-
-	metrics := textPainter measure.
-	origin := (self extent - metrics textMetrics bounds extent) / 2.0.
-	origin := origin - metrics textMetrics bounds origin.
-	textPainter
-		baseline: origin;
-		draw
-]
-
-{ #category : #'drawing - Sparta' }
-MGCardElement >> drawOnSpartaCanvas: aCanvas [
-	| roundedRectangle |
-	roundedRectangle := aCanvas shape
-  		roundedRectangle: self boundsInLocal
-		radii: (BlCornerRadii radius: self cornerRadius) asArray.
-	aCanvas clip
-		by: roundedRectangle
-		during: [
-			self drawCommonOn: aCanvas.
-			self card isFlipped
-				ifTrue: [ self drawFlippedSideOn: aCanvas ]
-				ifFalse: [ self drawBacksideOn: aCanvas ]  ]
+	^ 12
 ]
 
 { #category : #accessing }
@@ -250,8 +146,24 @@ MGCardElement >> fontPointSize [
 MGCardElement >> initialize [
 
 	super initialize.
-	self size: 80@80.
-	self card: (MGCard new symbol: $a)
+	
+	backElement := BlElement new
+		background: self class cardbackForm;
+		size: self cardExtent;
+		yourself.
+
+	faceElement := BlTextElement new.
+
+	self size: self cardExtent.
+	self layout:
+		(BlLinearLayout new
+			alignCenter;
+			yourself).
+	self background: self backgroundPaint.
+	self geometry: (BlRoundedRectangleGeometry cornerRadius: self cornerRadius).
+	
+	self card: (MGCard new symbol: $a).
+
 ]
 
 { #category : #'announcement - handling' }
@@ -290,35 +202,37 @@ MGCardElement >> onDisappear [
 
 { #category : #'announcement - handling' }
 MGCardElement >> onFlipped [
-	"Is sent after the card is flipped in the model"
+	"Update UI after the card is flipped in the model"
 	
-	self card isFlipped
+	card isFlipped
 		ifTrue: [ self onFlippedFace ]
 		ifFalse: [ self onFlippedBack ]
 ]
 
 { #category : #'announcement - handling' }
 MGCardElement >> onFlippedBack [
-	| animation |
 
+	| animation |
 	animation := BlTransformAnimation scale: 1@1.
 	animation
 		absolute;
 		easing: BlEasing bounceOut;
 		duration: 0.35 seconds.
-	
 	self addAnimation: animation.
+	
+	self beFlippedBack
 ]
 
 { #category : #'announcement - handling' }
 MGCardElement >> onFlippedFace [
-	| animation |
 
+	| animation |
 	animation := BlTransformAnimation scale: 0.85 @ 0.85.	
 	animation
 		absolute;
 		easing: BlQuinticInterpolator default;
 		duration: 0.3 seconds.
-	
 	self addAnimation: animation.
+	
+	self beFlippedFace
 ]
