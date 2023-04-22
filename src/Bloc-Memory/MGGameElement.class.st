@@ -122,15 +122,20 @@ MGGameElement >> initialize [
 	super initialize.
 
 	self background: (BlBackground paint: Color gray darker).
-	self layout: (BlGridLayout horizontal cellSpacing: 20).
 
-	self constraintsDo: [ :aLayoutConstraints | 
-		aLayoutConstraints horizontal matchParent.
-		aLayoutConstraints vertical matchParent ]
+	self layout:
+		(BlGridLayout horizontal
+			cellSpacing: 20;
+			yourself).
+
+	self constraintsDo: [ :layoutConstraints | 
+		layoutConstraints horizontal matchParent.
+		layoutConstraints vertical matchParent ]
 ]
 
 { #category : #accessing }
 MGGameElement >> memoryGame [
+
 	^ game
 ]
 
@@ -139,22 +144,19 @@ MGGameElement >> memoryGame: aGame [
 
 	| aCardEventListener |
 	game := aGame.
-	aCardEventListener := self newCardEventListener memoryGame: aGame.
+	aCardEventListener :=
+		MGCardEventListener new
+			memoryGame: aGame;
+			yourself.
+
 	self layout columnCount: game gridSize.
+
 	game availableCards do: [ :aCard | 
 		| cardElement |
-		cardElement := self newCardElement card: aCard.
-		cardElement addEventHandler: aCardEventListener.
+		cardElement :=
+			MGCardElement new
+				card: aCard;
+				addEventHandler: aCardEventListener;
+				yourself.
 		self addChild: cardElement ]
-]
-
-{ #category : #accessing }
-MGGameElement >> newCardElement [
-	^ MGCardElement new
-]
-
-{ #category : #'instance creation' }
-MGGameElement >> newCardEventListener [
-
-	^ MGCardEventListener new
 ]

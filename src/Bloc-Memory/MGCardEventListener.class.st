@@ -1,6 +1,7 @@
 "
 I'm an event listener for mouse clicks on cards of a memory game.
 
+Note a single instance can be added as event handler to multiple Bloc elements.
 "
 Class {
 	#name : #MGCardEventListener,
@@ -19,5 +20,6 @@ MGCardEventListener >> clickEvent: anEvent [
 
 { #category : #accessing }
 MGCardEventListener >> memoryGame: aGame [
+
 	memoryGame := aGame
 ]
