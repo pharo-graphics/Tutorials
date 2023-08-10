@@ -67,7 +67,11 @@ BoidsCustomDrawSkyElement >> aeDrawOn: aeCanvas velocityOf: aBoid [
 { #category : #initialization }
 BoidsCustomDrawSkyElement >> boidWasAddedToSimulation: aBoid [
 
-	self
-		invalidate;
-		requestLayout
+	self invalidate
+]
+
+{ #category : #accessing }
+BoidsCustomDrawSkyElement >> boidsMovedInSimulation [
+
+	self invalidate
 ]

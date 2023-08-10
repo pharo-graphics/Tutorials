@@ -18,7 +18,6 @@ BoidCustomGeometry >> aeApplyTo: aeCanvas element: aBlElement [
 		| boid |
 		boid := aBlElement boid.
 		cairoContext
-			moveTo: boid position;
 			circleRadius: boid radius;
 			moveTo: boid radius asPoint;
 			lineTo: boid velocity negated ]

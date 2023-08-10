@@ -23,6 +23,13 @@ BoidCustomGeometrySkyElement >> boidWasAddedToSimulation: aBoid [
 	self addChild: (self newElementForBoid: aBoid)
 ]
 
+{ #category : #accessing }
+BoidCustomGeometrySkyElement >> boidsMovedInSimulation [
+	
+	self childrenDo: [:each |
+		each position: each boid position ]
+]
+
 { #category : #initialization }
 BoidCustomGeometrySkyElement >> newElementForBoid: aBoid [
 

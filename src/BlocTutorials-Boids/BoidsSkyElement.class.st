@@ -31,6 +31,13 @@ BoidsSkyElement >> boidWasAddedToSimulation: aBoid [
 ]
 
 { #category : #accessing }
+BoidsSkyElement >> boidsMovedInSimulation [
+	"Act after simulation changed."
+
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
 BoidsSkyElement >> ensureNotStepping [
 	
 	steppingAnimation ifNotNil: [
@@ -119,7 +126,7 @@ BoidsSkyElement >> simulation [
 BoidsSkyElement >> step [
 
 	simulation move.
-	self invalidate
+	self boidsMovedInSimulation.
 ]
 
 { #category : #initialization }

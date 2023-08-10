@@ -21,6 +21,15 @@ BoidsSkyUsingGeometryElement >> boidWasAddedToSimulation: aBoid [
 	self addChild: (self newElementForBoid: aBoid)
 ]
 
+{ #category : #accessing }
+BoidsSkyUsingGeometryElement >> boidsMovedInSimulation [
+	
+	self childrenDo: [:each |
+		each position: each boid position.
+		each transformDo: [ :aBuilder |
+			aBuilder rotateBy: each boid velocity degrees ] ]
+]
+
 { #category : #initialization }
 BoidsSkyUsingGeometryElement >> newElementForBoid: aBoid [
 
@@ -31,23 +40,5 @@ BoidsSkyUsingGeometryElement >> newElementForBoid: aBoid [
 			border: (BlBorder paint: aBoid color muchDarker width: 2);
 			geometry: BlTriangleGeometry new;
 			yourself
-
-]
-
-{ #category : #accessing }
-BoidsSkyUsingGeometryElement >> step [
-
-	simulation move.
-	self updateChildrenFromBoids.
-	self invalidate.
-]
-
-{ #category : #accessing }
-BoidsSkyUsingGeometryElement >> updateChildrenFromBoids [
-	
-	self childrenDo: [:each |
-		each transformDo: [ :aBuilder |
-			aBuilder rotateBy: each boid velocity degrees.
-			aBuilder translateBy: each boid position ] ]
 
 ]
