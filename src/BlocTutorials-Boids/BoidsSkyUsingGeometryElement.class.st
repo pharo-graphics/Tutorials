@@ -37,7 +37,7 @@ BoidsSkyUsingGeometryElement >> newElementForBoid: aBoid [
 			boid: aBoid;
 			size: aBoid extent;
 			background: aBoid color;
-			border: (BlBorder paint: aBoid color muchDarker width: 2);
+"			border: (BlBorder paint: aBoid color muchDarker width: 2);"
 			geometry: BlTriangleGeometry new;
 			yourself
 

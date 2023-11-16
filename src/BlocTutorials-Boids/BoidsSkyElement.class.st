@@ -78,7 +78,7 @@ BoidsSkyElement >> initializeSimulation [
 	simulation := BoidsSimulation
 			newExtent: self size asIntegerPoint
 			random: randomGenerator
-			numberOfBoids: 200.
+			numberOfBoids: 100.
 
 	simulation boids do: [ :each |
 		self boidWasAddedToSimulation: each ].
