@@ -1,20 +1,21 @@
 Class {
-	#name : #BaselineOfReorderingExamples,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfReorderingExamples
+	#name : 'BaselineOfReorderingExamples',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfReorderingExamples',
+	#package : 'BaselineOfReorderingExamples'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfReorderingExamples >> baseline: spec [
 	<baseline>
 
 	spec for: #common do: [ 
 		spec
-			baseline: 'BlocPac'
-			with: [ spec repository: 'github://pharo-graphics/bloc-pac:dev-1.0/src' ].
+			baseline: 'Bloc'
+			with: [ spec repository: 'github://pharo-graphics/bloc:dev-1.0/src' ].
 		spec
 			package: #'Bloc-Examples-Reordering' with: [
-				spec requires: #( #'BlocPac' ) ];
+				spec requires: #( #'Bloc' ) ];
 			package: #'Bloc-Examples-Reordering-Tests' with: [
 				spec requires: #( #'Bloc-Examples-Reordering' ) ]
 		]
