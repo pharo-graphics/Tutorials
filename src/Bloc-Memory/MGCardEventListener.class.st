@@ -4,21 +4,23 @@ I'm an event listener for mouse clicks on cards of a memory game.
 Note a single instance can be added as event handler to multiple Bloc elements.
 "
 Class {
-	#name : #MGCardEventListener,
-	#superclass : #BlEventListener,
+	#name : 'MGCardEventListener',
+	#superclass : 'BlEventListener',
 	#instVars : [
 		'memoryGame'
 	],
-	#category : #'Bloc-Memory-Elements'
+	#category : 'Bloc-Memory-Elements',
+	#package : 'Bloc-Memory',
+	#tag : 'Elements'
 }
 
-{ #category : #'mouse handlers' }
+{ #category : 'mouse handlers' }
 MGCardEventListener >> clickEvent: anEvent [
 
 	memoryGame chooseCard: anEvent currentTarget card
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MGCardEventListener >> memoryGame: aGame [
 
 	memoryGame := aGame

@@ -12,31 +12,33 @@ When card is flipped on the face a player should see a symbol that is used to co
 ]]]
 "
 Class {
-	#name : #MGCard,
-	#superclass : #Object,
+	#name : 'MGCard',
+	#superclass : 'Object',
 	#instVars : [
 		'symbol',
 		'flipped',
 		'announcer'
 	],
-	#category : #'Bloc-Memory-Model'
+	#category : 'Bloc-Memory-Model',
+	#package : 'Bloc-Memory',
+	#tag : 'Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MGCard >> announcer [
 	"Return my announcer that is used to notify my observers"
 	
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 MGCard >> disappear [
 	"Ask card to disapper"
 	
 	self notifyDisappear
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 MGCard >> flip [
 	"Flip the card on the other side (toggle flipped state)"
 	
@@ -44,34 +46,34 @@ MGCard >> flip [
 	self notifyFlipped
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MGCard >> initialize [
 	super initialize.
 	flipped := false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MGCard >> isFlipped [
 	"Return true if card is flipped and its face (symbol) is visible, false otherwise"
 
 	^ flipped
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 MGCard >> notifyDisappear [
 	"Notify all observers that I disappeared from the game"
 	
 	self announcer announce: MGCardDisappearAnnouncement new
 ]
 
-{ #category : #notifying }
+{ #category : 'notifying' }
 MGCard >> notifyFlipped [
 	"Notify all observers that my flipped state was changed (from flipped to not or the other way around)"
 	
 	self announcer announce: MGCardFlippedAnnouncement new
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MGCard >> printOn: aStream [
 	aStream
 		nextPutAll: 'Card';
@@ -81,14 +83,14 @@ MGCard >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MGCard >> symbol [
 	"Return a symbol that should be displayed when card is flipped and face is visible"
 
 	^ symbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MGCard >> symbol: aCharacter [
 	"Initialize the card with a given symbol as a character"
 

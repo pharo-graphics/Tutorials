@@ -14,15 +14,17 @@ aGameElement := MGGameElement openWithNumber
 ```
 "
 Class {
-	#name : #MGGameElement,
-	#superclass : #BlElement,
+	#name : 'MGGameElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'game'
 	],
-	#category : #'Bloc-Memory-Elements'
+	#category : 'Bloc-Memory-Elements',
+	#package : 'Bloc-Memory',
+	#tag : 'Elements'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 MGGameElement class >> example [
 	<sampleInstance>
 	
@@ -30,7 +32,7 @@ MGGameElement class >> example [
 
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 MGGameElement class >> exampleInASpace [
 	<sampleInstance>
 	
@@ -38,21 +40,21 @@ MGGameElement class >> exampleInASpace [
 
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 MGGameElement class >> exampleInASpaceInAnOSWindow [
 	<sampleInstance>
 	
 	self nativelyOpenOnModel: MGGame withNumbers inSpace: BlSpace new.
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 MGGameElement class >> nativelyOpenOnModel: aModel inSpace: aSpace [
 
 	aSpace host: BlOSWindowSDL2Host new.
 	^ self openOnModel: aModel inSpace: aSpace.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MGGameElement class >> onModel: aModel [
 	"(self onModel: MGGame withEmoji) openInNewSpace"
 	"(self onModel: MGGame withEmoji) openInNewSpace"
@@ -60,16 +62,16 @@ MGGameElement class >> onModel: aModel [
 	^ self new memoryGame: aModel; yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MGGameElement class >> onModel: aModel inSpace: aSpace [
 
 	| game |
 	game := self onModel: aModel.
-	aSpace addChild: game. 
+	aSpace root addChild: game. 
 	^ game
 ]
 
-{ #category : #opening }
+{ #category : 'opening' }
 MGGameElement class >> openOnModel: aModel inSpace: aSpace [
 
 	| game |
@@ -79,7 +81,7 @@ MGGameElement class >> openOnModel: aModel inSpace: aSpace [
 	^ game
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 MGGameElement class >> openWithNumber [
 
 	<script>
@@ -98,7 +100,7 @@ MGGameElement class >> openWithNumber [
 	space show
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 MGGameElement class >> openWithNumberNoHost [
 
 	<script>
@@ -116,7 +118,7 @@ MGGameElement class >> openWithNumberNoHost [
 	space show
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MGGameElement >> initialize [
 
 	super initialize.
@@ -133,13 +135,13 @@ MGGameElement >> initialize [
 		layoutConstraints vertical matchParent ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MGGameElement >> memoryGame [
 
 	^ game
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MGGameElement >> memoryGame: aGame [
 
 	| aCardEventListener |

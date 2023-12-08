@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Memory' }
+Package { #name : 'Bloc-Memory' }
