@@ -2,8 +2,8 @@
 I support dragging and dropping to reorder
 "
 Class {
-	#name : #BlReorderingHandler,
-	#superclass : #BlCustomEventHandler,
+	#name : 'BlReorderingHandler',
+	#superclass : 'BlCustomEventHandler',
 	#instVars : [
 		'originalPosition',
 		'dragStartPosition',
@@ -18,42 +18,43 @@ Class {
 		'Horizontal',
 		'Vertical'
 	],
-	#category : #'Bloc-Examples-Reordering'
+	#category : 'Bloc-Examples-Reordering',
+	#package : 'Bloc-Examples-Reordering'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 BlReorderingHandler class >> initialize [	
 	Any := #any.
 	Vertical := #vertical.
 	Horizontal := #horizontal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlReorderingHandler >> allowOutOfBounds [
 	"Allow the pulled element to be pulled outside of the parent bounds"
 	
 	allowedOutOfBounds := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlReorderingHandler >> beFree [
 
 	direction := Any
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlReorderingHandler >> beHorizontal [
 
 	direction := Horizontal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlReorderingHandler >> beVertical [
 
 	direction := Vertical
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlReorderingHandler >> computePullDelta: aDragDelta [
 	
 	direction = Any
@@ -68,14 +69,14 @@ BlReorderingHandler >> computePullDelta: aDragDelta [
 	^ direction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BlReorderingHandler >> disallowOutOfBounds [
 	"Do not allow the pulled element to be pulled outside of the parent bounds"
 	
 	allowedOutOfBounds := false
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlReorderingHandler >> dragEndEvent: anEvent [
 
 	| draggable |
@@ -88,7 +89,7 @@ BlReorderingHandler >> dragEndEvent: anEvent [
 	anEvent currentTarget dispatchEvent: BlPullEndEvent new
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlReorderingHandler >> dragEvent: anEvent [
 
 	| dragPosition dragDelta aNewPosition |
@@ -114,14 +115,14 @@ BlReorderingHandler >> dragEvent: anEvent [
 
 	anEvent currentTarget position: aNewPosition.
 	anEvent consumed: true.
-	anEvent currentTarget dispatchEvent: (BlPullEvent new
-			 initialPosition: originalPosition;
-			 oldPosition: dragPosition;
-			 newPosition: aNewPosition;
-			 delta: dragDelta)
+	anEvent currentTarget dispatchEvent:
+		(BlPullEvent new
+			initialPosition: originalPosition;
+			currentPosition: aNewPosition;
+			yourself)
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlReorderingHandler >> dragStartEvent: anEvent [
 
 	| draggable |
@@ -143,7 +144,7 @@ BlReorderingHandler >> dragStartEvent: anEvent [
 	anEvent currentTarget dispatchEvent: BlPullStartEvent new
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlReorderingHandler >> eventsToHandle [
 
 	^ {
@@ -152,7 +153,7 @@ BlReorderingHandler >> eventsToHandle [
 		  BlDragEndEvent }
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BlReorderingHandler >> initialize [
 
 	super initialize.
@@ -161,11 +162,11 @@ BlReorderingHandler >> initialize [
 	direction := Any
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlReorderingHandler >> inplaceSortingExample [
 	<sampleInstance>
 
-	| pane |
+	| pane space |
 	pane := BlElement new
 		layout: BlFlowLayout new;
 		constraintsDo: [ :c |
@@ -183,15 +184,16 @@ BlReorderingHandler >> inplaceSortingExample [
 				addEventHandler: self class new;
 				yourself) ].
 
-	^ BlSpace new
-		addChild: pane;
+	space := BlSpace new
 		extent: 700 @ 600;
 		title: 'Inplace sorting';
-		show;
-		yourself
+		yourself.
+	space root addChild: pane.
+ 	space show.
+	^ space
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 
 	| mouseOverOther index |
@@ -205,7 +207,7 @@ BlReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 	parent addChild: placeholder at: index
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlReorderingHandler >> newPlaceholderFor: draggable [
 
 	^ BlElement new

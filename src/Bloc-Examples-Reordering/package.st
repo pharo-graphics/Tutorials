@@ -1,1 +1,1 @@
-Package { #name : #'Bloc-Examples-Reordering' }
+Package { #name : 'Bloc-Examples-Reordering' }

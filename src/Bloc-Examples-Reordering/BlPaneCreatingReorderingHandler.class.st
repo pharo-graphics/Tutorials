@@ -1,13 +1,14 @@
 Class {
-	#name : #BlPaneCreatingReorderingHandler,
-	#superclass : #BlMultiPaneReorderingHandler,
+	#name : 'BlPaneCreatingReorderingHandler',
+	#superclass : 'BlMultiPaneReorderingHandler',
 	#instVars : [
 		'draggableOffset'
 	],
-	#category : #'Bloc-Examples-Reordering'
+	#category : 'Bloc-Examples-Reordering',
+	#package : 'Bloc-Examples-Reordering'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 BlPaneCreatingReorderingHandler >> addPaneWith: draggable at: anEvent [
 
 	| column |
@@ -21,7 +22,7 @@ BlPaneCreatingReorderingHandler >> addPaneWith: draggable at: anEvent [
 	column when: BlPullStartEvent do: [ self makeLast: column ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlPaneCreatingReorderingHandler >> columnBlock [
 
 	^ [ BlElement new
@@ -37,7 +38,7 @@ BlPaneCreatingReorderingHandler >> columnBlock [
 			yourself ]
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlPaneCreatingReorderingHandler >> dragEndEvent: anEvent [
 	"anEvent consumed: true."
 	| draggable |
@@ -59,7 +60,7 @@ BlPaneCreatingReorderingHandler >> dragEndEvent: anEvent [
 	anEvent currentTarget dispatchEvent: BlPullEndEvent new
 ]
 
-{ #category : #'event handling' }
+{ #category : 'event handling' }
 BlPaneCreatingReorderingHandler >> dragStartEvent: anEvent [
 	|draggable |
 	anEvent consumed: true.
@@ -81,11 +82,11 @@ BlPaneCreatingReorderingHandler >> dragStartEvent: anEvent [
 	anEvent currentTarget dispatchEvent: BlPullStartEvent new
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 BlPaneCreatingReorderingHandler >> fittingColumnsExample [
 	<sampleInstance>
 
-	| pane columnBlock toDo columns handler |
+	| pane columnBlock toDo columns handler space |
 	pane := BlElement new
 		        constraintsDo: [:c |
 		           c horizontal matchParent.
@@ -116,15 +117,16 @@ BlPaneCreatingReorderingHandler >> fittingColumnsExample [
 			           yourself.
 		toDo addChild: element ].
 
-	^ BlSpace new
-		addChild: pane;
+	space := BlSpace new
 		extent: 800 @ 600;
 		title: 'Fitting columns';
-		show;
-		yourself
+		yourself.
+	space root addChild: pane.
+	space show.
+	^ space
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlPaneCreatingReorderingHandler >> makeLast: aPane [
 
 	panes swap: (panes indexOf: aPane) with: panes size.
@@ -132,7 +134,7 @@ BlPaneCreatingReorderingHandler >> makeLast: aPane [
 	container addChildren: panes
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BlPaneCreatingReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
 
 	| currentPane |
