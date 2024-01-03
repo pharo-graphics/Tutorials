@@ -62,16 +62,8 @@ This example shows how to use drag-and-drop, and it's written using Bloc and Bri
 To execute it, evaluate the following code:
 
 ```smalltalk
-pane := DTPaneCreatingReorderingHandler new 
-        fittingColumns   
-        constraintsDo: [ :c | 
-            c horizontal matchParent.
-            c vertical matchParent ];
-        yourself.
-space := BlSpace new extent: 800@600.
-
-space root addChild: pane.
-space show.
+BlPaneCreatingReorderingHandler new 
+        fittingColumnsExample
 ```
 
 Thanks @StephanEggermont for the contribution.
