@@ -12,7 +12,7 @@ BaselineOfReorderingExamples >> baseline: spec [
 	spec for: #common do: [ 
 		spec
 			baseline: 'Bloc'
-			with: [ spec repository: 'github://pharo-graphics/bloc:dev-1.0/src' ].
+			with: [ spec repository: 'github://pharo-graphics/Bloc:dev-1.0/src' ].
 		spec
 			package: #'Bloc-Examples-Reordering' with: [
 				spec requires: #( #'Bloc' ) ];
