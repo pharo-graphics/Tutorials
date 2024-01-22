@@ -197,28 +197,29 @@ BoidsSimulation >> move [
 ]
 
 { #category : #'looking at others' }
-BoidsSimulation >> nearbyBoidsToAlign: aBoid [
+BoidsSimulation >> nearbyBoidsToAlign: aBoid do: aBlock [
 
-	^ self nearbyBoidsWithin: alignmentRadius to: aBoid
+	^ self nearbyBoidsWithin: alignmentRadius to: aBoid do: aBlock
 ]
 
 { #category : #'looking at others' }
-BoidsSimulation >> nearbyBoidsToCohere: aBoid [
+BoidsSimulation >> nearbyBoidsToCohere: aBoid do: aBlock [
 
-	^ self nearbyBoidsWithin: cohesionRadius to: aBoid
+	^ self nearbyBoidsWithin: cohesionRadius to: aBoid do: aBlock
 ]
 
 { #category : #'looking at others' }
-BoidsSimulation >> nearbyBoidsToSeparate: aBoid [
+BoidsSimulation >> nearbyBoidsToSeparate: aBoid do: aBlock [
 
-	^ self nearbyBoidsWithin: separationRadius to: aBoid
+	^ self nearbyBoidsWithin: separationRadius to: aBoid do: aBlock
 ]
 
 { #category : #'looking at others' }
-BoidsSimulation >> nearbyBoidsWithin: aRadius to: aBoid [
+BoidsSimulation >> nearbyBoidsWithin: aRadius to: aBoid do: aBlock [
 
-	^ boids select: [ :eachBoid | 
-		  aBoid isNearby: eachBoid within: aRadius ]
+	^ boids do: [ :eachBoid |
+		  (aBoid isNearby: eachBoid within: aRadius)
+				ifTrue: [ aBlock value: eachBoid ] ]
 ]
 
 { #category : #private }

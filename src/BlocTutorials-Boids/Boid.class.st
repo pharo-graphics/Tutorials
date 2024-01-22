@@ -55,17 +55,18 @@ Boid class >> newIn: aBoidsSimulation random: aRandom [
 Boid >> align [
 	"Steer towards average heading of flockmates."
 
-	| averageVelocity flockmates |
-	flockmates := simulation nearbyBoidsToAlign: self.
-	flockmates ifEmpty: [ ^ self ].
-
-	averageVelocity := (flockmates
-		                    inject: 0 @ 0
-		                    into: [ :sum :each | sum + each velocity ])
-	                   / flockmates size.
+	| count sum |
+	count := 0.
+	sum := 0@0.
+	simulation
+		nearbyBoidsToAlign: self
+		do: [ :each |
+			sum := sum + each velocity.
+			count := count + 1 ].
+	count = 0 ifTrue: [ ^ self ].
 
 	velocityDelta := velocityDelta +
-		(averageVelocity - self velocity / simulation alignmentAdjustment)
+		((sum / count) - self velocity / simulation alignmentAdjustment)
 ]
 
 { #category : #moving }
@@ -78,17 +79,18 @@ Boid >> circle [
 Boid >> cohere [
 	"Steer towards average position of flockmates."
 
-	| averagePosition flockmates |
-	flockmates := simulation nearbyBoidsToCohere: self.
-	flockmates ifEmpty: [ ^ self ].
-
-	averagePosition := (flockmates
-		                    inject: 0 @ 0
-		                    into: [ :sum :each | sum + each position ])
-	                   / flockmates size.
+	| count sum |
+	count := 0.
+	sum := 0@0.
+	simulation
+		nearbyBoidsToCohere: self
+		do: [ :each |
+			sum := sum + each position.
+			count := count + 1 ].
+	count = 0 ifTrue: [ ^ self ].
 
 	velocityDelta := velocityDelta +
-		(averagePosition - self position / simulation cohesionAdjustment)
+		((sum / count) - self position / simulation cohesionAdjustment)
 
 ]
 
@@ -261,17 +263,18 @@ Boid >> radius: aNumber [
 Boid >> separate [
 	"Move a bit away from nearby flockmates."
 
-	| distance flockmates |
-	flockmates := simulation nearbyBoidsToSeparate: self.
-	flockmates ifEmpty: [ ^ self ].
+	| count sum |
+	count := 0.
+	sum := 0@0.
+	simulation
+		nearbyBoidsToSeparate: self
+		do: [ :each |
+			sum := sum + (self position - each position).
+			count := count + 1 ].
+	count = 0 ifTrue: [ ^ self ].
 
-	distance := flockmates
-		            inject: 0 @ 0
-		            into: [ :sum :each |
-							sum + (self position - each position) ].
-	
 	velocityDelta := velocityDelta +
-		(distance / simulation separationAdjustment)
+		(sum / simulation separationAdjustment)
 
 ]
 
