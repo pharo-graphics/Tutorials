@@ -123,6 +123,13 @@ BoidsSkyElement >> simulation [
 ]
 
 { #category : #accessing }
+BoidsSkyElement >> simulation: aBoidsSimulation [
+	"The simulation can be initialized externally via this mutator, else it will be initialized by default when the element receives its first resize event."
+
+	simulation := aBoidsSimulation
+]
+
+{ #category : #accessing }
 BoidsSkyElement >> step [
 
 	simulation move.
