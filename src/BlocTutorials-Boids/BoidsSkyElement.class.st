@@ -3,8 +3,9 @@ I'm a representation of a BoidsSimulation in Bloc.
 
 Please refer to that class for more information.
 
-My subclasses define alternative implementations to draw the boids in Bloc.
-
+My subclasses define alternative implementations to draw the boids in Bloc either using a custom geometric or overriding the drawing hooks.
+- See the methods `exampleOpenInNewSpace` of each of my subclasses.
+- See the class side of `BoidsSkyPresenter` for related examples: e.g. `BoidsSkyPresenter class>> #exampleBloc1`
 "
 Class {
 	#name : #BoidsSkyElement,

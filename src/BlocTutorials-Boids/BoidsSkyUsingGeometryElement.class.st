@@ -1,5 +1,5 @@
 "
-I'm an example of drawing boids simulation by using Element and Geometry: each boid is the model of aBlElement (See #boid: method), and the element updates it's transformation un demand from such model sending #updateFromBoid.
+I'm an example of drawing boids simulation by using Element and Geometry: each boid is the model of aBlElement (See #boid: method), and the element updates its transformation on demand from such model sending #updateFromBoid.
 
 See an example on class side.
 "
@@ -11,7 +11,7 @@ Class {
 
 { #category : #examples }
 BoidsSkyUsingGeometryElement class >> exampleOpenInNewSpace [
-
+	<script>
 	^ self new openInNewSpace
 ]
 

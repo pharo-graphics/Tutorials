@@ -11,7 +11,7 @@ Class {
 	#category : #'BlocTutorials-Boids-UI-Bloc'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'canvas - alexandrie' }
 BoidCustomGeometry >> aeApplyTo: aeCanvas element: aBlElement [ 
 
 	aeCanvas pathFactory: [ :cairoContext |

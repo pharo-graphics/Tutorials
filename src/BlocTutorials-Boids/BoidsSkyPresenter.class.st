@@ -51,6 +51,19 @@ BoidsSkyPresenter class >> exampleBloc2 [
 	presenter open
 ]
 
+{ #category : #examples }
+BoidsSkyPresenter class >> exampleBloc3 [
+
+	| app model presenter |
+	app := SpApplication new
+		       useBackend: #Morphic;
+		       yourself.
+
+	model := BoidCustomGeometrySkyElement new.
+	presenter := self newApplication: app model: model.
+	presenter open
+]
+
 { #category : #actions }
 BoidsSkyPresenter >> doInspectSimulation [
 
