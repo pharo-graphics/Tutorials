@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfBlocTutorialBoids,
+	#name : #BaselineOfBlocTutorialsBoids,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfBlocTutorialBoids
+	#category : #BaselineOfBlocTutorialsBoids
 }
 
 { #category : #baselines }
-BaselineOfBlocTutorialBoids >> baseline: spec [
+BaselineOfBlocTutorialsBoids >> baseline: spec [
 	<baseline>
 
 	spec for: #common do: [ 

@@ -17,6 +17,9 @@ BaselineOfBlocTutorials >> baseline: spec [
 			with: [ spec repository: 'github://pharo-graphics/Tutorials:master/src' ].
 		spec
 			baseline: 'GridCombineGame'
+			with: [ spec repository: 'github://pharo-graphics/Tutorials:master/src' ].
+		spec
+			baseline: 'BlocTutorialsBoids'
 			with: [ spec repository: 'github://pharo-graphics/Tutorials:master/src' ] ]
 
 ]
