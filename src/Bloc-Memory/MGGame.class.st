@@ -6,56 +6,54 @@ MGGame withEmoji
 ```
 "
 Class {
-	#name : 'MGGame',
-	#superclass : 'Object',
+	#name : #MGGame,
+	#superclass : #Object,
 	#instVars : [
 		'availableCards',
 		'chosenCards'
 	],
-	#category : 'Bloc-Memory-Model',
-	#package : 'Bloc-Memory',
-	#tag : 'Model'
+	#category : #'Bloc-Memory-Model'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 MGGame class >> withChinese [
 	<sampleInstance>
 	^ self new initializeForSymbols: '为从公家里地个时'
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 MGGame class >> withEmoji [
 	<sampleInstance>
 	^ self new initializeForSymbols: '💰🏡🎅🍪🍕🚀😸🙈'; yourself
 ]
 
-{ #category : 'factory' }
+{ #category : #factory }
 MGGame class >> withNumbers [
 	<sampleInstance>
 	^ self new initializeForSymbols: '12345678'
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 MGGame >> addCard: aCard [
 	"Add card to the list of available cards"
 
 	availableCards add: aCard
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MGGame >> availableCards [
 
 	^ availableCards
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MGGame >> cardsCount [
 	"Return how many cards there should be."
 
 	^ self gridSize * self gridSize
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 MGGame >> chooseCard: aCard [
 	"This is the main logic of the game. 
 	The user pick a card, if this is a new one it is added to the chosen ones,
@@ -73,7 +71,7 @@ MGGame >> chooseCard: aCard [
 		ifTrue: [ self resetStep ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 MGGame >> chosenCardMatch [
 	"Return whether the chosen cards match."
 	"The implementation is handling the fact that we could want to have a game where more than two matches are needed e.g., three cards of the same symbol."
@@ -84,12 +82,12 @@ MGGame >> chosenCardMatch [
 		aCard isFlipped and: [ firstCard symbol = aCard symbol ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MGGame >> chosenCards [
 	^ chosenCards
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 MGGame >> completeStep [
 	"The player found the same cards so the step is complete. The cards should be removed from the board."
 	
@@ -98,14 +96,14 @@ MGGame >> completeStep [
 		removeAll.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MGGame >> gridSize [
 	"Return grid size, total amount of card is gridSize^2"
 
 	^ 4
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 MGGame >> initialize [
 	super initialize.
 	
@@ -113,7 +111,7 @@ MGGame >> initialize [
 	chosenCards := OrderedCollection new
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 MGGame >> initializeForSymbols: aCollectionOfCharacters [
 
 	"Initialize game model with the cards that are represented by character symbols taken from a given
@@ -132,14 +130,14 @@ MGGame >> initializeForSymbols: aCollectionOfCharacters [
 					MGCard new symbol: aSymbol ] ] ) flattened shuffled asOrderedCollection
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 MGGame >> matchesCount [
 	"How many chosen cards should match to disappear"
 
 	^ 2
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 MGGame >> resetStep [
 	""
 	
@@ -151,7 +149,7 @@ MGGame >> resetStep [
 		add: lastCard
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 MGGame >> shouldCompleteStep [
 	"Return true if current step should be completed, false otherwise.
 	According to game rules step is done when all chosen cards match
@@ -161,7 +159,7 @@ MGGame >> shouldCompleteStep [
 		and: [ self chosenCardMatch ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 MGGame >> shouldResetStep [ 
 	^ self chosenCards size > self matchesCount
 ]

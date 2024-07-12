@@ -2,17 +2,16 @@
 In planning boards, we want to drag and drop tasks from one pane to another. This event handler supports that. The container is the space where the dragging and dropping is to happen, the panes are the elements that contain tasks
 "
 Class {
-	#name : 'BlMultiPaneReorderingHandler',
-	#superclass : 'BlReorderingHandler',
+	#name : #BlMultiPaneReorderingHandler,
+	#superclass : #BlReorderingHandler,
 	#instVars : [
 		'container',
 		'panes'
 	],
-	#category : 'Bloc-Examples-Reordering',
-	#package : 'Bloc-Examples-Reordering'
+	#category : #'Bloc-Examples-Reordering'
 }
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlMultiPaneReorderingHandler >> cardsExample [
 	<sampleInstance>
 
@@ -65,13 +64,13 @@ BlMultiPaneReorderingHandler >> cardsExample [
 	^ space
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMultiPaneReorderingHandler >> container: theContainer [
 
 	container := theContainer
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMultiPaneReorderingHandler >> dragEvent: anEvent [
 
 	| dragPosition dragDelta aNewPosition |
@@ -101,7 +100,7 @@ BlMultiPaneReorderingHandler >> dragEvent: anEvent [
 			 currentPosition: aNewPosition)
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMultiPaneReorderingHandler >> dragStartEvent: anEvent [
 
 	| draggable |
@@ -123,7 +122,7 @@ BlMultiPaneReorderingHandler >> dragStartEvent: anEvent [
 	anEvent currentTarget dispatchEvent: BlPullStartEvent new
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMultiPaneReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 
 	| mouseOverOther index |
@@ -139,7 +138,7 @@ BlMultiPaneReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 	parent addChild: placeholder at: index
 ]
 
-{ #category : 'event handling' }
+{ #category : #'event handling' }
 BlMultiPaneReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
 
 	| currentPane |
@@ -154,7 +153,7 @@ BlMultiPaneReorderingHandler >> movePlaceholderToCorrectParent: anEvent [
 	parent addChild: placeholder
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 BlMultiPaneReorderingHandler >> newThreeColumnsPane [
 
 	| pane columnBlock toDo doing done columns handler |
@@ -204,12 +203,12 @@ BlMultiPaneReorderingHandler >> newThreeColumnsPane [
 	^ pane
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 BlMultiPaneReorderingHandler >> panes: thePanes [
 	panes := thePanes
 ]
 
-{ #category : 'examples' }
+{ #category : #examples }
 BlMultiPaneReorderingHandler >> threeColumnsExample [
 	<sampleInstance>
 

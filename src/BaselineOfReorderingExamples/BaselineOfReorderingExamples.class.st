@@ -1,11 +1,10 @@
 Class {
-	#name : 'BaselineOfReorderingExamples',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfReorderingExamples',
-	#package : 'BaselineOfReorderingExamples'
+	#name : #BaselineOfReorderingExamples,
+	#superclass : #BaselineOf,
+	#category : #BaselineOfReorderingExamples
 }
 
-{ #category : 'baselines' }
+{ #category : #baselines }
 BaselineOfReorderingExamples >> baseline: spec [
 	<baseline>
 

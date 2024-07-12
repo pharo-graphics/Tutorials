@@ -1,1 +1,1 @@
-Package { #name : 'BaselineOfReorderingExamples' }
+Package { #name : #BaselineOfReorderingExamples }
