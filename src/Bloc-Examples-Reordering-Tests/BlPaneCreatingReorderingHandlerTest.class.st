@@ -10,9 +10,19 @@ Class {
 { #category : #tests }
 BlPaneCreatingReorderingHandlerTest >> testShowInSpace [
 
-	| aSpace |
+	| aSpace shown semaphore |
+	shown := false.
+	semaphore := Semaphore new.
+
 	aSpace := BlPaneCreatingReorderingHandler new fittingColumnsExample.
-	0.5 seconds wait.
-	aSpace close.
-	0.5 seconds wait
+	aSpace
+		when: BlSpaceShownEvent
+		doOnce: [ :event |
+			shown := true.
+			aSpace close.
+			semaphore signal ].
+
+	semaphore wait.
+	
+	self assert: shown
 ]

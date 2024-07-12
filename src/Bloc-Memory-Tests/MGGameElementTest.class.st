@@ -10,9 +10,19 @@ Class {
 { #category : #tests }
 MGGameElementTest >> testShowInSpace [
 
-	| space |
-	space := MGGameElement example.
-	space
+	| aSpace shown semaphore |
+	shown := false.
+	semaphore := Semaphore new.
+
+	aSpace := MGGameElement example.
+	aSpace
 		when: BlSpaceShownEvent
-		doOnce: [ :event | space close ]
+		doOnce: [ :event |
+			shown := true.
+			aSpace close.
+			semaphore signal ].
+
+	semaphore wait.
+	
+	self assert: shown
 ]
