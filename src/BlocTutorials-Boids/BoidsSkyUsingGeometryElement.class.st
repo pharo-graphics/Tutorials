@@ -11,7 +11,7 @@ Class {
 
 { #category : #examples }
 BoidsSkyUsingGeometryElement class >> exampleOpenInNewSpace [
-	<script>
+
 	^ self new openInNewSpace
 ]
 

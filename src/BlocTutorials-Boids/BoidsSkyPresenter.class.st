@@ -74,7 +74,7 @@ BoidsSkyPresenter >> doInspectSimulation [
 BoidsSkyPresenter >> doStart [
 
 	boidsSkyElement ensureStepping.
-	self refreshToolbar.
+	self refreshToolbar
 ]
 
 { #category : #actions }
@@ -88,14 +88,14 @@ BoidsSkyPresenter >> doStep [
 BoidsSkyPresenter >> doStop [
 
 	boidsSkyElement ensureNotStepping.
-	self refreshToolbar.
+	self refreshToolbar
 ]
 
 { #category : #actions }
 BoidsSkyPresenter >> doToggleCircling [
 
 	boidsSkyElement simulation toggleCircling.
-	self refreshToolbar.
+	self refreshToolbar
 ]
 
 { #category : #initialization }
@@ -156,23 +156,24 @@ BoidsSkyPresenter >> initializeWindow: aWindowPresenter [
 	aWindowPresenter
 		centered;
 		title: 'Boids';
-		initialExtent: 510@560;
-		toolbar: toolbar.
+		initialExtent: 510 @ 560;
+		toolbar: toolbar
 ]
 
 { #category : #initialization }
 BoidsSkyPresenter >> refreshToolbar [
 
-	startButton enabled: boidsSkyElement isSteppingAnimation not.
-	stepButton enabled: boidsSkyElement isSteppingAnimation not.
-	stopButton enabled: boidsSkyElement isSteppingAnimation.
+	startButton enabled: boidsSkyElement isStepping not.
+	stepButton enabled: boidsSkyElement isStepping not.
+	stopButton enabled: boidsSkyElement isStepping.
+	
+	boidsSkyElement isStepping traceCr.
 	
 	boidsSkyElement simulation ifNotNil: [
 	toggleCirclingButton label: 
 		(boidsSkyElement simulation isCircling
 			ifTrue: [ 'Circle' ]
-			ifFalse: [ 'Free' ])]
-
+			ifFalse: [ 'Free' ]) ]
 ]
 
 { #category : #initialization }

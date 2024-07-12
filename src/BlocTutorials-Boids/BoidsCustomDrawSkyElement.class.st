@@ -11,7 +11,7 @@ Class {
 
 { #category : #examples }
 BoidsCustomDrawSkyElement class >> exampleOpenInNewSpace [
-	<script>
+
 	^ self new openInNewSpace
 ]
 

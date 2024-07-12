@@ -13,7 +13,7 @@ Class {
 
 { #category : #examples }
 BoidCustomGeometrySkyElement class >> exampleOpenInNewSpace [
-	<script>
+
 	^ self new openInNewSpace
 ]
 

@@ -11,15 +11,16 @@ Class {
 	#name : #BoidsSkyElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'steppingAnimation',
 		'simulation',
-		'randomGenerator'
+		'randomGenerator',
+		'steppingTask'
 	],
 	#category : #'BlocTutorials-Boids-UI-Bloc'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #examples }
 BoidsSkyElement class >> exampleOpenInNewSpace [
+
 	^ self subclassResponsibility
 ]
 
@@ -41,18 +42,21 @@ BoidsSkyElement >> boidsMovedInSimulation [
 { #category : #accessing }
 BoidsSkyElement >> ensureNotStepping [
 	
-	steppingAnimation ifNotNil: [
-		steppingAnimation stop.
-		steppingAnimation := nil ]
+	steppingTask ifNotNil: [
+		steppingTask stop.
+		steppingTask := nil ]
 ]
 
 { #category : #accessing }
 BoidsSkyElement >> ensureStepping [
 
-	steppingAnimation ifNil: [
-		steppingAnimation := self newSteppingAnimation.
-		self addAnimation: steppingAnimation ]
-
+	steppingTask ifNil: [
+		steppingTask :=
+			(BlRepeatedTaskAction new
+				delay: 0 seconds;
+				action: [ self step ];
+				yourself).
+		self enqueueTask: steppingTask ]
 ]
 
 { #category : #initialization }
@@ -84,25 +88,13 @@ BoidsSkyElement >> initializeSimulation [
 	simulation boids do: [ :each |
 		self boidWasAddedToSimulation: each ].
 	
-	self ensureStepping.
-
+	self ensureStepping
 ]
 
 { #category : #testing }
-BoidsSkyElement >> isSteppingAnimation [
+BoidsSkyElement >> isStepping [
 
-	^ steppingAnimation isNotNil
-]
-
-{ #category : #initialization }
-BoidsSkyElement >> newSteppingAnimation [
-
-	^ BlNumberTransition new
-		  from: 0;
-		  to: 1;
-		  onStepDo: [ :t | self step ];
-		  beInfinite;
-		  yourself
+	^ steppingTask isNotNil
 ]
 
 { #category : #accessing }
@@ -134,7 +126,7 @@ BoidsSkyElement >> simulation: aBoidsSimulation [
 BoidsSkyElement >> step [
 
 	simulation move.
-	self boidsMovedInSimulation.
+	self boidsMovedInSimulation
 ]
 
 { #category : #initialization }

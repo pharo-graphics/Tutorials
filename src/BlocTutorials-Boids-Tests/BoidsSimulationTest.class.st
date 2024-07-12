@@ -4,7 +4,7 @@ A BoidTest is a test class for testing the behavior of Boid
 Class {
 	#name : #BoidsSimulationTest,
 	#superclass : #TestCase,
-	#category : #'BlocTutorials-Boids-Model-Tests'
+	#category : #'BlocTutorials-Boids-Tests-Model'
 }
 
 { #category : #'tests-moving' }
