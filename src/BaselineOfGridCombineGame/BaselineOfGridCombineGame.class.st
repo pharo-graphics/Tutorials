@@ -19,10 +19,10 @@ BaselineOfGridCombineGame >> baseline: spec [
 			with: [ spec repository: 'github://pharo-graphics/Bloc:master/src' ].
 		spec
 			package: #'Bloc-GridCombineGame';
-			package: #'Bloc-GridCombineGame-Tests' with: [
-				spec requires: #( #'Bloc-GridCombineGame' ) ];
 			package: #'Bloc-GridCombineGame-UI' with: [
-				spec requires: #( #'Bloc-GridCombineGame' #'Bloc' ) ]
+				spec requires: #( #'Bloc-GridCombineGame' #'Bloc' );
+			package: #'Bloc-GridCombineGame-Tests' with: [
+				spec requires: #( #'Bloc-GridCombineGame-UI' ) ] ]
 		]
 
 ]

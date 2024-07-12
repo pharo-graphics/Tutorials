@@ -38,10 +38,10 @@ GCGameElement class >> example2048 [
 
 	space := BlSpace new.
 	space root addChild: gameElement.
-	space
+	^ space
 		extent: game gridExtent * (skin cellSize + (2 * skin cellMarginSize));
 		show;
-		inspect
+		yourself
 ]
 
 { #category : #examples }
@@ -68,9 +68,10 @@ GCGameElement class >> example32 [
 
 	space := BlSpace new.
 	space root addChild: gameElement.
-	space
+	^ space
 		extent: game gridExtent * (skin cellSize + (2 * skin cellMarginSize));
-		show
+		show;
+		yourself
 ]
 
 { #category : #'instance creation' }
@@ -124,13 +125,11 @@ GCGameElement >> initialize [
 
 	"Key bindings need to be registered on the parent"
 	isSlideEnabled := false.
-	self
-		when: BlElementAddedToParentEvent
-		do: [ :anEvent |
-			isSlideEnabled := true.
-			self
-				registerKeyBindings;
-				registerToMouseWheel ]
+	self addEventHandlerOn: BlElementAddedToParentEvent do: [ :anEvent |
+		isSlideEnabled := true.
+		self
+			registerKeyBindings;
+			registerToMouseWheel ]
 ]
 
 { #category : #initialization }
@@ -141,21 +140,19 @@ GCGameElement >> initializeWithGame: aGame [
 	slotsContainer layout: BlGridLayout vertical.
 	slotsContainer layout rowCount: game gridExtent y.
 	slotElementMatrix := Array2D
-		rows: game gridExtent y
-		columns: game gridExtent x
-		tabulate: [ :row :column |
-			self newSlotElementForRow: row column: column ].
-	slotElementMatrix do: [:each |
-		slotsContainer addChild: each ].
+		                     rows: game gridExtent y
+		                     columns: game gridExtent x
+		                     tabulate: [ :row :column |
+		                     self newSlotElementForRow: row column: column ].
+	slotElementMatrix do: [ :each | slotsContainer addChild: each ].
 	"If slots resize, then tiles must be repositioned."
 	slotElementMatrix anyOne
-		when: BlElementExtentChangedEvent
+		addEventHandlerOn: BlElementExtentChangedEvent
 		do: [ :event | self refreshOnSlotsPixelResize ].
 
-	game tiles do: [ :each |
-		self addTileElementFor: each ].
+	game tiles do: [ :each | self addTileElementFor: each ].
 	self refreshScoreInTitle.
-	
+
 	self subscribeToGameAnnouncements
 ]
 

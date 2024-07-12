@@ -4,7 +4,7 @@ A GCGameTest is a test class for testing the behavior of GCGame
 Class {
 	#name : #GCGameTest,
 	#superclass : #TestCase,
-	#category : #'Bloc-GridCombineGame-Tests'
+	#category : #'Bloc-GridCombineGame-Tests-Model'
 }
 
 { #category : #'instance creation' }

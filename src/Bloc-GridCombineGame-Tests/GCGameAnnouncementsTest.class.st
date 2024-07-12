@@ -5,7 +5,7 @@ Class {
 		'game',
 		'announcements'
 	],
-	#category : #'Bloc-GridCombineGame-Tests'
+	#category : #'Bloc-GridCombineGame-Tests-Model'
 }
 
 { #category : #tests }
