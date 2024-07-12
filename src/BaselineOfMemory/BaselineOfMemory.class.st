@@ -7,14 +7,15 @@ Class {
 { #category : #baselines }
 BaselineOfMemory >> baseline: spec [
 	<baseline>
+
 	spec for: #common do: [ 
 		spec
-			baseline: 'Bloc'
+			baseline: #'Bloc'
 			with: [ spec repository: 'github://pharo-graphics/Bloc:master/src' ].
 		spec
 			package: #'Bloc-Memory' with: [
-				spec requires: #( #Bloc ) ];
+				spec requires: #( #'Bloc' ) ];
 			package: #'Bloc-Memory-Tests' with: [
-				spec requires: #( #'Bloc-Memory' ) ] ]
-
+				spec requires: #( #'Bloc-Memory' ) ]
+		]
 ]

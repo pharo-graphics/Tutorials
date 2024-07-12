@@ -20,9 +20,8 @@ BaselineOfGridCombineGame >> baseline: spec [
 		spec
 			package: #'Bloc-GridCombineGame';
 			package: #'Bloc-GridCombineGame-UI' with: [
-				spec requires: #( #'Bloc-GridCombineGame' #'Bloc' );
+				spec requires: #( #'Bloc-GridCombineGame' #'Bloc' ) ];
 			package: #'Bloc-GridCombineGame-Tests' with: [
-				spec requires: #( #'Bloc-GridCombineGame-UI' ) ] ]
+				spec requires: #( #'Bloc-GridCombineGame-UI' ) ] 
 		]
-
 ]
