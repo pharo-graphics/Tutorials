@@ -18,7 +18,9 @@ BlPaneCreatingReorderingHandler >> addPaneWith: draggable at: anEvent [
 	column position:
 		(column globalPointToParent: anEvent position) - draggableOffset
 		+ (-4 @ -12).
-	column when: BlPullStartEvent do: [ self makeLast: column ]
+	column
+		addEventHandlerOn: BlPullStartEvent
+		do: [ self makeLast: column ]
 ]
 
 { #category : #private }
@@ -102,7 +104,9 @@ BlPaneCreatingReorderingHandler >> fittingColumnsExample [
 		           panes: columns;
 		           yourself.
 	columns do: [ :column |
-		column when: BlPullStartEvent do: [ handler makeLast: column ] ].
+		column
+			addEventHandlerOn: BlPullStartEvent
+			do: [ handler makeLast: column ] ].
 	pane addChildren: columns.
 
 	10 timesRepeat: [
