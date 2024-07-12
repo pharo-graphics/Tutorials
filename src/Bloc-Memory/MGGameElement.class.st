@@ -1,17 +1,8 @@
 "
-I'm a game visual board.
+I'm a game UI for a game model.
 
-## To open a game 
+To open a game, look at the example in class-side.
 
-```
-(MGGameElement onModel: MGGame withNumbers) openInNewSpace
-```
-
-
-## To open a game in a separate native window
-```
-aGameElement := MGGameElement openWithNumber
-```
 "
 Class {
 	#name : #MGGameElement,
@@ -25,95 +16,15 @@ Class {
 { #category : #example }
 MGGameElement class >> example [
 	<sampleInstance>
-	
-	^ self new memoryGame: MGGame withNumbers; yourself
 
-]
-
-{ #category : #example }
-MGGameElement class >> exampleInASpace [
-	<sampleInstance>
-	
-	self openOnModel: MGGame withNumbers inSpace: (BlSpace new extent: 420@420; yourself)
-
-]
-
-{ #category : #example }
-MGGameElement class >> exampleInASpaceInAnOSWindow [
-	<sampleInstance>
-	
-	self nativelyOpenOnModel: MGGame withNumbers inSpace: BlSpace new.
-]
-
-{ #category : #opening }
-MGGameElement class >> nativelyOpenOnModel: aModel inSpace: aSpace [
-
-	aSpace host: BlOSWindowSDL2Host new.
-	^ self openOnModel: aModel inSpace: aSpace.
-]
-
-{ #category : #'instance creation' }
-MGGameElement class >> onModel: aModel [
-	"(self onModel: MGGame withEmoji) openInNewSpace"
-	"(self onModel: MGGame withEmoji) openInNewSpace"
-	
-	^ self new memoryGame: aModel; yourself
-]
-
-{ #category : #'instance creation' }
-MGGameElement class >> onModel: aModel inSpace: aSpace [
-
-	| game |
-	game := self onModel: aModel.
-	aSpace root addChild: game. 
-	^ game
-]
-
-{ #category : #opening }
-MGGameElement class >> openOnModel: aModel inSpace: aSpace [
-
-	| game |
-	game := self onModel: aModel inSpace: aSpace.
-	aSpace pulse.
-	aSpace show.
-	^ game
-]
-
-{ #category : #example }
-MGGameElement class >> openWithNumber [
-
-	<script>
 	| aGameElement space |
-	aGameElement := MGGameElement new
-		                memoryGame: MGGame withNumbers;
-		                yourself.
-	space := BlSpace new.
-	space host: BlOSWindowSDL2Host new.
-	space root addChild: aGameElement.
-	"space root layout: BlFrameLayout new.
-	space root constraintsDo: [ :c | 
-		c horizontal fitContent.
-		c vertical fitContent ]."
-	space root whenLayoutedDoOnce: [ space extent: 420 @ 420 ].
-	space show
-]
+	aGameElement := MGGameElement new.
+	aGameElement memoryGame: MGGame withNumbers.
 
-{ #category : #example }
-MGGameElement class >> openWithNumberNoHost [
-
-	<script>
-	| aGameElement space |
-	aGameElement := MGGameElement new
-		                memoryGame: MGGame withNumbers;
-		                yourself.
 	space := BlSpace new.
 	space root addChild: aGameElement.
-	"space root layout: BlFrameLayout new.
-	space root constraintsDo: [ :c | 
-		c horizontal fitContent.
-		c vertical fitContent ]."
-	space root whenLayoutedDoOnce: [ space extent: 420 @ 420 ].
-	space show
+	space root whenLayoutedDoOnce: [ space extent: aGameElement size ].
+	^ space show
 ]
 
 { #category : #initialization }
@@ -129,8 +40,8 @@ MGGameElement >> initialize [
 			yourself).
 
 	self constraintsDo: [ :layoutConstraints | 
-		layoutConstraints horizontal matchParent.
-		layoutConstraints vertical matchParent ]
+		layoutConstraints horizontal fitContent.
+		layoutConstraints vertical fitContent ]
 ]
 
 { #category : #accessing }
