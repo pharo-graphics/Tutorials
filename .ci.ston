@@ -8,7 +8,7 @@ SmalltalkCISpec {
   ],
   #testing: {
     #include : {
-     #packages : [ 'Bloc-Memory.*', 'Bloc-Examples-Reordering.*', 'Bloc-GridCombineGame.*' ]
+     #packages : [ 'Bloc-Memory.*', 'Bloc-Examples-Reordering.*', 'Bloc-GridCombineGame.*', 'BlocTutorials-Boids.*' ]
     }
   }
 }
