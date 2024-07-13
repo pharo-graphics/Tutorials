@@ -5,9 +5,11 @@ Class {
 }
 
 { #category : #asserting }
-BoidsSkyElementTest >> assertShown: aClass [
+BoidsSkyElementTest >> testExample: aClass [
 
 	| shown semaphore aSpace |
+	self timeLimit: 5 seconds.
+	
 	shown := false.
 	semaphore := Semaphore new.
 
@@ -34,17 +36,17 @@ BoidsSkyElementTest >> assertShown: aClass [
 { #category : #tests }
 BoidsSkyElementTest >> testOpenBoidCustomGeometrySkyElement [
 
-	self assertShown: BoidCustomGeometrySkyElement
+	self testExample: BoidCustomGeometrySkyElement
 ]
 
 { #category : #tests }
 BoidsSkyElementTest >> testOpenBoidsCustomDrawSkyElement [
 
-	self assertShown: BoidsCustomDrawSkyElement
+	self testExample: BoidsCustomDrawSkyElement
 ]
 
 { #category : #tests }
 BoidsSkyElementTest >> testOpenBoidsSkyUsingGeometryElement [
 
-	self assertShown: BoidsSkyUsingGeometryElement
+	self testExample: BoidsSkyUsingGeometryElement
 ]
