@@ -183,9 +183,9 @@ Boid >> isInFieldOfVision: aBoid [
 
 	| vector1 vector2 cosinusAngle |
 	vector1 := self velocity - self position.
-	(vector1 = (0@0)) ifTrue: [^ true ].
+	vector1 isZero ifTrue: [^ true ].
 	vector2 := aBoid position - self position.
-	(vector2 = (0@0)) ifTrue: [^ true ].
+	vector2 isZero ifTrue: [^ true ].
 	cosinusAngle := (vector1 dotProduct: vector2) / ((vector1 r) * (vector2 r)).
 	^ (cosinusAngle degreesToRadians) < (0.75 * (Float pi))
 ]
