@@ -16,7 +16,7 @@ BoidsSkyElementTest >> testExample: aClass [
 	aSpace := aClass exampleOpenInNewSpace.
 
 	aSpace
-		when: BlSpaceShownEvent
+		addEventHandlerOn: BlSpaceShownEvent
 		doOnce: [ :event |
 			"The space was shown, let's wait to signal and close"
 			shown := true.
