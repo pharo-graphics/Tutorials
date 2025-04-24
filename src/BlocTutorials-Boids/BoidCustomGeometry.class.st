@@ -78,3 +78,16 @@ BoidCustomGeometry >> matchElement: aBlElement [
 BoidCustomGeometry >> releaseCache [
 	"Nothing to release"
 ]
+
+{ #category : #'visual bounds' }
+BoidCustomGeometry >> strokedBounds: aBlBounds of: aBlElement [ 
+	"Return stroked bounds of a geometry if it would be stroked according to element's outskirts."
+
+	^ aBlElement outskirts strokedBounds: aBlBounds of: aBlElement
+]
+
+{ #category : #'visual bounds' }
+BoidCustomGeometry >> strokedBoundsInside: aBlBounds of: aBlElement [ 
+
+	^ self geometryBounds: aBlBounds of: aBlElement
+]
