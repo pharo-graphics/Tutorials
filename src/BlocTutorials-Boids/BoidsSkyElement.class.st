@@ -81,7 +81,7 @@ BoidsSkyElement >> initializeSimulation [
 	"Initialize the simulation and start stepping. This requires that my area is not zero."
 
 	simulation := BoidsSimulation
-			newExtent: self size asIntegerPoint
+			newExtent: self extent asIntegerPoint
 			random: randomGenerator
 			numberOfBoids: 100.
 
