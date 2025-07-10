@@ -35,7 +35,7 @@ BoidCustomGeometrySkyElement >> newElementForBoid: aBoid [
 
 	^ BlElement new
 			boid: aBoid;
-			size: aBoid extent;
+			extent: aBoid extent;
 			background: aBoid color;
 			border: (BlBorder paint: aBoid color muchDarker width: 2);
 			geometry: BoidCustomGeometry new;
