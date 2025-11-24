@@ -13,7 +13,8 @@ Class {
 	#instVars : [
 		'simulation',
 		'randomGenerator',
-		'steppingTask'
+		'steppingTask',
+		'numberOfBoids'
 	],
 	#category : #'BlocTutorials-Boids-UI-Bloc'
 }
@@ -64,6 +65,8 @@ BoidsSkyElement >> initialize [
 
 	super initialize.
 
+	numberOfBoids := 100.
+
 	self
 		useFixedRandomGenerator;
 		background: Color lightGray;
@@ -83,7 +86,7 @@ BoidsSkyElement >> initializeSimulation [
 	simulation := BoidsSimulation
 			newExtent: self extent asIntegerPoint
 			random: randomGenerator
-			numberOfBoids: 100.
+			numberOfBoids: self numberOfBoids.
 
 	simulation boids do: [ :each |
 		self boidWasAddedToSimulation: each ].
@@ -95,6 +98,18 @@ BoidsSkyElement >> initializeSimulation [
 BoidsSkyElement >> isStepping [
 
 	^ steppingTask isNotNil
+]
+
+{ #category : #accessing }
+BoidsSkyElement >> numberOfBoids [
+
+	^ numberOfBoids
+]
+
+{ #category : #accessing }
+BoidsSkyElement >> numberOfBoids: aValue [
+
+	numberOfBoids := aValue
 ]
 
 { #category : #accessing }
