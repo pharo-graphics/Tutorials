@@ -20,8 +20,17 @@ Class {
 		'simulation',
 		'velocityDelta'
 	],
+	#classVars : [
+		'ThreeQuartersPi'
+	],
 	#category : #'BlocTutorials-Boids-Model'
 }
+
+{ #category : #'class initialization' }
+Boid class >> initialize [
+
+	ThreeQuartersPi := 0.75 * Float pi
+]
 
 { #category : #'instance creation' }
 Boid class >> new [
@@ -187,7 +196,8 @@ Boid >> isInFieldOfVision: aBoid [
 	vector2 := aBoid position - self position.
 	vector2 isZero ifTrue: [^ true ].
 	cosinusAngle := (vector1 dotProduct: vector2) / ((vector1 r) * (vector2 r)).
-	^ (cosinusAngle degreesToRadians) < (0.75 * (Float pi))
+
+	^ cosinusAngle degreesToRadians < ThreeQuartersPi
 ]
 
 { #category : #'looking at others' }
