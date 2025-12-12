@@ -52,11 +52,7 @@ BoidsSkyElement >> ensureNotStepping [
 BoidsSkyElement >> ensureStepping [
 
 	steppingTask ifNil: [
-		steppingTask :=
-			(BlRepeatedTaskAction new
-				delay: 0 seconds;
-				action: [ self step ];
-				yourself).
+		steppingTask := BoidsMoveTask on: self.
 		self enqueueTask: steppingTask ]
 ]
 
@@ -100,6 +96,13 @@ BoidsSkyElement >> isStepping [
 	^ steppingTask isNotNil
 ]
 
+{ #category : #moving }
+BoidsSkyElement >> move: deltaSeconds [
+
+	simulation move: deltaSeconds.
+	self boidsMovedInSimulation
+]
+
 { #category : #accessing }
 BoidsSkyElement >> numberOfBoids [
 
@@ -135,13 +138,6 @@ BoidsSkyElement >> simulation: aBoidsSimulation [
 	"The simulation can be initialized externally via this mutator, else it will be initialized by default when the element receives its first resize event."
 
 	simulation := aBoidsSimulation
-]
-
-{ #category : #accessing }
-BoidsSkyElement >> step [
-
-	simulation move.
-	self boidsMovedInSimulation
 ]
 
 { #category : #initialization }

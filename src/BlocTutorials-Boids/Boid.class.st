@@ -20,8 +20,17 @@ Class {
 		'simulation',
 		'velocityDelta'
 	],
+	#classVars : [
+		'ThreeQuartersPi'
+	],
 	#category : #'BlocTutorials-Boids-Model'
 }
+
+{ #category : #'class initialization' }
+Boid class >> initialize [
+
+	ThreeQuartersPi := 0.75 * Float pi
+]
 
 { #category : #'instance creation' }
 Boid class >> new [
@@ -187,7 +196,8 @@ Boid >> isInFieldOfVision: aBoid [
 	vector2 := aBoid position - self position.
 	vector2 isZero ifTrue: [^ true ].
 	cosinusAngle := (vector1 dotProduct: vector2) / ((vector1 r) * (vector2 r)).
-	^ (cosinusAngle degreesToRadians) < (0.75 * (Float pi))
+
+	^ cosinusAngle degreesToRadians < ThreeQuartersPi
 ]
 
 { #category : #'looking at others' }
@@ -199,7 +209,10 @@ Boid >> isNearby: aBoid within: aThreshold [
 ]
 
 { #category : #moving }
-Boid >> move [
+Boid >> move: deltaSeconds [
+
+	| dt |
+	dt := deltaSeconds * 50. "MAGIC"
 
 	"Calculate velocity delta"	
 	velocityDelta := 0@0.
@@ -207,8 +220,8 @@ Boid >> move [
 	simulation isCircling ifTrue: [ self circle ].
 	
 	"Update according to delta"
-	self velocity: velocity + velocityDelta asIntegerPoint.
-	self position: position + velocity.
+	self velocity: velocity + (velocityDelta * dt).
+	self position: position + (velocity * dt).
 
 	simulation fallThrough: self
 ]
