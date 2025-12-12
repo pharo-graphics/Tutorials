@@ -192,8 +192,15 @@ BoidsSimulation >> isCircling: aBoolean [
 
 { #category : #moving }
 BoidsSimulation >> move [
+	"Update the simulation by 1 second. Backwards compatibility"
 
-	boids do: [ :each | each move ]
+	self move: 1.0
+]
+
+{ #category : #moving }
+BoidsSimulation >> move: deltaSeconds [
+
+	boids do: [ :each | each move: deltaSeconds ]
 ]
 
 { #category : #'looking at others' }

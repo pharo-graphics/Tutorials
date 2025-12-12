@@ -209,7 +209,10 @@ Boid >> isNearby: aBoid within: aThreshold [
 ]
 
 { #category : #moving }
-Boid >> move [
+Boid >> move: deltaSeconds [
+
+	| dt |
+	dt := deltaSeconds * 50. "MAGIC"
 
 	"Calculate velocity delta"	
 	velocityDelta := 0@0.
@@ -217,8 +220,8 @@ Boid >> move [
 	simulation isCircling ifTrue: [ self circle ].
 	
 	"Update according to delta"
-	self velocity: velocity + velocityDelta asIntegerPoint.
-	self position: position + velocity.
+	self velocity: velocity + (velocityDelta * dt).
+	self position: position + (velocity * dt).
 
 	simulation fallThrough: self
 ]
