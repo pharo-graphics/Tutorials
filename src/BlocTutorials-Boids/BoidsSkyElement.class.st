@@ -97,6 +97,13 @@ BoidsSkyElement >> isStepping [
 ]
 
 { #category : #moving }
+BoidsSkyElement >> move [
+
+	simulation move.
+	self boidsMovedInSimulation
+]
+
+{ #category : #moving }
 BoidsSkyElement >> move: deltaSeconds [
 
 	simulation move: deltaSeconds.
@@ -160,12 +167,10 @@ BoidsSkyElement >> subscribeExtentChangeToResizeSimulation [
 	The first time this event occurs, it initializes the boids.
 	The next times, the simulation extent must be updated."
 
-	self
-		addEventHandlerOn: BlElementExtentChangedEvent
-		do: [ :anEvent |
-			simulation
-				ifNil: [ self initializeSimulation ]
-				ifNotNil: [ simulation extent: self size asIntegerPoint ] ]
+	self addEventHandlerOn: BlElementExtentChangedEvent do: [
+		simulation
+			ifNil: [ self initializeSimulation ]
+			ifNotNil: [ simulation extent: self extent ] ]
 ]
 
 { #category : #accessing }

@@ -15,7 +15,6 @@ Class {
 	#instVars : [
 		'position',
 		'color',
-		'radius',
 		'velocity',
 		'simulation',
 		'velocityDelta'
@@ -121,58 +120,6 @@ Boid >> distanceFrom: aBoid [
 	^ self position distanceTo: aBoid position
 ]
 
-{ #category : #'drawing - Morphic' }
-Boid >> drawBallOn: aCanvas [
-	"Draw the body of a boid."
-	
-	| path stroke r |
-	r := self radius.	
-	
-	"Draw a filled ball."
-	path := aCanvas createPath: [ :builder | | rNeg halfPi |
-		rNeg := r negated.
-		halfPi := Float halfPi.  
-		
-		builder 
-			relative;
-			moveTo: (self position x - r)@(self position y) + 1;
-			cwArcTo: r@rNeg angle: halfPi; 
-			cwArcTo: r@r angle: halfPi; 
-			cwArcTo: rNeg@r angle: halfPi; 
-			cwArcTo: rNeg@rNeg angle: halfPi ].
-
-	aCanvas setPaint: self color.
-	aCanvas drawShape: path.	
-	
-	"Draw the outline of a ball."
-	stroke := aCanvas setStrokePaint: self color muchDarker.
-	stroke width: 1.
-	aCanvas draw.
-]
-
-{ #category : #'drawing - Morphic' }
-Boid >> drawOn: aCanvas [
-	self
-		drawBallOn: aCanvas;
-		drawTailOn: aCanvas
-
-	
-
-]
-
-{ #category : #'drawing - Morphic' }
-Boid >> drawTailOn: aCanvas [
-	"Draw the tail of the boid, that indicates it's speed."
-	
-	| path |
-	path := aCanvas createPath: [:builder |
-		builder
-			relative;
-			moveTo: self position + 1;
-			lineTo:  self velocity negated].
-	aCanvas drawShape: path.	
-]
-
 { #category : #accessing }
 Boid >> extent [
 
@@ -212,7 +159,7 @@ Boid >> isNearby: aBoid within: aThreshold [
 Boid >> move: deltaSeconds [
 
 	| dt |
-	dt := deltaSeconds * 50. "MAGIC"
+	dt := deltaSeconds * simulation deltaSecondsAdjustment.
 
 	"Calculate velocity delta"	
 	velocityDelta := 0@0.
@@ -263,13 +210,7 @@ Boid >> printOn: aStream [
 { #category : #accessing }
 Boid >> radius [
 
-	^ radius ifNil: [ radius := 7 ]
-]
-
-{ #category : #accessing }
-Boid >> radius: aNumber [
-
-	radius := aNumber
+	^ simulation boidRadius
 ]
 
 { #category : #'flocking rules' }
@@ -301,4 +242,10 @@ Boid >> velocity [
 Boid >> velocity: aPoint [
 
 	velocity := aPoint
+]
+
+{ #category : #accessing }
+Boid >> velocityLimit [
+
+	^ simulation velocityLimit
 ]
