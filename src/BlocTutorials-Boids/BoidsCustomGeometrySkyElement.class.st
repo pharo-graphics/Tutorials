@@ -6,32 +6,32 @@ See example on my class-side.
 TODO: It is not drawing well the boids into the canvas.
 "
 Class {
-	#name : #BoidCustomGeometrySkyElement,
+	#name : #BoidsCustomGeometrySkyElement,
 	#superclass : #BoidsSkyElement,
 	#category : #'BlocTutorials-Boids-UI-Bloc'
 }
 
 { #category : #examples }
-BoidCustomGeometrySkyElement class >> exampleOpenInNewSpace [
+BoidsCustomGeometrySkyElement class >> exampleOpenInNewSpace [
 
 	^ self new openInNewSpace
 ]
 
 { #category : #initialization }
-BoidCustomGeometrySkyElement >> boidWasAddedToSimulation: aBoid [
+BoidsCustomGeometrySkyElement >> boidWasAddedToSimulation: aBoid [
 
 	self addChild: (self newElementForBoid: aBoid)
 ]
 
 { #category : #accessing }
-BoidCustomGeometrySkyElement >> boidsMovedInSimulation [
+BoidsCustomGeometrySkyElement >> boidsMovedInSimulation [
 	"Position and rotation are applied in the custom geometry. We only need to request redraw"
 	
 	self invalidate
 ]
 
 { #category : #initialization }
-BoidCustomGeometrySkyElement >> newElementForBoid: aBoid [
+BoidsCustomGeometrySkyElement >> newElementForBoid: aBoid [
 
 	^ BlElement new
 		boid: aBoid;

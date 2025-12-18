@@ -36,7 +36,7 @@ BoidsSkyElementTest >> testExample: aClass [
 { #category : #tests }
 BoidsSkyElementTest >> testOpenBoidCustomGeometrySkyElement [
 
-	self testExample: BoidCustomGeometrySkyElement
+	self testExample: BoidsCustomGeometrySkyElement
 ]
 
 { #category : #tests }
@@ -48,5 +48,5 @@ BoidsSkyElementTest >> testOpenBoidsCustomDrawSkyElement [
 { #category : #tests }
 BoidsSkyElementTest >> testOpenBoidsSkyUsingGeometryElement [
 
-	self testExample: BoidsSkyUsingGeometryElement
+	self testExample: BoidsUsingTriangleSkyElement
 ]

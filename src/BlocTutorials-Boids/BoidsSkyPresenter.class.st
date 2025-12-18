@@ -46,7 +46,7 @@ BoidsSkyPresenter class >> exampleBloc2 [
 		       useBackend: #Morphic;
 		       yourself.
 
-	model := BoidsSkyUsingGeometryElement new.
+	model := BoidsUsingTriangleSkyElement new.
 	presenter := self newApplication: app model: model.
 	presenter open
 ]
@@ -59,7 +59,7 @@ BoidsSkyPresenter class >> exampleBloc3 [
 		       useBackend: #Morphic;
 		       yourself.
 
-	model := BoidCustomGeometrySkyElement new.
+	model := BoidsCustomGeometrySkyElement new.
 	presenter := self newApplication: app model: model.
 	presenter open
 ]

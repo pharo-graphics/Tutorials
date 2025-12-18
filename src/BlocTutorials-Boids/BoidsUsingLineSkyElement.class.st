@@ -4,25 +4,25 @@ I'm a sky of boids, where each of them is expressed as an element with line geom
 See example on my class-side.
 "
 Class {
-	#name : #BoidsSkyUsingLineElement,
+	#name : #BoidsUsingLineSkyElement,
 	#superclass : #BoidsSkyElement,
 	#category : #'BlocTutorials-Boids-UI-Bloc'
 }
 
 { #category : #examples }
-BoidsSkyUsingLineElement class >> exampleOpenInNewSpace [
+BoidsUsingLineSkyElement class >> exampleOpenInNewSpace [
 
 	^ self new openInNewSpace
 ]
 
 { #category : #initialization }
-BoidsSkyUsingLineElement >> boidWasAddedToSimulation: aBoid [
+BoidsUsingLineSkyElement >> boidWasAddedToSimulation: aBoid [
 
 	self addChild: (self newElementForBoid: aBoid)
 ]
 
 { #category : #accessing }
-BoidsSkyUsingLineElement >> boidsMovedInSimulation [
+BoidsUsingLineSkyElement >> boidsMovedInSimulation [
 	
 	self childrenDo: [:each |
 		each position: each boid position.
@@ -31,7 +31,7 @@ BoidsSkyUsingLineElement >> boidsMovedInSimulation [
 ]
 
 { #category : #initialization }
-BoidsSkyUsingLineElement >> newElementForBoid: aBoid [
+BoidsUsingLineSkyElement >> newElementForBoid: aBoid [
 
 	^ BlElement new
 			boid: aBoid;
