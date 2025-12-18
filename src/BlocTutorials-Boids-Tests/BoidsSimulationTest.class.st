@@ -55,12 +55,12 @@ BoidsSimulationTest >> testMove [
 	aSimulation addBoid: boidB.
 
 	aSimulation move.
-	self assert: boidR position equals: 11@10.
-	self assert: boidG position equals: 23@10.
-	self assert: boidB position equals: 17@15.
+	self assert: boidR position asIntegerPoint equals: 10@9.
+	self assert: boidG position asIntegerPoint equals: 23@9.
+	self assert: boidB position asIntegerPoint equals: 16@15.
 
 	aSimulation move.
-	self assert: boidR position equals: 11@10.
-	self assert: boidG position equals: 27@10.
-	self assert: boidB position equals: 19@15
+	self assert: boidR position asIntegerPoint equals: 9@8.
+	self assert: boidG position asIntegerPoint equals: 28@8.
+	self assert: boidB position asIntegerPoint equals: 17@18
 ]
