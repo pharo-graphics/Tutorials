@@ -97,6 +97,12 @@ BoidsSkyElement >> isStepping [
 ]
 
 { #category : #moving }
+BoidsSkyElement >> move [
+
+	self move: 0.01
+]
+
+{ #category : #moving }
 BoidsSkyElement >> move: deltaSeconds [
 
 	simulation move: deltaSeconds.
