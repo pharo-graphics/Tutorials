@@ -99,7 +99,8 @@ BoidsSkyElement >> isStepping [
 { #category : #moving }
 BoidsSkyElement >> move [
 
-	self move: 0.01
+	simulation move.
+	self boidsMovedInSimulation
 ]
 
 { #category : #moving }

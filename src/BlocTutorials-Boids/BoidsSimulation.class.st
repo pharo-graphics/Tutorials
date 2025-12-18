@@ -209,7 +209,7 @@ BoidsSimulation >> isCircling: aBoolean [
 BoidsSimulation >> move [
 	"Update the simulation by 1 second. Backwards compatibility"
 
-	self move: 1.0
+	self move: 1.0 / deltaSecondsAdjustment
 ]
 
 { #category : #moving }
