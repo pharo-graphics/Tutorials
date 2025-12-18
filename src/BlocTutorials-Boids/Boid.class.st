@@ -250,3 +250,9 @@ Boid >> velocity: aPoint [
 
 	velocity := aPoint
 ]
+
+{ #category : #accessing }
+Boid >> velocityLimit [
+
+	^ simulation velocityLimit
+]

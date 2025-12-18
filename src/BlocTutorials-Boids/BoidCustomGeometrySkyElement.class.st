@@ -25,20 +25,18 @@ BoidCustomGeometrySkyElement >> boidWasAddedToSimulation: aBoid [
 
 { #category : #accessing }
 BoidCustomGeometrySkyElement >> boidsMovedInSimulation [
+	"Position and rotation are applied in the custom geometry. We only need to request redraw"
 	
-	self childrenDo: [:each |
-		each position: each boid position ]
+	self invalidate
 ]
 
 { #category : #initialization }
 BoidCustomGeometrySkyElement >> newElementForBoid: aBoid [
 
 	^ BlElement new
-			boid: aBoid;
-			extent: aBoid extent;
-			background: aBoid color;
-			border: (BlBorder paint: aBoid color muchDarker width: 2);
-			geometry: BoidCustomGeometry new;
-			yourself
+		boid: aBoid;
+		background: aBoid color;
+		geometry: BoidCustomGeometry new;
+		yourself
 
 ]

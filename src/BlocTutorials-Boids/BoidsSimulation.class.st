@@ -175,7 +175,7 @@ BoidsSimulation >> initialize [
 	alignmentAdjustment := 8. "how aligned the Boids are with each other (smaller more aligned)"
 	cohesionAdjustment := 100. "how cohesive the Boids are with each other (smaller more cohesive)"
 	
-	isCircling := false.
+	isCircling := false
 ]
 
 { #category : #accessing }

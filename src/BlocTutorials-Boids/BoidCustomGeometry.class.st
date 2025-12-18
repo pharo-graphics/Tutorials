@@ -1,9 +1,7 @@
 "
-I'm a boid expressed as a geometry.
+I'm a boid expressed as an arrow whose length depends on the velocity.
 
 See my references.
-
-TODO: It is not drawing well into the canvas.
 "
 Class {
 	#name : #BoidCustomGeometry,
@@ -15,34 +13,32 @@ Class {
 BoidCustomGeometry >> aeApplyTo: aeCanvas element: aBlElement [ 
 
 	aeCanvas pathFactory: [ :cairoContext |
-		| boid |
-		boid := aBlElement boid.
-		cairoContext
-			circleRadius: boid radius;
-			moveTo: boid radius asPoint;
-			lineTo: boid velocity negated ]
+		cairoContext restoreStateAfter: [ 
+			| boid |
+			boid := aBlElement boid.
+
+			"The position, velocity and radius are applied to the affine matrix.
+			The state is restored after this block closure because each boid has
+			its own values."
+			cairoContext
+				translateBy: boid position;
+				rotateByRadians: boid velocity angle;
+				scaleByX: boid radius * boid velocity r / boid velocityLimit
+					    y: boid radius.
+
+			"Draw an arrow pointing to the left. Velocity affects arrow length."
+			cairoContext
+				lineToX: -1.0 y: -1.0;
+				lineToX: -0.5 y: 0.0;
+				lineToX: -1.0 y: 1.0;
+				lineToX: 1.0 y: 0.0;
+				closePath ] ]
 ]
 
 { #category : #'geometry testing' }
 BoidCustomGeometry >> containsPoint: aPoint alreadyInGeometryBoundsOf: aBlElement [
-	"Inspired by BlEllipseGeometry>>#containsPoint:in:"
 
-	| w h x y center xRadius yRadius normalized |
-	
-	w := aBlElement boid radius.
-	h := w.
-	x := 0.
-	y := 0.
-	
-	xRadius := w / 2.0.
-	yRadius := h / 2.0.
-	center := (x + xRadius) @ (y + yRadius).
-
-	(xRadius <= 0 or: [ yRadius <= 0 ])
-		ifTrue: [ ^ false ].
-
-	normalized := (aPoint x - center x) @ (aPoint y - center y).
-	^ ((normalized x squared / xRadius squared) + (normalized y squared / yRadius squared)) <= 1
+	^ (aPoint distanceTo: aBlElement boid position) <= aBlElement boid radius
 ]
 
 { #category : #'api - bounds' }
@@ -60,23 +56,26 @@ BoidCustomGeometry >> geometryBounds: aBlBounds of: aBlElement [
 { #category : #testing }
 BoidCustomGeometry >> hasCaps [
 
-	^ true
+	^ false
 ]
 
 { #category : #testing }
 BoidCustomGeometry >> hasJoins [
 
-	^ false
+	^ true
 ]
 
 { #category : #geometry }
-BoidCustomGeometry >> matchElement: aBlElement [ 
-	"Ignore element's extent. Wrong? We will get the position and radius from the boid in this element but at the moment of building the path."
+BoidCustomGeometry >> matchElement: aBlElement [
 ]
 
 { #category : #'api - cache' }
 BoidCustomGeometry >> releaseCache [
 	"Nothing to release"
+]
+
+{ #category : #'api - cache' }
+BoidCustomGeometry >> releaseStrokedBoundsCache [
 ]
 
 { #category : #'visual bounds' }
