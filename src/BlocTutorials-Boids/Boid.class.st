@@ -160,7 +160,7 @@ Boid >> isNearby: aBoid within: aThreshold [
 Boid >> move: deltaSeconds [
 
 	| dt |
-	dt := deltaSeconds * 50. "MAGIC"
+	dt := deltaSeconds * simulation deltaSecondsAdjustment.
 
 	"Calculate velocity delta"	
 	velocityDelta := 0@0.

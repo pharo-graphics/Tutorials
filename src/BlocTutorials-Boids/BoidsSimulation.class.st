@@ -30,7 +30,8 @@ Class {
 		'isCircling',
 		'extent',
 		'boidRadius',
-		'velocityLimit'
+		'velocityLimit',
+		'deltaSecondsAdjustment'
 	],
 	#category : #'BlocTutorials-Boids-Model'
 }
@@ -127,6 +128,12 @@ BoidsSimulation >> cohesionRadius: aNumber [
 ]
 
 { #category : #accessing }
+BoidsSimulation >> deltaSecondsAdjustment [
+
+	^ deltaSecondsAdjustment
+]
+
+{ #category : #accessing }
 BoidsSimulation >> extent [
 	^ extent
 ]
@@ -166,7 +173,7 @@ BoidsSimulation >> initialize [
 
 	boidRadius := 8.
 	velocityLimit := 8.
-	
+
 	separationRadius := boidRadius * 3. "steer to avoid crowding of flockmates"
 	alignmentRadius := boidRadius * 35. "steer towards average heading of flockmates"
 	cohesionRadius := boidRadius * 35. "steer towards average position of flockmates"
@@ -174,6 +181,8 @@ BoidsSimulation >> initialize [
 	separationAdjustment := 10. "how far away should Boids stay from each other (smaller further away)"
 	alignmentAdjustment := 8. "how aligned the Boids are with each other (smaller more aligned)"
 	cohesionAdjustment := 100. "how cohesive the Boids are with each other (smaller more cohesive)"
+
+	deltaSecondsAdjustment := 35.
 	
 	isCircling := false
 ]
