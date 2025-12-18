@@ -80,7 +80,7 @@ BoidsSkyPresenter >> doStart [
 { #category : #actions }
 BoidsSkyPresenter >> doStep [
 
-	boidsSkyElement step
+	boidsSkyElement move
 	"No need to refresh toolbar in this case"
 ]
 
