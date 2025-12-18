@@ -14,7 +14,6 @@ BoidsSimulationTest >> testFallThrough [
 	simulation := BoidsSimulation newExtent: 100@100.
 
 	boid := (Boid newIn: simulation)
-		radius: 10;
 		velocity: 10@10;
 		yourself.
 	

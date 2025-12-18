@@ -15,7 +15,6 @@ Class {
 	#instVars : [
 		'position',
 		'color',
-		'radius',
 		'velocity',
 		'simulation',
 		'velocityDelta'
@@ -211,13 +210,7 @@ Boid >> printOn: aStream [
 { #category : #accessing }
 Boid >> radius [
 
-	^ radius ifNil: [ radius := 7 ]
-]
-
-{ #category : #accessing }
-Boid >> radius: aNumber [
-
-	radius := aNumber
+	^ simulation boidRadius
 ]
 
 { #category : #'flocking rules' }

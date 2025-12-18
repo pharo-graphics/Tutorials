@@ -98,6 +98,12 @@ BoidsSimulation >> alignmentRadius: aNumber [
 ]
 
 { #category : #accessing }
+BoidsSimulation >> boidRadius [
+
+	^ boidRadius
+]
+
+{ #category : #accessing }
 BoidsSimulation >> boids [
 
 	^ boids
@@ -241,9 +247,7 @@ BoidsSimulation >> nearbyBoidsWithin: aRadius to: aBoid do: aBlock [
 { #category : #private }
 BoidsSimulation >> newBoid [
 
-	^ (Boid newIn: self)
-		  radius: boidRadius;
-		  yourself
+	^ Boid newIn: self
 ]
 
 { #category : #accessing }
