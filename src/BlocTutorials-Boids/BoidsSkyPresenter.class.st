@@ -163,21 +163,26 @@ BoidsSkyPresenter >> initializeWindow: aWindowPresenter [
 { #category : #initialization }
 BoidsSkyPresenter >> refreshToolbar [
 
+	| isCircling |
+	isCircling := boidsSkyElement simulation isNotNil
+		and: [ boidsSkyElement simulation isCircling ].
+
+	toggleCirclingButton label: 
+		(isCircling
+			ifTrue: [ 'Circling ON' ]
+			ifFalse: [ 'Circling OFF' ]).
+
 	startButton enabled: boidsSkyElement isStepping not.
 	stepButton enabled: boidsSkyElement isStepping not.
-	stopButton enabled: boidsSkyElement isStepping.
-	
-	boidsSkyElement isStepping traceCr.
-	
-	boidsSkyElement simulation ifNotNil: [
-	toggleCirclingButton label: 
-		(boidsSkyElement simulation isCircling
-			ifTrue: [ 'Circle' ]
-			ifFalse: [ 'Free' ]) ]
+	stopButton enabled: boidsSkyElement isStepping
 ]
 
 { #category : #initialization }
 BoidsSkyPresenter >> setModelBeforeInitialization: aBoidsSkyElement [
 
-	boidsSkyElement := aBoidsSkyElement
+	boidsSkyElement := aBoidsSkyElement.
+	
+	boidsSkyElement
+		addEventHandlerOn: BlElementExtentChangedEvent
+		doOnce: [ self refreshToolbar ]
 ]
