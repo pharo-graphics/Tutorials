@@ -157,20 +157,23 @@ Boid >> isNearby: aBoid within: aThreshold [
 
 { #category : #moving }
 Boid >> move: deltaSeconds [
+	"Move this boid according to a time delta. 
+	This is done by calculation of velocityDelta along multiple steps,
+	and update velocity and position proportionally to the time delta."
 
 	| dt |
-	dt := deltaSeconds * simulation deltaSecondsAdjustment.
-
-	"Calculate velocity delta"	
 	velocityDelta := 0@0.
+
 	self separate; align; cohere; muffle.
 	simulation isCircling ifTrue: [ self circle ].
 	
 	"Update according to delta"
+	dt := deltaSeconds * simulation deltaSecondsAdjustment.
 	self velocity: velocity + (velocityDelta * dt).
 	self position: position + (velocity * dt).
-
-	simulation fallThrough: self
+	simulation fallThrough: self.
+	
+	velocityDelta := nil
 ]
 
 { #category : #moving }
