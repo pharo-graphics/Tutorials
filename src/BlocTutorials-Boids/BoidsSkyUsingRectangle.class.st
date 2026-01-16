@@ -23,9 +23,11 @@ BoidsSkyUsingRectangle >> boidWasAddedToSimulation: aBoid [
 
 { #category : #accessing }
 BoidsSkyUsingRectangle >> boidsMovedInSimulation [
-	
-	self childrenDo: [:each |
-		each position: each boid position ]
+
+	self childrenDo: [ :each |
+			each position: each boid position.
+			each transformDo: [ :aBuilder | 
+				aBuilder rotateBy: each boid velocity degrees ] ]
 ]
 
 { #category : #initialization }

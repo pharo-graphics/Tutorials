@@ -14,7 +14,8 @@ Class {
 		'simulation',
 		'randomGenerator',
 		'steppingTask',
-		'numberOfBoids'
+		'numberOfBoids',
+		'runningThread'
 	],
 	#category : #'BlocTutorials-Boids-UI-Bloc'
 }
@@ -166,10 +167,7 @@ BoidsSkyElement >> subscribeExtentChangeToResizeSimulation [
 
 	self
 		addEventHandlerOn: BlElementExtentChangedEvent
-		do: [ :anEvent |
-			simulation
-				ifNil: [ self initializeSimulation ]
-				ifNotNil: [ simulation extent: self size asIntegerPoint ] ]
+		do: [ :anEvent | simulation ifNil: [ self initializeSimulation ] ifNotNil: [ simulation extent: self extent asIntegerPoint ] ]
 ]
 
 { #category : #accessing }
