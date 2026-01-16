@@ -46,7 +46,7 @@ BoidsSkyPresenter class >> exampleBloc2 [
 		       useBackend: #Morphic;
 		       yourself.
 
-	model := BoidsSkyUsingGeometryElement new.
+	model := BoidsUsingTriangleSkyElement new.
 	presenter := self newApplication: app model: model.
 	presenter open
 ]
@@ -59,7 +59,7 @@ BoidsSkyPresenter class >> exampleBloc3 [
 		       useBackend: #Morphic;
 		       yourself.
 
-	model := BoidCustomGeometrySkyElement new.
+	model := BoidsCustomGeometrySkyElement new.
 	presenter := self newApplication: app model: model.
 	presenter open
 ]
@@ -80,7 +80,7 @@ BoidsSkyPresenter >> doStart [
 { #category : #actions }
 BoidsSkyPresenter >> doStep [
 
-	boidsSkyElement step
+	boidsSkyElement move
 	"No need to refresh toolbar in this case"
 ]
 
@@ -163,21 +163,26 @@ BoidsSkyPresenter >> initializeWindow: aWindowPresenter [
 { #category : #initialization }
 BoidsSkyPresenter >> refreshToolbar [
 
+	| isCircling |
+	isCircling := boidsSkyElement simulation isNotNil
+		and: [ boidsSkyElement simulation isCircling ].
+
+	toggleCirclingButton label: 
+		(isCircling
+			ifTrue: [ 'Circling ON' ]
+			ifFalse: [ 'Circling OFF' ]).
+
 	startButton enabled: boidsSkyElement isStepping not.
 	stepButton enabled: boidsSkyElement isStepping not.
-	stopButton enabled: boidsSkyElement isStepping.
-	
-	boidsSkyElement isStepping traceCr.
-	
-	boidsSkyElement simulation ifNotNil: [
-	toggleCirclingButton label: 
-		(boidsSkyElement simulation isCircling
-			ifTrue: [ 'Circle' ]
-			ifFalse: [ 'Free' ]) ]
+	stopButton enabled: boidsSkyElement isStepping
 ]
 
 { #category : #initialization }
 BoidsSkyPresenter >> setModelBeforeInitialization: aBoidsSkyElement [
 
-	boidsSkyElement := aBoidsSkyElement
+	boidsSkyElement := aBoidsSkyElement.
+	
+	boidsSkyElement
+		addEventHandlerOn: BlElementExtentChangedEvent
+		doOnce: [ self refreshToolbar ]
 ]

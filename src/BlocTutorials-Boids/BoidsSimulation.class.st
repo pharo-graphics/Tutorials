@@ -30,7 +30,8 @@ Class {
 		'isCircling',
 		'extent',
 		'boidRadius',
-		'velocityLimit'
+		'velocityLimit',
+		'deltaSecondsAdjustment'
 	],
 	#category : #'BlocTutorials-Boids-Model'
 }
@@ -97,6 +98,12 @@ BoidsSimulation >> alignmentRadius: aNumber [
 ]
 
 { #category : #accessing }
+BoidsSimulation >> boidRadius [
+
+	^ boidRadius
+]
+
+{ #category : #accessing }
 BoidsSimulation >> boids [
 
 	^ boids
@@ -124,6 +131,12 @@ BoidsSimulation >> cohesionRadius [
 BoidsSimulation >> cohesionRadius: aNumber [
 
 	cohesionRadius := aNumber
+]
+
+{ #category : #accessing }
+BoidsSimulation >> deltaSecondsAdjustment [
+
+	^ deltaSecondsAdjustment
 ]
 
 { #category : #accessing }
@@ -166,7 +179,7 @@ BoidsSimulation >> initialize [
 
 	boidRadius := 8.
 	velocityLimit := 8.
-	
+
 	separationRadius := boidRadius * 3. "steer to avoid crowding of flockmates"
 	alignmentRadius := boidRadius * 35. "steer towards average heading of flockmates"
 	cohesionRadius := boidRadius * 35. "steer towards average position of flockmates"
@@ -174,8 +187,10 @@ BoidsSimulation >> initialize [
 	separationAdjustment := 10. "how far away should Boids stay from each other (smaller further away)"
 	alignmentAdjustment := 8. "how aligned the Boids are with each other (smaller more aligned)"
 	cohesionAdjustment := 100. "how cohesive the Boids are with each other (smaller more cohesive)"
+
+	deltaSecondsAdjustment := 35.
 	
-	isCircling := false.
+	isCircling := false
 ]
 
 { #category : #accessing }
@@ -192,8 +207,15 @@ BoidsSimulation >> isCircling: aBoolean [
 
 { #category : #moving }
 BoidsSimulation >> move [
+	"Update the simulation by 1 second. Backwards compatibility"
 
-	boids do: [ :each | each move ]
+	self move: 1.0 / deltaSecondsAdjustment
+]
+
+{ #category : #moving }
+BoidsSimulation >> move: deltaSeconds [
+
+	boids do: [ :each | each move: deltaSeconds ]
 ]
 
 { #category : #'looking at others' }
@@ -225,9 +247,7 @@ BoidsSimulation >> nearbyBoidsWithin: aRadius to: aBoid do: aBlock [
 { #category : #private }
 BoidsSimulation >> newBoid [
 
-	^ (Boid newIn: self)
-		  radius: boidRadius;
-		  yourself
+	^ Boid newIn: self
 ]
 
 { #category : #accessing }

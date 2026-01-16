@@ -4,40 +4,41 @@ I'm an example of drawing boids simulation by using Element and Geometry: each b
 See an example on class side.
 "
 Class {
-	#name : #BoidsSkyUsingRectangle,
+	#name : #BoidsUsingTriangleSkyElement,
 	#superclass : #BoidsSkyElement,
 	#category : #'BlocTutorials-Boids-UI-Bloc'
 }
 
 { #category : #examples }
-BoidsSkyUsingRectangle class >> exampleOpenInNewSpace [
+BoidsUsingTriangleSkyElement class >> exampleOpenInNewSpace [
 
 	^ self new openInNewSpace
 ]
 
 { #category : #initialization }
-BoidsSkyUsingRectangle >> boidWasAddedToSimulation: aBoid [
+BoidsUsingTriangleSkyElement >> boidWasAddedToSimulation: aBoid [
 
 	self addChild: (self newElementForBoid: aBoid)
 ]
 
 { #category : #accessing }
-BoidsSkyUsingRectangle >> boidsMovedInSimulation [
-
-	self childrenDo: [ :each |
-			each position: each boid position.
-			each transformDo: [ :aBuilder | 
-				aBuilder rotateBy: each boid velocity degrees ] ]
+BoidsUsingTriangleSkyElement >> boidsMovedInSimulation [
+	
+	self childrenDo: [:each |
+		each position: each boid position.
+		each transformDo: [ :aBuilder |
+			aBuilder rotateBy: each boid velocity degrees ] ]
 ]
 
 { #category : #initialization }
-BoidsSkyUsingRectangle >> newElementForBoid: aBoid [
+BoidsUsingTriangleSkyElement >> newElementForBoid: aBoid [
 
 	^ BlElement new
 			boid: aBoid;
 			extent: aBoid extent;
 			background: aBoid color;
-			border: (BlBorder paint: aBoid color muchDarker width: 2);
+"			border: (BlBorder paint: aBoid color muchDarker width: 2);"
+			geometry: BlTriangleGeometry new;
 			yourself
 
 ]

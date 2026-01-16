@@ -53,11 +53,7 @@ BoidsSkyElement >> ensureNotStepping [
 BoidsSkyElement >> ensureStepping [
 
 	steppingTask ifNil: [
-		steppingTask :=
-			(BlRepeatedTaskAction new
-				delay: 0 seconds;
-				action: [ self step ];
-				yourself).
+		steppingTask := BoidsMoveTask on: self.
 		self enqueueTask: steppingTask ]
 ]
 
@@ -101,6 +97,20 @@ BoidsSkyElement >> isStepping [
 	^ steppingTask isNotNil
 ]
 
+{ #category : #moving }
+BoidsSkyElement >> move [
+
+	simulation move.
+	self boidsMovedInSimulation
+]
+
+{ #category : #moving }
+BoidsSkyElement >> move: deltaSeconds [
+
+	simulation move: deltaSeconds.
+	self boidsMovedInSimulation
+]
+
 { #category : #accessing }
 BoidsSkyElement >> numberOfBoids [
 
@@ -138,13 +148,6 @@ BoidsSkyElement >> simulation: aBoidsSimulation [
 	simulation := aBoidsSimulation
 ]
 
-{ #category : #accessing }
-BoidsSkyElement >> step [
-
-	simulation move.
-	self boidsMovedInSimulation
-]
-
 { #category : #initialization }
 BoidsSkyElement >> subscribeClickToAddBoid [
 
@@ -165,9 +168,10 @@ BoidsSkyElement >> subscribeExtentChangeToResizeSimulation [
 	The first time this event occurs, it initializes the boids.
 	The next times, the simulation extent must be updated."
 
-	self
-		addEventHandlerOn: BlElementExtentChangedEvent
-		do: [ :anEvent | simulation ifNil: [ self initializeSimulation ] ifNotNil: [ simulation extent: self extent asIntegerPoint ] ]
+	self addEventHandlerOn: BlElementExtentChangedEvent do: [
+		simulation
+			ifNil: [ self initializeSimulation ]
+			ifNotNil: [ simulation extent: self extent ] ]
 ]
 
 { #category : #accessing }

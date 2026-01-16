@@ -4,41 +4,40 @@ I'm an example of drawing boids simulation by using Element and Geometry: each b
 See an example on class side.
 "
 Class {
-	#name : #BoidsSkyUsingGeometryElement,
+	#name : #BoidsUsingRectangleSkyElement,
 	#superclass : #BoidsSkyElement,
 	#category : #'BlocTutorials-Boids-UI-Bloc'
 }
 
 { #category : #examples }
-BoidsSkyUsingGeometryElement class >> exampleOpenInNewSpace [
+BoidsUsingRectangleSkyElement class >> exampleOpenInNewSpace [
 
 	^ self new openInNewSpace
 ]
 
 { #category : #initialization }
-BoidsSkyUsingGeometryElement >> boidWasAddedToSimulation: aBoid [
+BoidsUsingRectangleSkyElement >> boidWasAddedToSimulation: aBoid [
 
 	self addChild: (self newElementForBoid: aBoid)
 ]
 
 { #category : #accessing }
-BoidsSkyUsingGeometryElement >> boidsMovedInSimulation [
-	
-	self childrenDo: [:each |
-		each position: each boid position.
-		each transformDo: [ :aBuilder |
-			aBuilder rotateBy: each boid velocity degrees ] ]
+BoidsSkyUsingRectangle >> boidsMovedInSimulation [
+
+	self childrenDo: [ :each |
+			each position: each boid position.
+			each transformDo: [ :aBuilder | 
+				aBuilder rotateBy: each boid velocity degrees ] ]
 ]
 
 { #category : #initialization }
-BoidsSkyUsingGeometryElement >> newElementForBoid: aBoid [
+BoidsUsingRectangleSkyElement >> newElementForBoid: aBoid [
 
 	^ BlElement new
 			boid: aBoid;
 			extent: aBoid extent;
 			background: aBoid color;
-"			border: (BlBorder paint: aBoid color muchDarker width: 2);"
-			geometry: BlTriangleGeometry new;
+			border: (BlBorder paint: aBoid color muchDarker width: 2);
 			yourself
 
 ]
