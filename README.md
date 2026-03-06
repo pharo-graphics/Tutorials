@@ -51,12 +51,15 @@ By default, a OS "external" window will popup. It is also possible to popup a Mo
 
 ## Reordering Examples
 
-This example shows how to use drag-and-drop, and it's written using Bloc.
+![dragDrop](https://github.com/user-attachments/assets/37df5a54-59e4-4233-868e-6cafebcc1178)
 
-To execute it, evaluate the following code:
+This package shows the Bloc drag-and-drop examples. Evaluate any the following sentences:
 
 ```smalltalk
-BlPaneCreatingReorderingHandler new fittingColumnsExample
+BlReorderingHandler new inplaceSortingExample.
+BlMultiPaneReorderingHandler new threeColumnsExample.
+BlMultiPaneReorderingHandler new cardsExample.
+BlPaneCreatingReorderingHandler new fittingColumnsExample.
 ```
 
 Thanks @StephanEggermont for the contribution.
