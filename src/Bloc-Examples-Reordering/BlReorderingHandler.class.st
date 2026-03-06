@@ -163,32 +163,31 @@ BlReorderingHandler >> initialize [
 
 { #category : #examples }
 BlReorderingHandler >> inplaceSortingExample [
-	<sampleInstance>
 
+	<sampleInstance>
 	| pane space |
 	pane := BlElement new
-		layout: BlFlowLayout new;
-		constraintsDo: [ :c |
-			c horizontal matchParent.
-			c vertical matchParent ];
-		yourself.
+		        layout: BlFlowLayout new;
+		        constraintsDo: [ :c |
+				        c horizontal matchParent.
+				        c vertical matchParent ];
+		        yourself.
 
 	10 timesRepeat: [
-		pane addChild:
-			(BlElement new
-				size: 150 @ 100;
-				border: (BlBorder paint: Color black);
-				background: Color random;
-				margin: (BlInsets all: 5);
-				addEventHandler: self class new;
-				yourself) ].
+			pane addChild: (BlElement new
+					 extent: 150 @ 100;
+					 border: (BlBorder paint: Color black);
+					 background: Color random;
+					 margin: (BlInsets all: 5);
+					 addEventHandler: self class new;
+					 yourself) ].
 
 	space := BlSpace new
-		extent: 700 @ 600;
-		title: 'Inplace sorting';
-		yourself.
+		         extent: 700 @ 600;
+		         title: 'Inplace sorting';
+		         yourself.
 	space root addChild: pane.
- 	space show.
+	space show.
 	^ space
 ]
 
@@ -210,7 +209,7 @@ BlReorderingHandler >> movePlaceholderIfOverOtherChild: anEvent [
 BlReorderingHandler >> newPlaceholderFor: draggable [
 
 	^ BlElement new
-		  size: draggable size;
+		  extent: draggable extent;
 		  border: (draggable border copyWithStyle: BlStrokeStyle dashed);
 		  margin: draggable margin;
 		  background: (draggable background paint color alpha: 0.2);

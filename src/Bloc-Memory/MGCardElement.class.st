@@ -137,12 +137,12 @@ MGCardElement >> initialize [
 	
 	backElement := BlElement new
 		background: self class cardbackForm;
-		size: self cardExtent;
+		extent: self cardExtent;
 		yourself.
 
 	faceElement := BlTextElement new.
 
-	self size: self cardExtent.
+	self extent: self cardExtent.
 	self layout:
 		(BlLinearLayout new
 			alignCenter;
@@ -150,8 +150,7 @@ MGCardElement >> initialize [
 	self background: self backgroundPaint.
 	self geometry: (BlRoundedRectangleGeometry cornerRadius: self cornerRadius).
 	
-	self card: (MGCard new symbol: $a).
-
+	self card: (MGCard new symbol: $a)
 ]
 
 { #category : #'announcement - handling' }

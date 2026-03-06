@@ -13,52 +13,58 @@ Class {
 
 { #category : #examples }
 BlMultiPaneReorderingHandler >> cardsExample [
-	<sampleInstance>
 
+	<sampleInstance>
 	| enlargeButton reduceButton bar pane scene space |
 	pane := self newThreeColumnsPane.
 	pane constraintsDo: [ :c |
 		c horizontal matchParent.
 		c vertical matchParent ].
-	enlargeButton := BlTextElement new
-		            margin: (BlInsets all: 10);
-		            text: 'Click to Enlarge' asRopedText;
-		            when: BlClickEvent do: [ :evt |
-			            | subject |
-			            subject := (pane childAt: 1) childAt: 1.
-			            subject size: subject size + (20 @ 20) ];
-		            yourself.
-	reduceButton := BlTextElement new
-		           margin: (BlInsets all: 10);
-		           text: 'Click to Reduce' asRopedText;
-		           when: BlClickEvent do: [ :evt |
-			           | subject |
-			           subject := (pane childAt: 1) childAt: 1.
-			           subject size: (subject size - (20 @ 20) max: 10 @ 10) ];
-		           yourself.
-	bar := BlElement new
-		       size: 800 @ 40;
-		       background: Color lightGray muchLighter;
-		       layout: BlLinearLayout horizontal;
-		       constraintsDo: [ :c |
-			       c horizontal matchParent.
-			       c vertical exact: 40 ];
-		       addChild: reduceButton;
-		       addChild: enlargeButton;
-		       yourself.
-	scene := BlElement new
-		         constraintsDo: [ :c |
-			         c horizontal matchParent.
-			         c vertical matchParent ];
-		         layout: BlLinearLayout vertical;
-		         addChild: bar;
-		         addChild: pane;
-		         requestLayout;
-		         yourself.
-	space := BlSpace new
-		extent: 800 @ 600;
-		title: 'Cards';
-		yourself.
+	enlargeButton :=
+		BlTextElement new
+			margin: (BlInsets all: 10);
+			text: 'Click to Enlarge' asRopedText;
+			addEventHandlerOn: BlClickEvent do: [ :evt |
+				| subject |
+				subject := (pane childAt: 1) childAt: 1.
+				subject size: subject size + (20 @ 20) ];
+			yourself.
+	reduceButton :=
+		BlTextElement new
+			margin: (BlInsets all: 10);
+			text: 'Click to Reduce' asRopedText;
+			addEventHandlerOn: BlClickEvent do: [ :evt |
+				| subject |
+				subject := (pane childAt: 1) childAt: 1.
+				subject size:
+					(subject size - (20 @ 20) max: 10 @ 10) ];
+			yourself.
+	bar :=
+		BlElement new
+			extent: 800 @ 40;
+			background: Color lightGray muchLighter;
+			layout: BlLinearLayout horizontal;
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical exact: 40 ];
+			addChild: reduceButton;
+			addChild: enlargeButton;
+			yourself.
+	scene :=
+		BlElement new
+			constraintsDo: [ :c |
+				c horizontal matchParent.
+				c vertical matchParent ];
+			layout: BlLinearLayout vertical;
+			addChild: bar;
+			addChild: pane;
+			requestLayout;
+			yourself.
+	space :=
+		BlSpace new
+			extent: 800 @ 600;
+			title: 'Cards';
+			yourself.
 	space root addChild: scene.
 	space show.
 	^ space
@@ -158,7 +164,7 @@ BlMultiPaneReorderingHandler >> newThreeColumnsPane [
 
 	| pane columnBlock toDo doing done columns handler |
 	pane := BlElement new
-		        size: 800 @ 600;
+		        extent: 800 @ 600;
 		        background: Color lightGray muchLighter;
 		        padding: (BlInsets all: 2);
 		        layout: BlLinearLayout horizontal;
@@ -193,7 +199,7 @@ BlMultiPaneReorderingHandler >> newThreeColumnsPane [
 	10 timesRepeat: [
 		| element |
 		element := BlElement new
-			           size: 80 @ 60;
+			           extent: 80 @ 60;
 			           border: (BlBorder paint: Color black);
 			           background: Color random;
 			           margin: (BlInsets all: 2);

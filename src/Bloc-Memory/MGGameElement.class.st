@@ -15,15 +15,15 @@ Class {
 
 { #category : #example }
 MGGameElement class >> example [
-	<sampleInstance>
 
+	<sampleInstance>
 	| aGameElement space |
 	aGameElement := MGGameElement new.
 	aGameElement memoryGame: MGGame withNumbers.
 
 	space := BlSpace new.
 	space root addChild: aGameElement.
-	space root whenLayoutedDoOnce: [ space extent: aGameElement size ].
+	space root whenLayoutedDoOnce: [ space extent: aGameElement extent ].
 	^ space show
 ]
 

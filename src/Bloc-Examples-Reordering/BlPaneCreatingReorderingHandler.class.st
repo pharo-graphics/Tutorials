@@ -63,11 +63,13 @@ BlPaneCreatingReorderingHandler >> dragEndEvent: anEvent [
 
 { #category : #'event handling' }
 BlPaneCreatingReorderingHandler >> dragStartEvent: anEvent [
-	|draggable |
+
+	| draggable |
 	anEvent consumed: true.
 	draggable := anEvent currentTarget.
-	parent := panes detect: [ :aPane | (aPane containsGlobalPoint: anEvent position) 
-		and: [ draggable hasParent: aPane]].
+	parent := panes detect: [ :aPane |
+			          (aPane containsGlobalPoint: anEvent position) and: [
+				          draggable allParentsInclude: aPane ] ].
 	overlay := BlOverlayElement on: container.
 	container parent addChild: overlay.
 
@@ -85,13 +87,13 @@ BlPaneCreatingReorderingHandler >> dragStartEvent: anEvent [
 
 { #category : #examples }
 BlPaneCreatingReorderingHandler >> fittingColumnsExample [
-	<sampleInstance>
 
+	<sampleInstance>
 	| pane columnBlock toDo columns handler space |
 	pane := BlElement new
-		        constraintsDo: [:c |
-		           c horizontal matchParent.
-		           c vertical matchParent ];
+		        constraintsDo: [ :c |
+				        c horizontal matchParent.
+				        c vertical matchParent ];
 		        background: Color lightGray muchLighter;
 		        padding: (BlInsets all: 2);
 		        layout: BlBasicLayout new;
@@ -104,26 +106,26 @@ BlPaneCreatingReorderingHandler >> fittingColumnsExample [
 		           panes: columns;
 		           yourself.
 	columns do: [ :column |
-		column
-			addEventHandlerOn: BlPullStartEvent
-			do: [ handler makeLast: column ] ].
+			column
+				addEventHandlerOn: BlPullStartEvent
+				do: [ handler makeLast: column ] ].
 	pane addChildren: columns.
 
 	10 timesRepeat: [
-		| element |
-		element := BlElement new
-			           size: 80 @ 60;
-			           border: (BlBorder paint: Color black);
-			           background: Color random;
-			           margin: (BlInsets all: 2);
-			           addEventHandler: handler;
-			           yourself.
-		toDo addChild: element ].
+			| element |
+			element := BlElement new
+				           extent: 80 @ 60;
+				           border: (BlBorder paint: Color black);
+				           background: Color random;
+				           margin: (BlInsets all: 2);
+				           addEventHandler: handler;
+				           yourself.
+			toDo addChild: element ].
 
 	space := BlSpace new
-		extent: 800 @ 600;
-		title: 'Fitting columns';
-		yourself.
+		         extent: 800 @ 600;
+		         title: 'Fitting columns';
+		         yourself.
 	space root addChild: pane.
 	space show.
 	^ space
