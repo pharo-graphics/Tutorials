@@ -25,7 +25,7 @@ This is a Memory Card game. Please, find the code at the `Bloc-Memory` package.
 The present code is the result of following the Bloc tutorial in [this booklet](https://files.pharo.org/books-pdfs/booklet-Bloc/2017-11-09-memorygame.pdf), with some little name adaptations.
 The source code for such booklet can be found [here](https://github.com/SquareBracketAssociates/Booklet-BuildingMemoryGameWithBloc).
 
-![Window](OSWindow.png)
+![Cards](https://github.com/user-attachments/assets/832d8ec9-d521-4d50-a8f2-8ac89637be18)
 
 To start it, evaluate this code:
 
