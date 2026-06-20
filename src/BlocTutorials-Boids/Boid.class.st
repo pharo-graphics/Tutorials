@@ -48,7 +48,7 @@ Boid class >> newIn: aBoidsSimulation [
 Boid class >> newIn: aBoidsSimulation random: aRandom [
 
 	^ (self newIn: aBoidsSimulation)
-		color: (Color random: aRandom);
+		color: (self newRandomColor: aRandom);
 		position:
 			(aBoidsSimulation extent x atRandom: aRandom) @ 
 			(aBoidsSimulation extent y atRandom: aRandom);
@@ -56,6 +56,17 @@ Boid class >> newIn: aBoidsSimulation random: aRandom [
 			(aBoidsSimulation velocityLimit - ((2 * aBoidsSimulation velocityLimit) atRandom: aRandom)) @
 			(aBoidsSimulation velocityLimit - ((2 * aBoidsSimulation velocityLimit) atRandom: aRandom));
 		yourself
+
+]
+
+{ #category : #private }
+Boid class >> newRandomColor: aRandom [
+	"Return a random color that isn't too dark or under-saturated."
+
+	^ Color
+		h: (360.0 * aRandom next)
+		s: (0.3 + (aRandom next * 0.7))
+		v: (0.4 + (aRandom next * 0.6))
 
 ]
 
