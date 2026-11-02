@@ -26,6 +26,15 @@ BoidsSkyElement class >> exampleOpenInNewSpace [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'instance creation' }
+BoidsSkyElement class >> new100BoidsRecordedSimulation [
+	
+	^ self new
+		simulation: BoidsRecordedSimulation with100Boids;
+		initializeSimulation;
+		yourself
+]
+
 { #category : #initialization }
 BoidsSkyElement >> boidWasAddedToSimulation: aBoid [
 	"Hook to act after a new boid was added to the simulation"
@@ -80,10 +89,11 @@ BoidsSkyElement >> initialize [
 BoidsSkyElement >> initializeSimulation [
 	"Initialize the simulation and start stepping. This requires that my area is not zero."
 
-	simulation := BoidsSimulation
-			newExtent: self extent asIntegerPoint
-			random: randomGenerator
-			numberOfBoids: self numberOfBoids.
+	simulation ifNil: [  
+		simulation := BoidsSimulation
+				newExtent: self extent asIntegerPoint
+				random: randomGenerator
+				numberOfBoids: self numberOfBoids ].
 
 	simulation boids do: [ :each |
 		self boidWasAddedToSimulation: each ].
