@@ -35,6 +35,12 @@ BoidsRecordedSimulation >> boids [
 ]
 
 { #category : #accessing }
+BoidsRecordedSimulation >> extent [
+	
+	^ 200@200
+]
+
+{ #category : #accessing }
 BoidsRecordedSimulation >> extent: anExtent [
 
 	"I cannot change the extent, I am already recorded"
